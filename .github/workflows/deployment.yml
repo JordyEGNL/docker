@@ -17,6 +17,9 @@ jobs:
         # checkout full tree
         fetch-depth: 0
 
+    - name: Install jq
+      run: sudo apt-get update && sudo apt-get install -y jq
+
     # Write SSH private key to a file
     - name: Create SSH key file
       run: |
