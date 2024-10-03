@@ -51,5 +51,5 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i ./temp/.ssh/id_ed25519 ${{ secrets.SSH_USER }}@$HOST "mkdir -p ~/docker/$SERVICE"
           rsync -avz -e "ssh -o StrictHostKeyChecking=no -i ./temp/.ssh/id_ed25519" ./$HOST/$SERVICE/docker-compose.yml ${{ secrets.SSH_USER }}@$HOST:~/docker/$SERVICE/docker-compose.yml
           # Optioneel: herstart Docker Compose service
-          ssh -o StrictHostKeyChecking=no -i ./temp/.ssh/id_ed25519 ${{ secrets.SSH_USER }}@$HOST "cd ~/docker/$SERVICE && docker-compose down && docker-compose up -d"
+          ssh -o StrictHostKeyChecking=no -i ./temp/.ssh/id_ed25519 ${{ secrets.SSH_USER }}@$HOST "cd ~/docker/$SERVICE && docker compose down && docker compose up -d"
         done
