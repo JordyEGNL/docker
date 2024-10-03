@@ -17,12 +17,6 @@ jobs:
         # checkout full tree
         fetch-depth: 0
 
-    - name: Cache APT Packages
-      uses: awalsh128/cache-apt-pkgs-action@v1.4.2
-      with:
-        packages: jq
-    
-
     # Write SSH private key to a file
     - name: Create SSH key file
       run: |
@@ -42,20 +36,16 @@ jobs:
           exit 1
         fi
         echo "Modified files: $FILES"
-        # Set the output as a JSON array (properly formatted for later use)
-        FILES_JSON=$(echo "$FILES" | jq -R -s -c 'split("\n") | map(select(. != ""))')
-        echo "::set-output name=files::$FILES_JSON"
+        echo "::set-output name=files::$FILES"
+
+    - name: Debug
+      run: |
+        echo "Files: ${{ steps.find_files.outputs.files }}"
 
     # Loop through each Docker Compose file, extract host and service, and deploy
     - name: Deploy to each host and service
       run: |
-
-        # Parse the JSON array from the previous step
-        FILES=${{ steps.find_files.outputs.files }}
-        echo "Files: $FILES"
-
-        # Convert JSON array into a bash array
-        for FILE_PATH in $(echo $FILES | jq -r '.[]'); do
+        for FILE_PATH in ${{ steps.find_files.outputs.files }}; do
           # Extract the host and service from the file path
           HOST=$(echo $FILE_PATH | awk -F'/' '{print $1}')
           SERVICE=$(echo $FILE_PATH | awk -F'/' '{print $2}')
