@@ -3,5 +3,5 @@ services:
     image: nginx:1.27.2
     container_name: nginx2
     ports:
-      - "81:80"
+      - "86:80"
     restart: always
