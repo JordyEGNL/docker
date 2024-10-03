@@ -3,6 +3,6 @@
         "config:base"
     ],
     "prHourlyLimit": 0,
-    "commitMessageAction": "{{parentDir}}",
+    "commitMessageAction": "Update {{parentDir}} -",
     "additionalBranchPrefix": "{{parentDir}}-"
 }
