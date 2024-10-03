@@ -1,9 +1,11 @@
 name: Deploy Docker Compose via SSH
 
 on:
-  push:
-    paths:
-      - '**/docker-compose.yml'
+    push:
+        branches:
+            - main
+        paths:
+            - '**/docker-compose.yml'
 
 jobs:
   deploy:
