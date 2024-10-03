@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
     # Checkout the repository
@@ -19,7 +19,7 @@ jobs:
       id: find_files
       run: |
         # Zoek alle gewijzigde docker-compose.yml bestanden
-        FILES=$(git diff --name-only HEAD^ HEAD -- '**/docker-compose.yml')
+        FILES=$(git diff --name-only HEAD HEAD^ -- '**/docker-compose.yml')
         if [ -z "$FILES" ]; then
           echo "No Docker Compose files modified."
           exit 1
