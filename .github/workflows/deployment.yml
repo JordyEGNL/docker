@@ -17,6 +17,12 @@ jobs:
         # checkout full tree
         fetch-depth: 0
 
+    # Write SSH private key to a file
+    - name: Create SSH key file
+      run: |
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > /home/runner/.ssh/id_rsa
+        chmod 600 /home/runner/.ssh/id_rsa
+
     # Find all modified docker-compose.yml files
     - name: Find modified Docker Compose files
       id: find_files
@@ -31,7 +37,7 @@ jobs:
         echo "::set-output name=files::$FILES"
 
     # Loop through each Docker Compose file, extract host and service, and deploy
-    - name: Deploy to each host and service using SSH
+    - name: Deploy to each host and service
       run: |
         for FILE_PATH in ${{ steps.find_files.outputs.files }}; do
           # Extract the host and service from the file path
@@ -39,14 +45,9 @@ jobs:
           SERVICE=$(echo $FILE_PATH | awk -F'/' '{print $2}')
           echo "Deploying to host: $HOST, service: $SERVICE"
 
-          # Run appleboy/ssh-action for each host and service
-          echo "Running SSH action for $HOST and $SERVICE"
-          gh workflow run appleboy/ssh-action@v1.0.3 \
-            -e "host=$HOST" \
-            -e "username=${{ secrets.SSH_USER }}" \
-            -e "key=${{ secrets.SSH_PRIVATE_KEY }}" \
-            -e "port=22" \
-            -e "script=mkdir -p ~/docker/$SERVICE && \
-            rsync -avz ./$HOST/$SERVICE/docker-compose.yml ~/docker/$SERVICE/docker-compose.yml && \
-            cd ~/docker/$SERVICE && docker-compose pull && docker-compose up -d --remove-orphans"
+          # Maak directory aan op de host en verplaats bestand
+          ssh -o StrictHostKeyChecking=no -i /home/runner/.ssh/id_rsa ${{ secrets.SSH_USER }}@$HOST "mkdir -p ~/docker/$SERVICE"
+          rsync -avz -e "ssh -o StrictHostKeyChecking=no -i /home/runner/.ssh/id_rsa" ./$HOST/$SERVICE/docker-compose.yml ${{ secrets.SSH_USER }}@$HOST:~/docker/$SERVICE/docker-compose.yml
+          # Optioneel: herstart Docker Compose service
+          ssh -o StrictHostKeyChecking=no -i /home/runner/.ssh/id_rsa ${{ secrets.SSH_USER }}@$HOST "cd ~/docker/$SERVICE && docker-compose down && docker-compose up -d"
         done
