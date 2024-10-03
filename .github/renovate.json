@@ -4,5 +4,5 @@
     ],
     "prHourlyLimit": 0,
     "commitMessageAction": "Update {{baseDir}} -",
-    "additionalBranchPrefix": "{{parentDir}}-"
+    "additionalBranchPrefix": "{{baseDir}}-"
 }
