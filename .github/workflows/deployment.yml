@@ -1,0 +1,45 @@
+name: Deploy Docker Compose via SSH
+
+on:
+  push:
+    paths:
+      - 'docker-compose/**/docker-compose.yml'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checkout the repository
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    # Find all modified docker-compose.yml files
+    - name: Find modified Docker Compose files
+      id: find_files
+      run: |
+        # Zoek alle gewijzigde docker-compose.yml bestanden
+        FILES=$(git diff --name-only HEAD^ HEAD -- '/**/docker-compose.yml')
+        if [ -z "$FILES" ]; then
+          echo "No Docker Compose files modified."
+          exit 1
+        fi
+        echo "Modified files: $FILES"
+        echo "::set-output name=files::$FILES"
+
+    # Loop through each Docker Compose file, extract host and service, and deploy
+    - name: Deploy to each host and service
+      run: |
+        for FILE_PATH in ${{ steps.find_files.outputs.files }}; do
+          # Extract the host and service from the file path
+          HOST=$(echo $FILE_PATH | awk -F'/' '{print $3}')
+          SERVICE=$(echo $FILE_PATH | awk -F'/' '{print $4}')
+          echo "Deploying to host: $HOST, service: $SERVICE"
+
+          # Maak directory aan op de host en verplaats bestand
+          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ secrets.SSH_USER }}@$HOST "mkdir -p ~/docker/$SERVICE"
+          rsync -avz ./docker-compose/$HOST/$SERVICE/docker-compose.yml ${{ secrets.SSH_USER }}@$HOST:~/docker/$SERVICE/docker-compose.yml
+
+          # Optioneel: herstart Docker Compose service
+          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ secrets.SSH_USER }}@$HOST "cd ~/docker/$SERVICE && docker-compose down && docker-compose up -d"
+        done
