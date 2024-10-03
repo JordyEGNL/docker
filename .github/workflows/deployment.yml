@@ -49,7 +49,7 @@ jobs:
     - name: Deploy to each host and service
       run: |
         # Zet de gewijzigde bestanden om in een array
-        IFS=' ' read -r -a FILE_ARRAY <<< "${{ steps.find_files.outputs.files }}"
+        IFS=',' read -r -a FILE_ARRAY <<< "${{ steps.find_files.outputs.files }}"
 
         # Loop door alle bestanden in de array
         for FILE_PATH in "${FILE_ARRAY[@]}"; do
