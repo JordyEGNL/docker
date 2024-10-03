@@ -1,7 +1,7 @@
 services:
-  nginx:
+  nginx2:
     image: nginx:1.27.2
-    container_name: nginx
+    container_name: nginx2
     ports:
-      - "80:80"
+      - "81:80"
     restart: always
