@@ -1,6 +1,6 @@
 services:
   homebox:
-    image: ghcr.io/sysadminsmedia/homebox:latest
+    image: ghcr.io/sysadminsmedia/homebox:0.14.2
     container_name: homebox
     restart: always
     environment:
