@@ -14,7 +14,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
       with:
-        # checkout full tree
         fetch-depth: 0
 
     # Write SSH private key to a file
@@ -41,10 +40,6 @@ jobs:
         echo "Comma separated files: $FILES_COMMA_SEPARATED"
         echo "::set-output name=files::$FILES_COMMA_SEPARATED"
 
-    - name: Debug
-      run: |
-        echo "Files: ${{ steps.find_files.outputs.files }}"
-
     # Loop through each Docker Compose file, extract host and service, and deploy
     - name: Deploy to each host and service
       run: |
@@ -58,10 +53,10 @@ jobs:
           SERVICE=$(echo $FILE_PATH | awk -F'/' '{print $2}')
           echo "Deploying to host: $HOST, service: $SERVICE"
 
-          # Maak directory aan op de host en verplaats bestand
+          # Maak directory aan op de host en verplaats bestanden
           ssh -o StrictHostKeyChecking=no -i ./temp/.ssh/id_ed25519 ${{ secrets.SSH_USER }}@$HOST "mkdir -p ~/docker/$SERVICE"
-          rsync -avz -e "ssh -o StrictHostKeyChecking=no -i ./temp/.ssh/id_ed25519" $FILE_PATH ${{ secrets.SSH_USER }}@$HOST:~/docker/$SERVICE/docker-compose.yml
-          
-          # Optioneel: herstart Docker Compose service
-          ssh -o StrictHostKeyChecking=no -i ./temp/.ssh/id_ed25519 ${{ secrets.SSH_USER }}@$HOST "cd ~/docker/$SERVICE && docker compose down && docker compose up -d"
+          rsync -avz -e "ssh -o StrictHostKeyChecking=no -i ./temp/.ssh/id_ed25519" $FILE_PATH ${{ secrets.SSH_USER }}@$HOST:~/docker/$SERVICE/  
+                  
+          # Update de docker compose stack
+          ssh -o StrictHostKeyChecking=no -i ./temp/.ssh/id_ed25519 ${{ secrets.SSH_USER }}@$HOST "cd ~/docker/$SERVICE && docker compose pull && docker compose up -d --remove-orphans"
         done
