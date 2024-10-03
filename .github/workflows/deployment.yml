@@ -3,7 +3,7 @@ name: Deploy Docker Compose via SSH
 on:
   push:
     paths:
-      - 'docker-compose/**/docker-compose.yml'
+      - '**/docker-compose.yml'
 
 jobs:
   deploy:
@@ -19,7 +19,7 @@ jobs:
       id: find_files
       run: |
         # Zoek alle gewijzigde docker-compose.yml bestanden
-        FILES=$(git diff --name-only HEAD^ HEAD -- '/**/docker-compose.yml')
+        FILES=$(git diff --name-only HEAD^ HEAD -- '**/docker-compose.yml')
         if [ -z "$FILES" ]; then
           echo "No Docker Compose files modified."
           exit 1
@@ -32,8 +32,8 @@ jobs:
       run: |
         for FILE_PATH in ${{ steps.find_files.outputs.files }}; do
           # Extract the host and service from the file path
-          HOST=$(echo $FILE_PATH | awk -F'/' '{print $3}')
-          SERVICE=$(echo $FILE_PATH | awk -F'/' '{print $4}')
+          HOST=$(echo $FILE_PATH | awk -F'/' '{print $1}')
+          SERVICE=$(echo $FILE_PATH | awk -F'/' '{print $2}')
           echo "Deploying to host: $HOST, service: $SERVICE"
 
           # Maak directory aan op de host en verplaats bestand
