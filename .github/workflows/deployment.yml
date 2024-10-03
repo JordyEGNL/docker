@@ -36,12 +36,20 @@ jobs:
           exit 1
         fi
         echo "Modified files: $FILES"
-        echo "::set-output name=files::$FILES"
+        # Set the output as a JSON array (properly formatted for later use)
+        FILES_JSON=$(echo "$FILES" | jq -R -s -c 'split("\n") | map(select(. != ""))')
+        echo "::set-output name=files::$FILES_JSON"
 
     # Loop through each Docker Compose file, extract host and service, and deploy
     - name: Deploy to each host and service
       run: |
-        for FILE_PATH in ${{ steps.find_files.outputs.files }}; do
+
+        # Parse the JSON array from the previous step
+        FILES=${{ steps.find_files.outputs.files }}
+        echo "Files: $FILES"
+
+        # Convert JSON array into a bash array
+        for FILE_PATH in $(echo $FILES | jq -r '.[]'); do
           # Extract the host and service from the file path
           HOST=$(echo $FILE_PATH | awk -F'/' '{print $1}')
           SERVICE=$(echo $FILE_PATH | awk -F'/' '{print $2}')
