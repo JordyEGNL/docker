@@ -36,7 +36,10 @@ jobs:
           exit 1
         fi
         echo "Modified files: $FILES"
-        echo "::set-output name=files::${FILES}"
+        # Zet de bestanden als een enkele string, gescheiden door een komma
+        FILES_COMMA_SEPARATED=$(echo "$FILES" | tr '\n' ',')
+        echo "Comma separated files: $FILES_COMMA_SEPARATED"
+        echo "::set-output name=files::$FILES_COMMA_SEPARATED"
 
     - name: Debug
       run: |
