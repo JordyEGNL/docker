@@ -41,7 +41,7 @@ jobs:
 
           # Run appleboy/ssh-action for each host and service
           echo "Running SSH action for $HOST and $SERVICE"
-          gh workflow run appleboy/ssh-action@v0.1.5 \
+          gh workflow run appleboy/ssh-action@v1.0.3 \
             -e "host=$HOST" \
             -e "username=${{ secrets.SSH_USER }}" \
             -e "key=${{ secrets.SSH_PRIVATE_KEY }}" \
