@@ -64,3 +64,10 @@ jobs:
           # Update de docker compose stack
           ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ./temp/.ssh/id_ed25519 ${{ secrets.SSH_USER }}@$HOST "cd ~/docker/$SERVICE && docker compose pull && docker compose up -d --remove-orphans"
         done
+
+  debug:
+    needs: [deploy]
+    runs-on: ubuntu-latest
+    if: ${{ failure() }}
+    steps:
+      - run: echo "Failed to deploy"
