@@ -53,3 +53,4 @@ services:
     environment:
       - LD_LIBRARY_PATH=/usr/lib/wsl/lib
       - LIBVA_DRIVER_NAME=d3d12
+      
