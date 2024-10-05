@@ -43,7 +43,7 @@ services:
       interval: 5m
   redis:
     container_name: immich-redis
-    image: registry.hub.docker.com/library/redis:6.2-alpine@sha256:328fe6a5822256d065debb36617a8169dbfbd77b797c525288e465f56c1d392b
+    image: registry.hub.docker.com/library/redis:7.4-alpine@sha256:c35af3bbcef51a62c8bae5a9a563c6f1b60d7ebaea4cb5a3ccbcc157580ae098
     healthcheck:
       test: redis-cli ping || exit 1
     labels:
