@@ -27,11 +27,11 @@ jobs:
         chmod 600 ./temp/.ssh/id_ed25519
 
     # Find all modified docker-compose.yml files
-    - name: Find modified Docker Compose files
+    - name: Find modified files
       id: find_files
       run: |
         # Zoek alle gewijzigde docker-compose.yml bestanden
-        FILES=$(git diff --name-only ${{github.event.before}} ${{github.sha}} -- '**/docker-compose.yml')
+        FILES=$(git diff --name-only ${{github.event.before}} ${{github.sha}})
         if [ -z "$FILES" ]; then
           echo "No Docker Compose files modified."
           exit 1
