@@ -13,6 +13,7 @@ services:
       - DB_PASSWORD=${DB_PASSWORD}
       - TZ=Europe/Amsterdam
       - APP_KEY=${APP_KEY}
+      - SPEEDTEST_SCHEDULE="0 * * * *"
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./data:/config
