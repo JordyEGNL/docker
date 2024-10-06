@@ -1,0 +1,16 @@
+services:
+  metube:
+    image: alexta69/metube:2024-10-04
+    container_name: metube
+    restart: unless-stopped
+    volumes:
+      - /mnt/truenas/MeTube:/downloads
+    labels:
+      traefik.enable: true
+      traefik.http.routers.metube.entryPoints: https
+      traefik.http.routers.metube.rule: Host(`yt.hoebergen.net`)
+
+networks:
+  default:
+    name: proxy
+    external: true

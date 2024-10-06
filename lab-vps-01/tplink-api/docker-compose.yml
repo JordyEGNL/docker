@@ -1,0 +1,19 @@
+services:
+  tplink-api:
+    container_name: tplink-api
+    image: ghcr.io/jordyegnl/tplink-sg108e-led-api:0.1.0
+    environment:
+      TP_LINK_IP: 10.0.0.11
+      TP_LINK_USERNAME: admin
+      TP_LINK_PASSWORD: ${PASSWORD}
+    restart: unless-stopped
+    labels:
+      traefik.enable: true
+      traefik.http.routers.tplink-api.entryPoints: https
+      traefik.http.services.tplink-api.loadbalancer.server.port: 5000
+      traefik.http.routers.tplink-api.rule: Host(`tplinkapi.hoebergen.net`)
+
+networks:
+  default:
+    name: proxy
+    external: true
