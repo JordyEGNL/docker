@@ -30,7 +30,7 @@ services:
       traefik.http.services.speedtest-tracker.loadbalancer.server.port: 80
   db:
     container_name: speedtest-tracker-db
-    image: mariadb:10
+    image: mariadb:11
     restart: always
     networks:
       - speedtest-tracker
