@@ -21,7 +21,6 @@ services:
       traefik.http.routers.mealie.rule: Host(`mealie.hoebergen.net`)
 
 networks:
-  mealie:
-  proxy:
+  default:
     name: proxy
     external: true
