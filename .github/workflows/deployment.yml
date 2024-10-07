@@ -41,7 +41,10 @@ jobs:
         # Zet de bestanden als een enkele string, gescheiden door een komma
         FILES_COMMA_SEPARATED=$(echo "$FILES" | tr '\n' ',')
         echo "Comma separated files: $FILES_COMMA_SEPARATED"
-        echo "::set-output name=files::$FILES_COMMA_SEPARATED"
+        
+        # echo "::set-output name=files::$FILES_COMMA_SEPARATED"
+
+        echo "files::$FILES_COMMA_SEPARATED" >> $GITHUB_OUTPUT
 
     # Loop through each Docker Compose file, extract host and service, and deploy
     - name: Deploy to each host and service
