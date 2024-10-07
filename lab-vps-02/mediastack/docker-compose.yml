@@ -57,7 +57,7 @@ services:
       - LOG_LEVEL=info
       - TZ=Europe/Amsterdam
     ports:
-      - ${TAILSCALE_IP}:5055:5055
+      - ${LOCAL_IP}:5055:5055
     volumes:
       - ./jellyseerr/config:/app/config
     labels:
@@ -82,7 +82,7 @@ services:
       - ./radarr/config:/config
       - ${MOUNT_ROOT}:/data
     ports:
-      - ${TAILSCALE_IP}:7878:7878
+      - ${LOCAL_IP}:7878:7878
     restart: unless-stopped
     labels:
       traefik.enable: true
@@ -102,7 +102,7 @@ services:
       - ./sonarr/config:/config
       - ${MOUNT_ROOT}:/data
     ports:
-      - ${TAILSCALE_IP}:8989:8989
+      - ${LOCAL_IP}:8989:8989
     labels:
       traefik.enable: true
       traefik.http.routers.sonarr.entryPoints: https
@@ -123,7 +123,7 @@ services:
       - ${MEDIA_ROOT}/movies:/movies
       - ${MEDIA_ROOT}/series:/series
     ports:
-      - ${TAILSCALE_IP}:6767:6767
+      - ${LOCAL_IP}:6767:6767
     labels:
       traefik.enable: true
       traefik.http.routers.bazarr.entryPoints: https
@@ -141,7 +141,7 @@ services:
     volumes:
       - ./prowlarr/config:/config
     ports:
-      - ${TAILSCALE_IP}:9696:9696
+      - ${LOCAL_IP}:9696:9696
     labels:
       traefik.enable: true
       traefik.http.routers.prowlarr.entryPoints: https
