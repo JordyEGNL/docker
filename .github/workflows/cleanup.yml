@@ -10,6 +10,12 @@ jobs:
     runs-on: self-hosted
 
     steps:
+    # Checkout the repository
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+      
     # Write SSH private key to a file
     - name: Create SSH key file
       run: |
@@ -17,13 +23,8 @@ jobs:
         touch ./temp/.ssh/id_ed25519
         echo "${{ secrets.SSH_PRIVATE_KEY }}" >> ./temp/.ssh/id_ed25519
         chmod 600 ./temp/.ssh/id_ed25519
-
-    - name: Checkout code
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-
-      # Find all host folders (with ls and save the folder names)
+        
+    # Find all host folders (with ls and save the folder names)
     - name: Find host folder
       id: find_files
       run: |
@@ -45,7 +46,7 @@ jobs:
     - name: Prune on each host
       run: |
         # Zet de hosts om in een array
-        IFS=',' read -r -a FILE_ARRAY <<< "${{ steps.find_files.outputs.hosts }}"
+        IFS='/,' read -r -a FILE_ARRAY <<< "${{ steps.find_files.outputs.hosts }}"
 
         echo "Hosts: $FILE_ARRAY"
 
