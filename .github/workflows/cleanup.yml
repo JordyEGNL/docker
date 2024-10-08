@@ -2,7 +2,7 @@ name: Cleanup Docker images via SSH
 
 on:
   schedule:
-    - cron: "0 0 * * *" # Run every night at midnight
+    - cron: "0 0 * * 0" # Run every sunday at midnight
   workflow_dispatch:
 
 jobs:
@@ -50,11 +50,9 @@ jobs:
         # Zet de hosts om in een array
         IFS=',' read -r -a FILE_ARRAY <<< "${{ steps.find_files.outputs.hosts }}"
 
-        echo "Hosts: $FILE_ARRAY"
-
         # Loop door alle hosts
         for HOST in "${FILE_ARRAY[@]}"; do
-          echo " -- Deploying to host: $HOST --"
+          echo " -- Pruning on host: $HOST --"
           # Extract the host and service from the file path
           # HOST=$(echo $FILE_PATH | awk -F'/' '{print $1}')
           
