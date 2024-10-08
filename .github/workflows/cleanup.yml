@@ -38,7 +38,7 @@ jobs:
         HOSTS_COMMA_SEPARATED=$(echo "$HOSTS" | tr '\n' ',')
         echo "Comma separated host folders: $HOSTS_COMMA_SEPARATED"
 
-        echo "hosts=$HOSTS_COMMA_SEPARATED" >> $GITHUB_ENV
+        echo "hosts=$HOSTS_COMMA_SEPARATED" >> $GITHUB_OUTPUT
 
 
     # Loop through each Docker Compose file, extract host and service, and deploy
