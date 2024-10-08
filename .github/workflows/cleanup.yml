@@ -29,7 +29,7 @@ jobs:
       id: find_files
       run: |
         # Zoek alle host folders
-        HOSTS=$(ls -d */)
+        HOSTS=$(ls -d */ | grep -v '^temp/')
         if [ -z "$HOSTS" ]; then
           echo "No host folders found."
           exit 1
@@ -57,5 +57,5 @@ jobs:
           # HOST=$(echo $FILE_PATH | awk -F'/' '{print $1}')
           
           # Docker image prune
-          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ./temp/.ssh/id_ed25519 ${{ secrets.SSH_USER }}@$HOST "docker image prune -a"
+          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ./temp/.ssh/id_ed25519 ${{ secrets.SSH_USER }}@$HOST "docker image prune -a -f"
         done
