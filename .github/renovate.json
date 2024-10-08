@@ -5,5 +5,5 @@
     "prHourlyLimit": 0,
     "commitMessageAction": "update {{baseDir}} -",
     "additionalBranchPrefix": "{{baseDir}}-",
-    "assignees": ["@jordyegnl"]
+    "assignees": ["@JordyEGNL"]
 }
