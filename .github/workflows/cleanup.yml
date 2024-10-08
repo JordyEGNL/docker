@@ -47,6 +47,8 @@ jobs:
         # Zet de hosts om in een array
         IFS=',' read -r -a FILE_ARRAY <<< "${{ steps.find_files.outputs.hosts }}"
 
+        echo "Hosts: $FILE_ARRAY"
+
         # Loop door alle hosts
         for HOST in "${FILE_ARRAY[@]}"; do
           echo " -- Deploying to host: $HOST --"
