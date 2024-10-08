@@ -43,7 +43,7 @@ services:
       interval: 5m
   redis:
     container_name: immich-redis
-    image: redis:6.2-alpine
+    image: redis:7.4-alpine
     healthcheck:
       test: redis-cli ping || exit 1
     labels:
