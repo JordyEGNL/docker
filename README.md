@@ -1,2 +1,11 @@
-# docker-deployment-playground
-[![Deploy Docker Compose via SSH](https://github.com/JordyEGNL/docker-deployment-playground/actions/workflows/deployment.yml/badge.svg)](https://github.com/JordyEGNL/docker-deployment-playground/actions/workflows/deployment.yml)
+# Docker Compose files for my home servers
+[![Deployment](https://github.com/JordyEGNL/docker-deployment-playground/actions/workflows/deployment.yml/badge.svg)](https://github.com/JordyEGNL/docker-deployment-playground/actions/workflows/deployment.yml)
+
+This repository contains the Docker Compose files for my home servers. The Docker Compose files are automatically deployed to the servers using GitHub Actions. Most updates will be done automatically by Renovate, but some services require manual intervention.
+
+## File structure
+```
+<HOST>
+├── <SERVICE>
+│   ├── docker-compose.yml
+```
