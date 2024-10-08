@@ -35,6 +35,8 @@ jobs:
           exit 1
         fi
         echo "Host folders: $HOSTS"
+        # Verwijder de trailing slash van elke host folder
+        HOSTS=$(echo "$HOSTS" | sed 's:/$::')
         # Zet de hosts als een enkele string, gescheiden door een komma
         HOSTS_COMMA_SEPARATED=$(echo "$HOSTS" | tr '\n' ',')
         echo "Comma separated host folders: $HOSTS_COMMA_SEPARATED"
@@ -46,7 +48,7 @@ jobs:
     - name: Prune on each host
       run: |
         # Zet de hosts om in een array
-        IFS='/,' read -r -a FILE_ARRAY <<< "${{ steps.find_files.outputs.hosts }}"
+        IFS=',' read -r -a FILE_ARRAY <<< "${{ steps.find_files.outputs.hosts }}"
 
         echo "Hosts: $FILE_ARRAY"
 
