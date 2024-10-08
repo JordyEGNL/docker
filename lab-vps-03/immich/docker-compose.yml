@@ -43,7 +43,7 @@ services:
       interval: 5m
   redis:
     container_name: immich-redis
-    image: registry.hub.docker.com/library/redis:6.2-alpine
+    image: redis:6.2-alpine
     healthcheck:
       test: redis-cli ping || exit 1
     labels:
@@ -53,7 +53,7 @@ services:
       - immich
   database:
     container_name: immich-postgres
-    image: registry.hub.docker.com/tensorchord/pgvecto-rs:pg14-v0.2.0
+    image: tensorchord/pgvecto-rs:pg14-v0.2.0
     env_file:
       - ./.env
     environment:
