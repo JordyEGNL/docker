@@ -3,6 +3,7 @@
         "config:base"
     ],
     "prHourlyLimit": 0,
-    "commitMessageAction": "Update {{baseDir}} -",
-    "additionalBranchPrefix": "{{baseDir}}-"
+    "commitMessageAction": "update {{baseDir}} -",
+    "additionalBranchPrefix": "{{baseDir}}-",
+    "assignees": ["@jordyegnl"]
 }
