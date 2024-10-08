@@ -1,0 +1,58 @@
+name: Deploy Docker Compose via SSH
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # Run every night at midnight
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+    # Write SSH private key to a file
+    - name: Create SSH key file
+      run: |
+        mkdir -p ./temp/.ssh
+        touch ./temp/.ssh/id_ed25519
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" >> ./temp/.ssh/id_ed25519
+        chmod 600 ./temp/.ssh/id_ed25519
+
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+      # Find all host folders (with ls and save the folder names)
+    - name: Find host folder
+      id: find_files
+      run: |
+        # Zoek alle host folders
+        HOSTS=$(ls -d */)
+        if [ -z "$HOSTS" ]; then
+          echo "No host folders found."
+          exit 1
+        fi
+        echo "Host folders: $HOSTS"
+        # Zet de hosts als een enkele string, gescheiden door een komma
+        HOSTS_COMMA_SEPARATED=$(echo "$HOSTS" | tr '\n' ',')
+        echo "Comma separated host folders: $HOSTS_COMMA_SEPARATED"
+
+        echo "hosts=$HOSTS_COMMA_SEPARATED" >> $GITHUB_ENV
+
+
+    # Loop through each Docker Compose file, extract host and service, and deploy
+    - name: Prune on each host
+      run: |
+        # Zet de hosts om in een array
+        IFS=',' read -r -a FILE_ARRAY <<< "${{ steps.find_files.outputs.hosts }}"
+
+        # Loop door alle hosts
+        for HOST in "${FILE_ARRAY[@]}"; do
+          echo " -- Deploying to host: $HOST --"
+          # Extract the host and service from the file path
+          # HOST=$(echo $FILE_PATH | awk -F'/' '{print $1}')
+          
+          # Docker image prune
+          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ./temp/.ssh/id_ed25519 ${{ secrets.SSH_USER }}@$HOST "docker image prune -a"
+        done
