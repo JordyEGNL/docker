@@ -5,8 +5,9 @@ on:
         branches:
             - main
         paths:
-            - '**/docker-compose.yml'
-            - '**/hwaccel.transcoding.yml'
+            #- '**/docker-compose.yml'
+            #- '**/hwaccel.transcoding.yml'
+            - 'lab*/**'
 
 jobs:
   deploy:
