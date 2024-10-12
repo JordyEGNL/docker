@@ -7,7 +7,6 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
-      - WATCHTOWER_CLEANUP=true
       - TZ=Europe/Amsterdam
       - WATCHTOWER_DEBUG=false
       - WATCHTOWER_SCHEDULE=0 0 4 * * ?
