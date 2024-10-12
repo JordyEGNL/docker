@@ -5,8 +5,6 @@ on:
         branches:
             - main
         paths:
-            #- '**/docker-compose.yml'
-            #- '**/hwaccel.transcoding.yml'
             - 'lab*/**'
 
 jobs:
@@ -32,7 +30,7 @@ jobs:
     - name: Find modified files
       id: find_files
       run: |
-        # Zoek alle gewijzigde docker-compose.yml bestanden
+        # Zoek alle gewijzigde bestanden
         FILES=$(git diff --name-only --diff-filter=d ${{github.event.before}} ${{github.sha}} -- 'lab*/**')
         if [ -z "$FILES" ]; then
           echo "No file changes detected."
