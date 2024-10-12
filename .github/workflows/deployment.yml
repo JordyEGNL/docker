@@ -35,8 +35,8 @@ jobs:
         # Zoek alle gewijzigde docker-compose.yml bestanden
         FILES=$(git diff --name-only --diff-filter=d ${{github.event.before}} ${{github.sha}} -- 'lab*/**')
         if [ -z "$FILES" ]; then
-          echo "No Docker Compose files modified."
-          exit 1
+          echo "No file changes detected."
+          exit 0
         fi
         echo "Modified files: $FILES"
         # Zet de bestanden als een enkele string, gescheiden door een komma
