@@ -33,7 +33,7 @@ jobs:
       id: find_files
       run: |
         # Zoek alle gewijzigde docker-compose.yml bestanden
-        FILES=$(git diff --name-only ${{github.event.before}} ${{github.sha}} -- '**/docker-compose.yml' '**/hwaccel.*')
+        FILES=$(git diff --name-only ${{github.event.before}} ${{github.sha}} -- 'lab*/**')
         if [ -z "$FILES" ]; then
           echo "No Docker Compose files modified."
           exit 1
