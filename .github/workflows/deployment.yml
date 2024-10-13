@@ -57,9 +57,9 @@ jobs:
           HOST=$(echo $FILE_PATH | awk -F'/' '{print $1}')
           SERVICE=$(echo $FILE_PATH | awk -F'/' '{print $2}')
           echo " -- Deploying to host: $HOST, service: $SERVICE --"
-          
+
           # Extract the first two folders from the file path
-          FIRST_TWO_FOLDERS=$(echo $FILE_PATH | awk -F'/' '{print $1"/"$2}')
+          FIRST_TWO_FOLDERS=$(echo $FILE_PATH | awk -F'/' '{print $1}')
           echo "First two folders: $FIRST_TWO_FOLDERS"
 
           # Remove the first two folders from the file path
