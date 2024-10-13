@@ -57,7 +57,14 @@ jobs:
           HOST=$(echo $FILE_PATH | awk -F'/' '{print $1}')
           SERVICE=$(echo $FILE_PATH | awk -F'/' '{print $2}')
           echo " -- Deploying to host: $HOST, service: $SERVICE --"
-          echo "File path: $FILE_PATH"
+          
+          # Extract the first two folders from the file path
+          FIRST_TWO_FOLDERS=$(echo $FILE_PATH | awk -F'/' '{print $1"/"$2}')
+          echo "First two folders: $FIRST_TWO_FOLDERS"
+
+          # Remove the first two folders from the file path
+          FILE_PATH=$(echo $FILE_PATH | sed -e "s|^$FIRST_TWO_FOLDERS/||")
+          echo "Updated file path: $FILE_PATH"
 
           # Maak directory aan op de host en verplaats bestanden
           ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ./temp/.ssh/id_ed25519 ${{ secrets.SSH_USER }}@$HOST "mkdir -p ~/docker/$SERVICE"
