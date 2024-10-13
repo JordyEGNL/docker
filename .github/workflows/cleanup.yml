@@ -1,4 +1,4 @@
-name: Cleanup Docker images via SSH
+name: Cleanup Docker images
 
 on:
   schedule:

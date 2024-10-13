@@ -1,4 +1,4 @@
-name: Deploy Docker Compose via SSH
+name: Deploy Docker Compose
 
 on:
     push:
