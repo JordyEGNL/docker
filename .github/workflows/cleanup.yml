@@ -10,7 +10,6 @@ jobs:
     runs-on: self-hosted
 
     steps:
-    # Checkout the repository
     - name: Checkout code
       uses: actions/checkout@v4
       with:
@@ -28,33 +27,34 @@ jobs:
     - name: Find host folder
       id: find_files
       run: |
-        # Zoek alle host folders
+        # List all directories except the temp directory
         HOSTS=$(ls -d */ | grep -v '^temp/')
         if [ -z "$HOSTS" ]; then
           echo "No host folders found."
           exit 1
         fi
-        echo "Host folders: $HOSTS"
-        # Verwijder de trailing slash van elke host folder
+
+        # Some debugging output
+        # echo "Host folders: $HOSTS"
+
+        # Remove the trailing slash
         HOSTS=$(echo "$HOSTS" | sed 's:/$::')
-        # Zet de hosts als een enkele string, gescheiden door een komma
-        HOSTS_COMMA_SEPARATED=$(echo "$HOSTS" | tr '\n' ',')
+
+        # Convert the list of hosts to a comma separated string
+        HOSTS_COMMA_SEPARATED=$(echo "$HOSTS" | tr '\n' ',' | sed 's/,$//')
         echo "Comma separated host folders: $HOSTS_COMMA_SEPARATED"
 
         echo "hosts=$HOSTS_COMMA_SEPARATED" >> $GITHUB_OUTPUT
 
-
-    # Loop through each Docker Compose file, extract host and service, and deploy
+    # Loop through each HOST and prune Docker images
     - name: Prune on each host
       run: |
-        # Zet de hosts om in een array
+        # Convert to an array to loop through
         IFS=',' read -r -a FILE_ARRAY <<< "${{ steps.find_files.outputs.hosts }}"
 
-        # Loop door alle hosts
+        # Loop through the array
         for HOST in "${FILE_ARRAY[@]}"; do
           echo " -- Pruning on host: $HOST --"
-          # Extract the host and service from the file path
-          # HOST=$(echo $FILE_PATH | awk -F'/' '{print $1}')
           
           # Docker image prune
           ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ./temp/.ssh/id_ed25519 ${{ secrets.SSH_USER }}@$HOST "docker image prune -a -f"
