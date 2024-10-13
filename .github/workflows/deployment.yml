@@ -39,7 +39,7 @@ jobs:
         echo "Modified files: $FILES"
         
         # Extract the first two directories and create a comma-separated list
-        FILES_COMMA_SEPARATED=$(echo "$FILES" | awk -F'/' '{print $1"/"$2}' | sort | uniq | tr '\n' ',')
+        FILES_COMMA_SEPARATED=$(echo "$FILES" | awk -F'/' '{print $1"/"$2}' | sort | uniq | tr '\n' ',' | sed 's/,$//')
         echo "Comma separated filtered files: $FILES_COMMA_SEPARATED"
 
         echo "files=$FILES_COMMA_SEPARATED" >> $GITHUB_OUTPUT
