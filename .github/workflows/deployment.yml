@@ -31,17 +31,16 @@ jobs:
       id: find_files
       run: |
         # Zoek alle gewijzigde bestanden
-        FILES=$(git diff --name-only --diff-filter=d ${{github.event.before}} ${{github.sha}} -- 'lab*/**' | sed 's|/[^/]*$||' | sort -u)
+        FILES=$(git diff --name-only --diff-filter=d ${{github.event.before}} ${{github.sha}} -- 'lab*/**')
         if [ -z "$FILES" ]; then
           echo "No file changes detected."
           exit 0
         fi
         echo "Modified files: $FILES"
-        # Zet de bestanden als een enkele string, gescheiden door een komma
-        FILES_COMMA_SEPARATED=$(echo "$FILES" | tr '\n' ',')
-        echo "Comma separated files: $FILES_COMMA_SEPARATED"
-
-        # echo "::set-output name=files::$FILES_COMMA_SEPARATED"
+        
+        # Extract the first two directories and create a comma-separated list
+        FILES_COMMA_SEPARATED=$(echo "$FILES" | awk -F'/' '{print $1"/"$2}' | sort | uniq | tr '\n' ',')
+        echo "Comma separated filtered files: $FILES_COMMA_SEPARATED"
 
         echo "files=$FILES_COMMA_SEPARATED" >> $GITHUB_OUTPUT
 
