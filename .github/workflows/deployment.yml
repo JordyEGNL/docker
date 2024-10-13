@@ -60,7 +60,7 @@ jobs:
 
           # Maak directory aan op de host en verplaats bestanden
           ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ./temp/.ssh/id_ed25519 ${{ secrets.SSH_USER }}@$HOST "mkdir -p ~/docker/$SERVICE"
-          rsync -avz --relative -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ./temp/.ssh/id_ed25519" $HOST/$SERVICE/ ${{ secrets.SSH_USER }}@$HOST:~/docker/$SERVICE
+          rsync -avz -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ./temp/.ssh/id_ed25519" $HOST/$SERVICE/ ${{ secrets.SSH_USER }}@$HOST:~/docker/$SERVICE
 
           ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ./temp/.ssh/id_ed25519 ${{ secrets.SSH_USER }}@$HOST "cd ~/docker/$SERVICE && ls -la && pwd"
 
