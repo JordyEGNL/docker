@@ -58,17 +58,9 @@ jobs:
           SERVICE=$(echo $FILE_PATH | awk -F'/' '{print $2}')
           echo " -- Deploying to host: $HOST, service: $SERVICE --"
 
-          # Extract the first folder from the file path
-          FIRST_FOLDER=$(echo $FILE_PATH | awk -F'/' '{print $1}')
-          echo "First folder: $FIRST_FOLDER"
-
-          # Remove the first folder from the file path
-          DEST_FILE_PATH=$(echo $FILE_PATH | sed -e "s|^$FIRST_FOLDER/||")
-          echo "Updated file path: $FILE_PATH"
-
           # Maak directory aan op de host en verplaats bestanden
           ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ./temp/.ssh/id_ed25519 ${{ secrets.SSH_USER }}@$HOST "mkdir -p ~/docker/$SERVICE"
-          rsync -avz --relative -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ./temp/.ssh/id_ed25519" $FILE_PATH ${{ secrets.SSH_USER }}@$HOST:~/docker/$DEST_FILE_PATH
+          rsync -avz --relative -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ./temp/.ssh/id_ed25519" $HOST/$SERVICE ${{ secrets.SSH_USER }}@$HOST:~/docker/$SERVICE
 
           ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ./temp/.ssh/id_ed25519 ${{ secrets.SSH_USER }}@$HOST "cd ~/docker/$SERVICE && ls -la && pwd"
 
