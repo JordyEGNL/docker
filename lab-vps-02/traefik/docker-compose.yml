@@ -17,7 +17,7 @@ services:
     networks:
       - proxy
     environment:
-      DOCKER_HOST: dockersocket
+      DOCKER_HOST: dockerproxy
     labels:
       traefik.http.routers.api.rule: Host(`traefik.lab-vps-02.hoebergen.net`)
       traefik.http.routers.api.entryPoints: https
