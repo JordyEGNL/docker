@@ -31,7 +31,7 @@ jobs:
       id: find_files
       run: |
         # Zoek alle gewijzigde bestanden
-        FILES=$(git diff --name-only --diff-filter=d ${{github.event.before}} ${{github.sha}} -- 'lab*/**')
+        FILES=$(git diff --name-only --diff-filter=d ${{github.event.before}} ${{github.sha}} -- 'lab*/**' | sed 's|/[^/]*$||' | sort -u)
         if [ -z "$FILES" ]; then
           echo "No file changes detected."
           exit 0
