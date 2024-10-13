@@ -54,7 +54,7 @@ jobs:
 
         # Loop through the array
         for HOST in "${FILE_ARRAY[@]}"; do
-          echo " -- Pruning on host: $HOST --"
+          echo " 🗑️ Pruning on host: $HOST 🗑️"
           
           # Docker image prune
           ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ./temp/.ssh/id_ed25519 ${{ secrets.SSH_USER }}@$HOST "docker image prune -a -f"
