@@ -1,0 +1,22 @@
+services:
+  homebox:
+    image: ghcr.io/sysadminsmedia/homebox:0.15.2
+    container_name: homebox
+    restart: always
+    environment:
+    - HBOX_LOG_LEVEL=info
+    - HBOX_LOG_FORMAT=text
+    - HBOX_WEB_MAX_UPLOAD_SIZE=50
+    volumes:
+      - ./data/:/data/
+    labels:
+      traefik.enable: true
+      traefik.http.routers.homebox.entryPoints: https
+      traefik.http.services.homebox.loadbalancer.server.port: 7745
+      traefik.http.routers.homebox.rule: Host(`homebox.hoebergen.net`)
+      com.centurylinklabs.watchtower.monitor-only: true
+
+networks:
+  default:
+    name: proxy
+    external: true

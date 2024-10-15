@@ -1,0 +1,24 @@
+version: '3.3'
+services:
+  stirling-pdf:
+    image: frooodle/s-pdf:0.29.0
+    container_name: stirling
+    restart: unless-stopped
+    volumes:
+      - ./data:/usr/share/tesseract-ocr/4.00/tessdata
+      - ./data/config:/configs
+    environment:
+      APP_HOME_NAME: Stirling PDF
+      APP_HOME_DESCRIPTION: Your locally hosted one-stop-shop for all your PDF needs.
+      APP_NAVBAR_NAME: Stirling PDF
+      APP_ROOT_PATH: /
+      ALLOW_GOOGLE_VISABILITY: false
+    labels:
+      traefik.enable: true
+      traefik.http.routers.stirling.entryPoints: https
+      traefik.http.routers.stirling.rule: Host(`pdf.hoebergen.net`)
+
+networks:
+  default:
+    name: proxy
+    external: true

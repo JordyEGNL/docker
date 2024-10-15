@@ -1,0 +1,26 @@
+services:
+  mealie:
+    image: ghcr.io/mealie-recipes/mealie:v1.12.0
+    container_name: mealie
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
+    volumes:
+      - ./data:/app/data/
+    environment:
+      ALLOW_SIGNUP: "false"
+      PUID: 1000
+      PGID: 1000
+      TZ: Europe/Amsterdam
+      BASE_URL: https://mealie.hoebergen.net
+    labels:
+      traefik.enable: true
+      traefik.http.routers.mealie.entryPoints: https
+      traefik.http.routers.mealie.rule: Host(`mealie.hoebergen.net`)
+
+networks:
+  default:
+    name: proxy
+    external: true

@@ -1,0 +1,7 @@
+services:
+  nginx2:
+    image: nginx:1.23
+    container_name: nginx2
+    ports:
+      - "86:80"
+    restart: always

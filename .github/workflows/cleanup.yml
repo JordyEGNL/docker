@@ -1,0 +1,61 @@
+name: Cleanup Docker images
+
+on:
+  schedule:
+    - cron: "0 0 * * 0" # Run every sunday at midnight
+  workflow_dispatch:
+
+jobs:
+  cleanup:
+    runs-on: self-hosted
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+      
+    # Write SSH private key to a file
+    - name: Create SSH key file
+      run: |
+        mkdir -p ./temp/.ssh
+        touch ./temp/.ssh/id_ed25519
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" >> ./temp/.ssh/id_ed25519
+        chmod 600 ./temp/.ssh/id_ed25519
+        
+    # Find all host folders (with ls and save the folder names)
+    - name: Find host folder
+      id: find_files
+      run: |
+        # List all directories except the temp directory
+        HOSTS=$(ls -d */ | grep -v '^temp/')
+        if [ -z "$HOSTS" ]; then
+          echo "No host folders found."
+          exit 1
+        fi
+
+        # Some debugging output
+        # echo "Host folders: $HOSTS"
+
+        # Remove the trailing slash
+        HOSTS=$(echo "$HOSTS" | sed 's:/$::')
+
+        # Convert the list of hosts to a comma separated string
+        HOSTS_COMMA_SEPARATED=$(echo "$HOSTS" | tr '\n' ',' | sed 's/,$//')
+        echo "Comma separated host folders: $HOSTS_COMMA_SEPARATED"
+
+        echo "hosts=$HOSTS_COMMA_SEPARATED" >> $GITHUB_OUTPUT
+
+    # Loop through each HOST and prune Docker images
+    - name: Prune on each host
+      run: |
+        # Convert to an array to loop through
+        IFS=',' read -r -a FILE_ARRAY <<< "${{ steps.find_files.outputs.hosts }}"
+
+        # Loop through the array
+        for HOST in "${FILE_ARRAY[@]}"; do
+          echo " 🗑️ Pruning on host: $HOST 🗑️"
+          
+          # Docker image prune
+          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ./temp/.ssh/id_ed25519 ${{ secrets.SSH_USER }}@$HOST "docker image prune -a -f"
+        done

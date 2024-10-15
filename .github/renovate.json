@@ -1,0 +1,9 @@
+{
+    "extends": [
+        "config:base"
+    ],
+    "prHourlyLimit": 0,
+    "commitMessageAction": "update {{baseDir}} -",
+    "additionalBranchPrefix": "{{baseDir}}-",
+    "assignees": ["@JordyEGNL"]
+}
