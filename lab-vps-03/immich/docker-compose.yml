@@ -29,7 +29,7 @@ services:
       - proxy
   immich-machine-learning:
     container_name: immich-machine-learning
-    image: ghcr.io/immich-app/immich-machine-learning:v1.117.0
+    image: ghcr.io/immich-app/immich-machine-learning:v1.118.0
     env_file:
       - ./.env
     volumes:
