@@ -1,0 +1,24 @@
+services:
+  homepage:
+    image: ghcr.io/gethomepage/homepage:v0.9.11
+    container_name: homepage
+    restart: unless-stopped
+    volumes:
+      - ./config:/app/config
+      - ./images:/app/public/images
+      - ./icons:/app/public/icons
+    env_file:
+      - ./.env
+    environment:
+      PUID: 1000
+      PGID: 1000
+    labels:
+      traefik.enable: true
+      traefik.http.routers.homepage.entryPoints: https
+      traefik.http.services.homepage.loadbalancer.server.port: 3000
+      traefik.http.routers.homepage.rule: Host(`home.hoebergen.net`)
+
+networks:
+  default:
+    name: proxy
+    external: true
