@@ -5,4 +5,12 @@
     "prHourlyLimit": 0,
     "commitMessageAction": "update {{baseDir}} -",
     "additionalBranchPrefix": "{{baseDir}}-"
+  "packageRules": [
+    {
+      "matchDatasources": ["docker"],
+      "matchPackagePatterns": ["^ghcr.io/immich-app/immich-"],
+      "groupName": "immich updates",
+      "groupSlug": "immich"
+    }
+  ]
 }
