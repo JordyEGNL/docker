@@ -4,7 +4,7 @@
     ],
     "prHourlyLimit": 0,
     "commitMessageAction": "update {{baseDir}} -",
-    "additionalBranchPrefix": "{{baseDir}}-"
+    "additionalBranchPrefix": "{{baseDir}}-",
   "packageRules": [
     {
       "matchDatasources": ["docker"],
