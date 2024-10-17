@@ -9,7 +9,7 @@
     {
       "matchDatasources": ["docker"],
       "matchPackagePatterns": ["^ghcr.io/immich-app/immich-"],
-      "groupName": "immich updates",
+      "groupName": "immich",
       "groupSlug": "immich"
     }
   ]
