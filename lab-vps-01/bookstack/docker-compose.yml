@@ -1,6 +1,6 @@
 services:
   bookstack:
-    image: lscr.io/linuxserver/bookstack:24.10.20241014
+    image: lscr.io/linuxserver/bookstack:24.10.20241021
     container_name: bookstack
     environment:
       - PUID=1000
