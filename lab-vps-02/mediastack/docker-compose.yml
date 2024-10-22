@@ -127,7 +127,7 @@ services:
       traefik.http.routers.bazarr.rule: Host(`bazarr.hoebergen.net`)
     restart: unless-stopped
   prowlarr:
-    image: lscr.io/linuxserver/prowlarr:1.24.3
+    image: lscr.io/linuxserver/prowlarr:1.25.4
     container_name: prowlarr
     environment:
       - PUID=1000
