@@ -9,7 +9,7 @@ services:
     restart: unless-stopped
     labels:
       traefik.enable: true
-      traefik.http.routers.tplink-api.entryPoints: https
+      traefik.http.routers.tplink-api.entryPoints: websecure
       traefik.http.services.tplink-api.loadbalancer.server.port: 5000
       traefik.http.routers.tplink-api.rule: Host(`tplinkapi.hoebergen.net`)
 

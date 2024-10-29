@@ -17,7 +17,7 @@ services:
       BASE_URL: https://mealie.hoebergen.net
     labels:
       traefik.enable: true
-      traefik.http.routers.mealie.entryPoints: https
+      traefik.http.routers.mealie.entryPoints: websecure
       traefik.http.routers.mealie.rule: Host(`mealie.hoebergen.net`)
 
 networks:

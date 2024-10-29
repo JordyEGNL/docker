@@ -17,7 +17,7 @@ services:
     labels:
       # Traefik
       traefik.enable: true
-      traefik.http.routers.bookstack.entryPoints: https
+      traefik.http.routers.bookstack.entryPoints: websecure
       traefik.http.services.bookstack.loadbalancer.server.port: 80
       traefik.http.routers.bookstack.rule: Host(`docs.hoebergen.net`)
     volumes:

@@ -61,7 +61,7 @@ services:
       - "9443:9443"
     labels:
       traefik.enable: true
-      traefik.http.routers.authentik.entryPoints: https
+      traefik.http.routers.authentik.entryPoints: websecure
       traefik.http.services.authentik.loadbalancer.server.scheme: https
       traefik.http.services.authentik.loadbalancer.server.port: 9443
       traefik.http.routers.authentik.rule: Host(`auth.hoebergen.net`)

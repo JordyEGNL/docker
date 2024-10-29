@@ -15,7 +15,7 @@ services:
       ALLOW_GOOGLE_VISABILITY: false
     labels:
       traefik.enable: true
-      traefik.http.routers.stirling.entryPoints: https
+      traefik.http.routers.stirling.entryPoints: websecure
       traefik.http.routers.stirling.rule: Host(`pdf.hoebergen.net`)
 
 networks:

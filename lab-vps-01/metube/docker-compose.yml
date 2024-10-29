@@ -7,7 +7,7 @@ services:
       - /mnt/truenas/MeTube:/downloads
     labels:
       traefik.enable: true
-      traefik.http.routers.metube.entryPoints: https
+      traefik.http.routers.metube.entryPoints: websecure
       traefik.http.routers.metube.rule: Host(`yt.hoebergen.net`)
 
 networks:
