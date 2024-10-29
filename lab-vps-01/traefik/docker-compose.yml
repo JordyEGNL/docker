@@ -15,7 +15,7 @@ services:
       - ./data/:/etc/traefik/
       - ./logs/:/var/log/traefik/
     networks:
-      - proxy
+      - frontend
     labels:
       traefik.http.routers.api.rule: Host(`traefik.lab-vps-01.hoebergen.net`)
       traefik.http.routers.api.entryPoints: https
