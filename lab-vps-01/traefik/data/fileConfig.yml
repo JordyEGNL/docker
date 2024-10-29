@@ -6,7 +6,7 @@ http:
       middlewares:
         - "authentik@file"
       entryPoints:
-        - https
+        - websecure
       rule: 'Host(`dns-01.hoebergen.net`)'
       service: dns-01
       tls:
@@ -16,7 +16,7 @@ http:
       middlewares:
         - "authentik@file"
       entryPoints:
-        - https
+        - websecure
       rule: 'Host(`dns-02.hoebergen.net`)'
       service: dns-02
       tls:
@@ -26,7 +26,7 @@ http:
       middlewares:
         - "authentik@file"
       entryPoints:
-        - https
+        - websecure
       rule: 'Host(`dnssync.hoebergen.net`)'
       service: adguardsync-rpi-01
       tls:
