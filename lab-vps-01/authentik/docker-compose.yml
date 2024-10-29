@@ -101,5 +101,5 @@ volumes:
 
 networks:
   authentik:
-  proxy:
+  frontend:
     external: true

@@ -13,6 +13,6 @@ services:
     networks:
       - proxy
 networks:
-  proxy:
+  frontend:
     external: true
     name: proxy
