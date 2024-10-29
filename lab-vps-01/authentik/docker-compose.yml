@@ -53,7 +53,7 @@ services:
       - ./custom-templates:/templates
     networks:
       - authentik
-      - proxy
+      - frontend
     env_file:
       - .env
     ports:

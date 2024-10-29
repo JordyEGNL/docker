@@ -20,7 +20,7 @@ services:
       - ./data/web:/etc/ssl/web
     networks:
       - speedtest-tracker
-      - proxy
+      - frontend
     restart: unless-stopped
     depends_on:
       - db
