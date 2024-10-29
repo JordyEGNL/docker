@@ -15,12 +15,10 @@ services:
       - ./data/:/etc/traefik/
       - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
-      - proxy
-    environment:
-      DOCKER_HOST: dockerproxy
+      - frontend
     labels:
       traefik.http.routers.api.rule: Host(`traefik.lab-vps-02.hoebergen.net`)
-      traefik.http.routers.api.entryPoints: https
+      traefik.http.routers.api.entryPoints: websecure
       traefik.http.routers.api.service: api@internal
       traefik.enable: true
     env_file:
@@ -28,6 +26,6 @@ services:
     restart: unless-stopped
 
 networks:
-  proxy:
+  frontend:
     driver: bridge
     external: true

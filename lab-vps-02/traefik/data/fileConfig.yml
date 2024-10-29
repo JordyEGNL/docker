@@ -5,7 +5,7 @@ http:
       middlewares:
         - authentik
       entryPoints:
-        - https
+        - websecure
       rule: 'Host(`qbittorrent.hoebergen.net`)'
       service: qbittorrent
       tls:

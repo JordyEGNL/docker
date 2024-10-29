@@ -15,7 +15,7 @@ services:
       - /dev/dri/renderD128:/dev/dri/renderD128
     labels:
       traefik.enable: true
-      traefik.http.routers.jellyfin.entryPoints: https
+      traefik.http.routers.jellyfin.entryPoints: websecure
       traefik.http.services.jellyfin.loadbalancer.server.port: 8096
       traefik.http.routers.jellyfin.rule: Host(`jellyfin.hoebergen.net`)
     restart: always
@@ -40,7 +40,7 @@ services:
       - JWT_SECRET="${JELLYSTAT_JWT}"
     labels:
       traefik.enable: true
-      traefik.http.routers.jellystat.entryPoints: https
+      traefik.http.routers.jellystat.entryPoints: websecure
       traefik.http.services.jellystat.loadbalancer.server.port: 3000
       traefik.http.routers.jellystat.rule: Host(`jellystat.hoebergen.net`)
     volumes:
@@ -61,7 +61,7 @@ services:
       - ./jellyseerr/config:/app/config
     labels:
       traefik.enable: true
-      traefik.http.routers.jellyseerr.entryPoints: https
+      traefik.http.routers.jellyseerr.entryPoints: websecure
       traefik.http.services.jellyseerr.loadbalancer.server.port: 5055
       traefik.http.routers.jellyseerr.rule: Host(`request.hoebergen.net`)
     restart: unless-stopped
@@ -84,7 +84,7 @@ services:
     restart: unless-stopped
     labels:
       traefik.enable: true
-      traefik.http.routers.radarr.entryPoints: https
+      traefik.http.routers.radarr.entryPoints: websecure
       traefik.http.services.radarr.loadbalancer.server.port: 7878
       traefik.http.routers.radarr.rule: Host(`radarr.hoebergen.net`)
       traefik.http.routers.radarr.middlewares: authentik@file
@@ -102,7 +102,7 @@ services:
       - ${LOCAL_IP}:8989:8989
     labels:
       traefik.enable: true
-      traefik.http.routers.sonarr.entryPoints: https
+      traefik.http.routers.sonarr.entryPoints: websecure
       traefik.http.services.sonarr.loadbalancer.server.port: 8989
       traefik.http.routers.sonarr.rule: Host(`sonarr.hoebergen.net`)
       traefik.http.routers.sonarr.middlewares: authentik@file
@@ -122,7 +122,7 @@ services:
       - ${LOCAL_IP}:6767:6767
     labels:
       traefik.enable: true
-      traefik.http.routers.bazarr.entryPoints: https
+      traefik.http.routers.bazarr.entryPoints: websecure
       traefik.http.services.bazarr.loadbalancer.server.port: 6767
       traefik.http.routers.bazarr.rule: Host(`bazarr.hoebergen.net`)
     restart: unless-stopped
@@ -139,7 +139,7 @@ services:
       - ${LOCAL_IP}:9696:9696
     labels:
       traefik.enable: true
-      traefik.http.routers.prowlarr.entryPoints: https
+      traefik.http.routers.prowlarr.entryPoints: websecure
       traefik.http.services.prowlarr.loadbalancer.server.port: 9696
       traefik.http.routers.prowlarr.rule: Host(`prowlarr.hoebergen.net`)
       traefik.http.routers.prowlarr.middlewares: authentik@file
@@ -167,7 +167,7 @@ services:
 
 networks:
   default:
-    name: proxy
+    name: frontend
     external: true
   vpn:
     name: vpn

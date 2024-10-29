@@ -1,6 +1,6 @@
 services:
   dockerproxy:
-    image: ghcr.io/tecnativa/docker-socket-proxy:latest
+    image: ghcr.io/tecnativa/docker-socket-proxy:0.3.0
     container_name: dockerproxy
     environment:
       - CONTAINERS=1 # Allow access to viewing containers
@@ -10,9 +10,8 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro # Mounted as read-only
     restart: unless-stopped
-    networks:
-      - proxy
+
 networks:
-  proxy:
+  default:
     external: true
-    name: proxy
+    name: frontend
