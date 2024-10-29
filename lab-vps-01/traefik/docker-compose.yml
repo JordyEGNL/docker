@@ -16,8 +16,6 @@ services:
       - ./logs/:/var/log/traefik/
     networks:
       - proxy
-    environment:
-      DOCKER_HOST: dockerproxy
     labels:
       traefik.http.routers.api.rule: Host(`traefik.lab-vps-01.hoebergen.net`)
       traefik.http.routers.api.entryPoints: https
@@ -28,6 +26,6 @@ services:
     restart: unless-stopped
 
 networks:
-  proxy:
+  frontend:
     driver: bridge
     external: true
