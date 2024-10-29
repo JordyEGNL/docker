@@ -17,14 +17,14 @@ services:
       - database
     labels:
       traefik.enable: true
-      traefik.http.routers.immich.entryPoints: https
+      traefik.http.routers.immich.entryPoints: websecure
       traefik.http.services.immich.loadbalancer.server.port: 2283
       traefik.http.routers.immich.rule: Host(`photos.hoebergen.net`)
       com.centurylinklabs.watchtower.monitor-only: true
     restart: always
     networks:
       - immich
-      - proxy
+      - frontend
 
   immich-machine-learning:
     container_name: immich-machine-learning
@@ -71,8 +71,8 @@ services:
       - immich
 
 networks:
-  proxy:
-    name: proxy
+  frontend:
+    name: frontend
     external: true
   immich:
     name: immich
