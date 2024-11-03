@@ -60,6 +60,7 @@ entryPoints:
             sans:
               - '*.hoebergen.net'
               - '*.lab-vps-03.hoebergen.net'
+          - main: public.photos.hoebergen.net
       middlewares:
         - securityHeaders@file
 
