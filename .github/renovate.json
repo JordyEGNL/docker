@@ -1,17 +1,23 @@
 {
-    "extends": [
-        "config:base"
-    ],
-    "prHourlyLimit": 0,
-    "assignees": ["JordyEGNL"],
-    "commitMessageAction": "update {{baseDir}} -",
-    "additionalBranchPrefix": "{{baseDir}}-",
+  "extends": [
+    "config:recommended"
+  ],
+  "prHourlyLimit": 0,
+  "assignees": [
+    "JordyEGNL"
+  ],
+  "commitMessageAction": "update {{packageFileDir}} -",
+  "additionalBranchPrefix": "{{packageFileDir}}-",
   "packageRules": [
     {
-      "matchDatasources": ["docker"],
-      "matchPackagePatterns": ["^ghcr.io/immich-app/immich-"],
+      "matchDatasources": [
+        "docker"
+      ],
       "groupName": "immich",
-      "groupSlug": "immich"
+      "groupSlug": "immich",
+      "matchPackageNames": [
+        "/^ghcr.io/immich-app/immich-/"
+      ]
     }
   ]
 }
