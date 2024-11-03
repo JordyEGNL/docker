@@ -1,0 +1,11 @@
+{
+    "lightGallery": {
+      "controls": true,
+      "download": false,
+      "mobileSettings": {
+        "controls": false,
+        "showCloseIcon": true,
+        "download": false
+      }
+    }
+  }
