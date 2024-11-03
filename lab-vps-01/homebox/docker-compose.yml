@@ -14,7 +14,7 @@ services:
       traefik.http.routers.homebox.entryPoints: websecure
       traefik.http.services.homebox.loadbalancer.server.port: 7745
       traefik.http.routers.homebox.rule: Host(`homebox.hoebergen.net`)
-      com.centurylinklabs.watchtower.monitor-only: true
+      traefik.http.routers.homebox.middlewares: localAccess@file
 
 networks:
   default:

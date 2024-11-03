@@ -9,6 +9,7 @@ services:
       traefik.enable: true
       traefik.http.routers.metube.entryPoints: websecure
       traefik.http.routers.metube.rule: Host(`yt.hoebergen.net`)
+      traefik.http.routers.metube.middlewares: localAccess@file
 
 networks:
   default:

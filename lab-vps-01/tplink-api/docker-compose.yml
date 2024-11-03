@@ -12,6 +12,7 @@ services:
       traefik.http.routers.tplink-api.entryPoints: websecure
       traefik.http.services.tplink-api.loadbalancer.server.port: 5000
       traefik.http.routers.tplink-api.rule: Host(`tplinkapi.hoebergen.net`)
+      traefik.http.routers.tplink-api.middlewares: localAccess@file
 
 networks:
   default:

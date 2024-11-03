@@ -19,6 +19,7 @@ services:
       traefik.enable: true
       traefik.http.routers.mealie.entryPoints: websecure
       traefik.http.routers.mealie.rule: Host(`mealie.hoebergen.net`)
+      traefik.http.routers.mealie.middlewares: localAccess@file
 
 networks:
   default:

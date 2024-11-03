@@ -29,6 +29,7 @@ services:
       traefik.http.routers.speedtest-tracker.entryPoints: websecure
       traefik.http.routers.speedtest-tracker.rule: Host(`speedtest.hoebergen.net`)
       traefik.http.services.speedtest-tracker.loadbalancer.server.port: 80
+      traefik.http.routers.speedtest-tracker.middlewares: localAccess@file
   db:
     container_name: speedtest-tracker-db
     image: mariadb:10
