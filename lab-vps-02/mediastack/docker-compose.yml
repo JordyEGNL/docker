@@ -4,7 +4,7 @@ services:
     image: jellyfin/jellyfin:10.10.1
     user: 1000:1000
     group_add:
-      - "109" # Change this to match your "render" host group id and remove this comment
+      - "109" # Change this to match your "render" host group id
     volumes:
       - ./jellyfin/config:/config
       - ./jellyfin/cache:/cache
@@ -19,6 +19,7 @@ services:
       traefik.http.services.jellyfin.loadbalancer.server.port: 8096
       traefik.http.routers.jellyfin.rule: Host(`jellyfin.hoebergen.net`)
     restart: always
+
   jellystat-db:
     container_name: jellystat-db
     image: postgres:15.8
@@ -29,6 +30,7 @@ services:
     volumes:
       - ./jellystat/postgres-data:/var/lib/postgresql/data
     restart: unless-stopped
+
   jellystat:
     container_name: jellystat
     image: cyfershepard/jellystat:latest
@@ -43,12 +45,14 @@ services:
       traefik.http.routers.jellystat.entryPoints: websecure
       traefik.http.services.jellystat.loadbalancer.server.port: 3000
       traefik.http.routers.jellystat.rule: Host(`jellystat.hoebergen.net`)
+      traefik.http.routers.jellystat.middlewares: localAccess@file
     volumes:
       - ./jellystat/backup-data:/app/backend/backup-data
     depends_on:
       - jellystat-db
       - jellyfin
     restart: unless-stopped
+
   jellyseerr:
     image: fallenbagel/jellyseerr:2.0.1
     container_name: jellyseerr
@@ -69,6 +73,7 @@ services:
       - jellyfin
       - radarr
       - sonarr
+
   radarr:
     image: lscr.io/linuxserver/radarr:5.14.0
     container_name: radarr
@@ -87,7 +92,8 @@ services:
       traefik.http.routers.radarr.entryPoints: websecure
       traefik.http.services.radarr.loadbalancer.server.port: 7878
       traefik.http.routers.radarr.rule: Host(`radarr.hoebergen.net`)
-      traefik.http.routers.radarr.middlewares: authentik@file
+      traefik.http.routers.radarr.middlewares: authentik@file,localAccess@file
+
   sonarr:
     image: lscr.io/linuxserver/sonarr:4.0.10
     container_name: sonarr
@@ -105,8 +111,9 @@ services:
       traefik.http.routers.sonarr.entryPoints: websecure
       traefik.http.services.sonarr.loadbalancer.server.port: 8989
       traefik.http.routers.sonarr.rule: Host(`sonarr.hoebergen.net`)
-      traefik.http.routers.sonarr.middlewares: authentik@file
+      traefik.http.routers.sonarr.middlewares: authentik@file,localAccess@file
     restart: unless-stopped
+
   bazarr:
     image: lscr.io/linuxserver/bazarr:1.4.5
     container_name: bazarr
@@ -125,7 +132,9 @@ services:
       traefik.http.routers.bazarr.entryPoints: websecure
       traefik.http.services.bazarr.loadbalancer.server.port: 6767
       traefik.http.routers.bazarr.rule: Host(`bazarr.hoebergen.net`)
+      traefik.http.routers.bazarr.middlewares: localAccess@file
     restart: unless-stopped
+
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:1.25.4
     container_name: prowlarr
@@ -142,8 +151,9 @@ services:
       traefik.http.routers.prowlarr.entryPoints: websecure
       traefik.http.services.prowlarr.loadbalancer.server.port: 9696
       traefik.http.routers.prowlarr.rule: Host(`prowlarr.hoebergen.net`)
-      traefik.http.routers.prowlarr.middlewares: authentik@file
+      traefik.http.routers.prowlarr.middlewares: authentik@file,localAccess@file
     restart: unless-stopped
+
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:5.0.1
     container_name: qbittorrent
@@ -156,11 +166,17 @@ services:
       - ./qbittorrent:/config
       - ${MOUNT_ROOT}/qbittorrent/downloads:/downloads
     restart: unless-stopped
+    labels:
+      traefik.enable: true
+      traefik.http.routers.qbittorrent.entryPoints: websecure
+      traefik.http.services.qbittorrent.loadbalancer.server.port: 8085
+      traefik.http.routers.qbittorrent.rule: Host(`qbittorrent.hoebergen.net`)
+      traefik.http.routers.qbittorrent.middlewares: localAccess@file
     ports:
       - 8085:8085
     networks:
       vpn:
-        ipv4_address: 10.0.50.202
+        ipv4_address: ${VPN_IP}
     dns:
       - 1.1.1.1
       - 9.9.9.9
