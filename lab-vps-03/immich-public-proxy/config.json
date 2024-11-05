@@ -1,11 +1,17 @@
 {
-    "lightGallery": {
+  "ipp": {
+    "responseHeaders": {
+      "Cache-Control": "public, max-age=86400"
+    },
+    "singleImageGallery": true
+  },
+  "lightGallery": {
+    "controls": true,
+    "download": false,
+    "mobileSettings": {
       "controls": true,
-      "download": false,
-      "mobileSettings": {
-        "controls": false,
-        "showCloseIcon": true,
-        "download": false
-      }
+      "showCloseIcon": true,
+      "download": false
     }
   }
+}
