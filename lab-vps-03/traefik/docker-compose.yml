@@ -21,6 +21,7 @@ services:
       traefik.http.routers.api.rule: Host(`traefik.lab-vps-03.hoebergen.net`)
       traefik.http.routers.api.entryPoints: websecure
       traefik.http.routers.api.service: api@internal
+      traefik.http.routers.api.middlewares: localAccess@file
       traefik.enable: true
     env_file:
       - ./.env
