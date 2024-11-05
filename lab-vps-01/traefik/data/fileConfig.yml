@@ -97,7 +97,7 @@ http:
         sourceRange:
           - "172.16.1.0/24" # Trusted Remote VPN
           - "10.0.10.0/24"  # Trusted Servers
-          - "10.0.40.0/24"  # X-Forwarded-For is still 10.0.0.101 or 10.0.0.102 for some reason so thats why no /8
+          - "10.0.40.0/24"  # Clients
 
     realip:
       plugin:
