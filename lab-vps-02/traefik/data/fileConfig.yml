@@ -1,21 +1,8 @@
 http:
 
   routers:
-    qbittorrent:
-      middlewares:
-        - authentik
-      entryPoints:
-        - websecure
-      rule: 'Host(`qbittorrent.hoebergen.net`)'
-      service: qbittorrent
-      tls:
-        certResolver: letsencrypt
 
   services:
-    qbittorrent:
-      loadBalancer:
-        servers:
-          - url: http://10.0.50.202:8085
 
   ## MIDDLEWARES ##
   middlewares:
