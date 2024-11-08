@@ -1,7 +1,7 @@
 services:
   speedtest-tracker:
     container_name: speedtest-tracker
-    image: lscr.io/linuxserver/speedtest-tracker:0.21.4
+    image: lscr.io/linuxserver/speedtest-tracker:0.21.5
     environment:
       - PUID=1000
       - PGID=1000
