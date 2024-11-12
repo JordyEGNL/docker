@@ -3,8 +3,7 @@
     "responseHeaders": {
       "Cache-Control": "public, max-age=86400"
     },
-    "singleImageGallery": true,
-    "downloadOriginalPhoto": true
+    "singleImageGallery": true
   },
   "lightGallery": {
     "controls": true,
