@@ -31,7 +31,7 @@ jobs:
       id: find_files
       run: |
         # Search for changed files since the last commit
-        FILES=$(git diff --name-only --diff-filter=d ${{github.event.before}} ${{github.sha}} -- 'lab*/**')
+        FILES=$(git diff --name-only --diff-filter=d ${{github.event.before}} ${{github.sha}} -- 'lab*/**' 'str*/**')
         if [ -z "$FILES" ]; then
           echo "No file changes detected."
           exit 0
