@@ -11,7 +11,7 @@ services:
       traefik.enable: true
       traefik.http.routers.immich-proxy.entryPoints: websecure
       traefik.http.services.immich-proxy.loadbalancer.server.port: 3000
-      traefik.http.routers.immich-proxy.rule: Host(`public.photos.hoebergen.net`)
+      traefik.http.routers.immich-proxy.rule: Host(`public.photos.hoebergen.net`) && PathPrefix(`/share`)
     networks:
       - immich
       - frontend
