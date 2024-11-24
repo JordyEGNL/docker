@@ -1,0 +1,19 @@
+services:
+  glance:
+    image: glanceapp/glance:v0.6.2
+    volumes:
+      - ./glance.yml:/app/glance.yml
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    restart: unless-stopped
+    labels:
+      traefik.enable: true
+      traefik.http.routers.homepage.entryPoints: websecure
+      traefik.http.services.homepage.loadbalancer.server.port: 8080
+      traefik.http.routers.homepage.rule: Host(`home.hoebergen.net`)
+      traefik.http.routers.homepage.middlewares: localAccess@file
+
+networks:
+  default:
+    name: frontend
+    external: true
