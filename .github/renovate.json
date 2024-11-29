@@ -18,9 +18,7 @@
       "matchPackageNames": [
         "/^ghcr.io/immich-app/immich-/"
       ]
-    }
-  ],
-  "packageRules": [
+    },
     {
       "matchUpdateTypes": ["patch"],
       "automerge": true
