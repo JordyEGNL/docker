@@ -20,7 +20,6 @@ services:
       traefik.http.routers.immich.entryPoints: websecure
       traefik.http.services.immich.loadbalancer.server.port: 2283
       traefik.http.routers.immich.rule: Host(`photos.hoebergen.net`)
-      com.centurylinklabs.watchtower.monitor-only: true
     restart: always
     networks:
       - immich
@@ -69,6 +68,21 @@ services:
     restart: always
     networks:
       - immich
+
+  power-tools:
+    container_name: immich-power-tools
+    image: ghcr.io/varun-raj/immich-power-tools:latest
+    env_file:
+      - ./.env
+    labels:
+      traefik.enable: true
+      traefik.http.routers.immich-power-tools.entryPoints: websecure
+      traefik.http.services.immich-power-tools.loadbalancer.server.port: 3000
+      traefik.http.routers.immich-power-tools.rule: Host(`tools.photos.hoebergen.net`)
+    restart: always
+    networks:
+      - immich
+      - frontend
 
 networks:
   frontend:
