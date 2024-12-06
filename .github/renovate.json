@@ -22,7 +22,9 @@
     {
       "matchUpdateTypes": ["patch"],
       "automerge": true,
-      "automergeType": "branch"
+      "automergeType": "branch",
+      "matchCurrentVersion": "!/^0/",
+      "ignoreTests": true
     }
   ]
 }
