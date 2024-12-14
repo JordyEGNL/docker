@@ -2,7 +2,7 @@ services:
   db_recipes:
     container_name: tandoor-db
     restart: unless-stopped
-    image: postgres:16-alpine
+    image: postgres:17-alpine
     volumes:
       - ./postgresql:/var/lib/postgresql/data
     env_file:
