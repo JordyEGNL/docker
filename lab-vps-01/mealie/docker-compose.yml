@@ -14,11 +14,11 @@ services:
       PUID: 1000
       PGID: 1000
       TZ: Europe/Amsterdam
-      BASE_URL: https://mealie.hoebergen.net
+      BASE_URL: https://recipes.hoebergen.net
     labels:
       traefik.enable: true
       traefik.http.routers.mealie.entryPoints: websecure
-      traefik.http.routers.mealie.rule: Host(`mealie.hoebergen.net`)
+      traefik.http.routers.mealie.rule: Host(`recipes.hoebergen.net`)
       traefik.http.routers.mealie.middlewares: localAccess@file
 
 networks:
