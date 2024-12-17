@@ -75,7 +75,7 @@ services:
       - sonarr
 
   radarr:
-    image: lscr.io/linuxserver/radarr:5.15.1
+    image: lscr.io/linuxserver/radarr:5.16.3
     container_name: radarr
     environment:
       - PUID=1000
