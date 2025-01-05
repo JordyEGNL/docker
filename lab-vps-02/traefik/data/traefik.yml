@@ -74,7 +74,7 @@ providers:
   # Docker provider for connecting all apps that are inside of the docker network
   docker:
     watch: true
-    network: websecure
+    network: frontend
     exposedByDefault: false
     endpoint: "tcp://dockerproxy:2375"
 
