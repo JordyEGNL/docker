@@ -57,9 +57,7 @@ entryPoints:
             sans:
               - '*.hoebergen.net'
               - '*.lab-vps-02.hoebergen.net'
-          - main: jellyfin.hoebergen.net
-            sans:
-              - '*.jellyfin.hoebergen.net'
+          - main: '*.jellyfin.hoebergen.net'
       middlewares:
         - securityHeaders@file
 
