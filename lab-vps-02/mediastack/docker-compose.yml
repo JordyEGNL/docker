@@ -44,7 +44,7 @@ services:
       traefik.enable: true
       traefik.http.routers.jellystat.entryPoints: websecure
       traefik.http.services.jellystat.loadbalancer.server.port: 3000
-      traefik.http.routers.jellystat.rule: Host(`jellystat.hoebergen.net`)
+      traefik.http.routers.jellystat.rule: Host(`stats.jellyfin.hoebergen.net`)
       traefik.http.routers.jellystat.middlewares: localAccess@file
     volumes:
       - ./jellystat/backup-data:/app/backend/backup-data
