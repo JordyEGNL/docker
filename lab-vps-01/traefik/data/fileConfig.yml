@@ -37,12 +37,12 @@ http:
     dns-01:
       loadBalancer:
         servers:
-          - url: http://10.0.10.21:80/
+          - url: http://10.0.10.202:80/
 
     dns-02:
       loadBalancer:
         servers:
-          - url: http://10.0.10.202:80/
+          - url: http://10.0.10.21:80/
 
     adguardsync-rpi-01:
       loadBalancer:
