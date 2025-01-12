@@ -33,7 +33,7 @@ services:
 
   jellystat:
     container_name: jellystat
-    image: cyfershepard/jellystat:latest
+    image: cyfershepard/jellystat:1.1.2
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=${JELLYSTAT_POSTGRES_PASSWORD}
