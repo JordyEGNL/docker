@@ -14,7 +14,7 @@ http:
       entryPoints:
         - websecure
       rule: 'Host(`photos.hoebergen.net`)'
-      service: photos
+      service: immich
       tls:
         certResolver: letsencrypt
 
