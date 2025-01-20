@@ -11,8 +11,7 @@ entryPoints:
     address: :80
     forwardedHeaders:
       trustedIPs: &trustedIps
-        - 10.0.20.201
-        - 172.16.0.0
+        - 172.16.2.3 # ORC-VPS-01 proxy
         # Start of Clouflare public IP list for HTTP requests, remove this if you don't use it
         - 173.245.48.0/20
         - 103.21.244.0/22
