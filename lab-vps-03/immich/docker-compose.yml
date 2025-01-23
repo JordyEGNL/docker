@@ -1,7 +1,7 @@
 services:
   immich-server:
     container_name: immich-server
-    image: ghcr.io/immich-app/immich-server:v1.124.2
+    image: ghcr.io/immich-app/immich-server:v1.125.1
     group_add:
       - "109"
     extends:
@@ -29,7 +29,7 @@ services:
 
   immich-machine-learning:
     container_name: immich-machine-learning
-    image: ghcr.io/immich-app/immich-machine-learning:v1.124.2
+    image: ghcr.io/immich-app/immich-machine-learning:v1.125.1
     env_file:
       - ./.env
     volumes:
@@ -42,7 +42,7 @@ services:
 
   redis:
     container_name: immich-redis
-    image: library/redis:6.2-alpine@sha256:2ba50e1ac3a0ea17b736ce9db2b0a9f6f8b85d4c27d5f5accc6a416d8f42c6d5
+    image: library/redis:6.2-alpine@sha256:905c4ee67b8e0aa955331960d2aa745781e6bd89afc44a8584bfd13bc890f0ae
     healthcheck:
       test: redis-cli ping || exit 1
     restart: always
