@@ -182,6 +182,20 @@ services:
       - 1.1.1.1
       - 9.9.9.9
 
+  janitorr:
+    container_name: janitorr
+    image: ghcr.io/schaka/janitorr:native-stable
+    user: 1000:1000
+    volumes:
+      - ./janitorr/application.yml:/workspace/application.yml
+      - ./janitorr/appdata/janitorr/logs:/logs
+      - ${MOUNT_ROOT}:/data
+    healthcheck:
+      test: "wget -T5 -qO- http://localhost:8978/health | grep UP || exit 1"
+      start_period: 30s
+      interval: 15s
+      retries: 3
+
 networks:
   default:
     name: frontend
