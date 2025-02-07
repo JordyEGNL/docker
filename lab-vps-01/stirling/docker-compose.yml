@@ -1,7 +1,7 @@
 version: '3.3'
 services:
   stirling-pdf:
-    image: ghcr.io/stirling-tools/s-pdf:0.40.2
+    image: ghcr.io/stirling-tools/s-pdf:0.41.0
     container_name: stirling
     restart: unless-stopped
     volumes:
