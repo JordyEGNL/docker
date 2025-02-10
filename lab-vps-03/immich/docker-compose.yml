@@ -1,7 +1,7 @@
 services:
   immich-server:
     container_name: immich-server
-    image: ghcr.io/immich-app/immich-server:v1.125.7
+    image: ghcr.io/immich-app/immich-server:v1.126.1
     group_add:
       - "109"
     extends:
@@ -29,7 +29,7 @@ services:
 
   immich-machine-learning:
     container_name: immich-machine-learning
-    image: ghcr.io/immich-app/immich-machine-learning:v1.125.7
+    image: ghcr.io/immich-app/immich-machine-learning:v1.126.1
     env_file:
       - ./.env
     volumes:
