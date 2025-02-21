@@ -1,7 +1,7 @@
 services:
   immich-public-proxy:
     container_name: immich-public-proxy
-    image: alangrainger/immich-public-proxy:1.7.2
+    image: alangrainger/immich-public-proxy:1.7.3
     restart: unless-stopped
     env_file:
       - ./.env
