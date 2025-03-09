@@ -177,7 +177,7 @@ services:
     volumes:
       - '/etc/localtime:/etc/localtime:ro'
       - ./qbittorrent:/config
-      - '${MOUNT_ROOT}/qbittorrent/downloads:/data'
+      - '${MOUNT_ROOT}/qbittorrent/downloads:/downloads'
     container_name: qbittorrent
     ports:
       - '58946:58946/udp'
