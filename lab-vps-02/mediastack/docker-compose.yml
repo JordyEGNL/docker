@@ -154,7 +154,6 @@ services:
       traefik.http.routers.prowlarr.middlewares: authentik@file,localAccess@file
     restart: unless-stopped
 
-services:
   qbittorrent:
     image: binhex/arch-qbittorrentvpn:5.0.4-3-01
     environment:
