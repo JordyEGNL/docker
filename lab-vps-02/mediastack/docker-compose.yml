@@ -201,7 +201,7 @@ services:
       - ./cleanuperr/logs:/var/logs
     environment:
       - TZ=Europe/Amsterdam
-      - DRY_RUN=true
+      - DRY_RUN=false
       ## Basic
       - LOGGING__LOGLEVEL=Information
       - LOGGING__FILE__ENABLED=false
