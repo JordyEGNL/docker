@@ -195,7 +195,7 @@ services:
       traefik.http.routers.qbittorrent.middlewares: localAccess@file
 
   cleanuperr:
-    image: ghcr.io/flmorg/cleanuperr:1.5.9
+    image: ghcr.io/flmorg/cleanuperr:1.5.11
     restart: unless-stopped
     volumes:
       - ./cleanuperr/logs:/var/logs
