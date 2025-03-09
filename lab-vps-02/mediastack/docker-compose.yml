@@ -132,7 +132,7 @@ services:
       traefik.http.routers.bazarr.entryPoints: websecure
       traefik.http.services.bazarr.loadbalancer.server.port: 6767
       traefik.http.routers.bazarr.rule: Host(`bazarr.hoebergen.net`)
-      traefik.http.routers.bazarr.middlewares: localAccess@file
+      traefik.http.routers.bazarr.middlewares: authentik@file,localAccess@file
     restart: unless-stopped
 
   prowlarr:
