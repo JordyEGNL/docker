@@ -154,33 +154,46 @@ services:
       traefik.http.routers.prowlarr.middlewares: authentik@file,localAccess@file
     restart: unless-stopped
 
+services:
   qbittorrent:
-    image: lscr.io/linuxserver/qbittorrent:5.0.4
-    container_name: qbittorrent
+    image: binhex/arch-qbittorrentvpn:5.0.4-3-01
     environment:
-      - PUID=1000
       - PGID=1000
-      - TZ=Europe/Amsterdam
-      - WEBUI_PORT=8085
+      - PUID=1000
+      - UMASK=000
+      - WEBUI_PORT=8080
+      - DEBUG=false
+      - NAME_SERVERS=1.1.1.1
+      - LAN_NETWORK=${LAN_NETWORK}
+      - ENABLE_SOCKS=no
+      - USERSPACE_WIREGUARD=no
+      - STRICT_PORT_FORWARD=no
+      - ENABLE_PRIVOXY=no
+      - ENABLE_STARTUP_SCRIPTS=no
+      - VPN_CLIENT=wireguard
+      - VPN_PROV=pia
+      - VPN_USER=${PIA_USER}
+      - VPN_PASS=${PIA_PASSWORD}
+      - VPN_ENABLED=yes
     volumes:
+      - '/etc/localtime:/etc/localtime:ro'
       - ./qbittorrent:/config
-      - ${MOUNT_ROOT}/qbittorrent/downloads:/downloads
+      - '${MOUNT_ROOT}/qbittorrent/downloads:/data'
+    container_name: qbittorrent
+    ports:
+      - '58946:58946/udp'
+      - '58946:58946'
+    privileged: true
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
     restart: unless-stopped
     labels:
       traefik.enable: true
       traefik.docker.network: vpn
       traefik.http.routers.qbittorrent.entryPoints: websecure
-      traefik.http.services.qbittorrent.loadbalancer.server.port: 8085
+      traefik.http.services.qbittorrent.loadbalancer.server.port: 8080
       traefik.http.routers.qbittorrent.rule: Host(`qbittorrent.hoebergen.net`)
       traefik.http.routers.qbittorrent.middlewares: localAccess@file
-    ports:
-      - 8085:8085
-    networks:
-      vpn:
-        ipv4_address: ${VPN_IP}
-    dns:
-      - 1.1.1.1
-      - 9.9.9.9
 
   janitorr:
     container_name: janitorr
