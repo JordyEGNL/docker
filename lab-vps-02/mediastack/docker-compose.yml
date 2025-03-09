@@ -194,19 +194,60 @@ services:
       traefik.http.routers.qbittorrent.rule: Host(`qbittorrent.hoebergen.net`)
       traefik.http.routers.qbittorrent.middlewares: localAccess@file
 
-  janitorr:
-    container_name: janitorr
-    image: ghcr.io/schaka/janitorr:native-stable
-    user: 1000:1000
+  cleanuperr:
+    image: ghcr.io/flmorg/cleanuperr:1.5.9
+    restart: unless-stopped
     volumes:
-      - ./janitorr/application.yml:/workspace/application.yml
-      - ./janitorr/appdata/janitorr/logs:/logs
-      - ${MOUNT_ROOT}:/data
+      - ./cleanuperr/logs:/var/logs
+    environment:
+      - TZ=Europe/Amsterdam
+      - DRY_RUN=true
+      ## Basic
+      - LOGGING__LOGLEVEL=Information
+      - LOGGING__FILE__ENABLED=false
+      - LOGGING__ENHANCED=true
+      ## Triggers
+      - TRIGGERS__QUEUECLEANER=0 0/30 * * * ?
+      - TRIGGERS__CONTENTBLOCKER=0 0/30 * * * ?
+      - TRIGGERS__DOWNLOADCLEANER=0 0 * * * ?
+      ## Queue cleaner
+      - QUEUECLEANER__ENABLED=true
+      - QUEUECLEANER__RUNSEQUENTIALLY=true
+      - QUEUECLEANER__IMPORT_FAILED_MAX_STRIKES=5
+      - QUEUECLEANER__IMPORT_FAILED_IGNORE_PRIVATE=false
+      - QUEUECLEANER__IMPORT_FAILED_DELETE_PRIVATE=false
+      - QUEUECLEANER__IMPORT_FAILED_IGNORE_PATTERNS__0=title mismatch
+      - QUEUECLEANER__IMPORT_FAILED_IGNORE_PATTERNS__1=manual import required
+      - QUEUECLEANER__STALLED_MAX_STRIKES=5
+      - QUEUECLEANER__STALLED_RESET_STRIKES_ON_PROGRESS=false
+      - QUEUECLEANER__STALLED_IGNORE_PRIVATE=false
+      - QUEUECLEANER__STALLED_DELETE_PRIVATE=false
+      ## Content blocker
+      - CONTENTBLOCKER__ENABLED=true
+      - CONTENTBLOCKER__IGNORE_PRIVATE=false
+      - CONTENTBLOCKER__DELETE_PRIVATE=false
+      ## Download cleaner
+      - DOWNLOADCLEANER__ENABLED=false
+      ## Download client
+      - DOWNLOAD_CLIENT=qBittorrent
+      - QBITTORRENT__URL=http://qbittorrent:8080
+      - QBITTORRENT__USERNAME=${QBITTORRENT_USERNAME}
+      - QBITTORRENT__PASSWORD=${QBITTORRENT_PASSWORD}
+      ## Sonarr
+      - SONARR__ENABLED=true
+      - SONARR__SEARCHTYPE=Episode
+      - SONARR__BLOCK__TYPE=blacklist
+      - SONARR__BLOCK__PATH=https://raw.githubusercontent.com/flmorg/cleanuperr/refs/heads/main/blacklist
+      - SONARR__INSTANCES__0__URL=http://sonarr:8989
+      - SONARR__INSTANCES__0__APIKEY=${SONARR_API_KEY}
+      ## Radarr
+      - RADARR__ENABLED=true
+      - RADARR__BLOCK__TYPE=blacklist
+      - RADARR__BLOCK__PATH=https://raw.githubusercontent.com/flmorg/cleanuperr/refs/heads/main/blacklist
+      - RADARR__INSTANCES__0__URL=http://radarr:7878
+      - RADARR__INSTANCES__0__APIKEY=${RADARR_API_KEY}
 
 networks:
   default:
     name: frontend
-    external: true
-  vpn:
-    name: vpn
     external: true
