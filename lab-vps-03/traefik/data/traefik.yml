@@ -48,7 +48,9 @@ entryPoints:
     # https://github.com/immich-app/immich/discussions/8872
     transport:
       respondingTimeouts:
-        readTimeout: "0s"
+        readTimeout: 0s
+        idleTimeout: 600s
+        writeTimeout: 600s
     # end of fix for immich large file uploads
     forwardedHeaders:
       trustedIPs: *trustedIps
