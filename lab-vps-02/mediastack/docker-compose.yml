@@ -155,6 +155,7 @@ services:
     restart: unless-stopped
 
   qbittorrent:
+    container_name: qbittorrent
     image: binhex/arch-qbittorrentvpn:5.0.4-3-01
     environment:
       - PGID=1000
@@ -195,6 +196,7 @@ services:
       traefik.http.routers.qbittorrent.middlewares: localAccess@file
 
   cleanuperr:
+    container_name: cleanuperr
     image: ghcr.io/flmorg/cleanuperr:1.5.11
     restart: unless-stopped
     volumes:
