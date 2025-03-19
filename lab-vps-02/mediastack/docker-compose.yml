@@ -196,7 +196,7 @@ services:
 
   cleanuperr:
     container_name: cleanuperr
-    image: ghcr.io/flmorg/cleanuperr:1.5.13
+    image: ghcr.io/flmorg/cleanuperr:1.5.14
     restart: unless-stopped
     volumes:
       - ./cleanuperr/logs:/var/logs
