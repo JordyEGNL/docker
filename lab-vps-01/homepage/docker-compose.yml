@@ -1,6 +1,6 @@
 services:
   homepage:
-    image: ghcr.io/gethomepage/homepage:v0.10.9
+    image: ghcr.io/gethomepage/homepage:v1.0.4
     container_name: homepage
     restart: unless-stopped
     volumes:
@@ -12,6 +12,7 @@ services:
     environment:
       PUID: 1000
       PGID: 1000
+      HOMEPAGE_ALLOWED_HOSTS: 172.16.0.0/12,10.0.0.0/16
     labels:
       traefik.enable: true
       traefik.http.routers.homepage.entryPoints: websecure
