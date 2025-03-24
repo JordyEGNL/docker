@@ -12,7 +12,7 @@ services:
     environment:
       PUID: 1000
       PGID: 1000
-      HOMEPAGE_ALLOWED_HOSTS: 172.16.0.0/12,10.0.0.0/16
+      HOMEPAGE_ALLOWED_HOSTS: homepage.hoebergen.net
     labels:
       traefik.enable: true
       traefik.http.routers.homepage.entryPoints: websecure
