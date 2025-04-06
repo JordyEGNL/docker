@@ -102,3 +102,6 @@ experimental:
     traefik-get-real-ip:
       moduleName: "github.com/Paxxs/traefik-get-real-ip"
       version: "v1.0.3"
+    bouncer:
+      moduleName: github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin
+      version: "v1.4.2"
