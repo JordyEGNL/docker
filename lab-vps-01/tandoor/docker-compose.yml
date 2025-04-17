@@ -13,7 +13,7 @@ services:
   web_recipes:
     container_name: tandoor-web
     restart: unless-stopped
-    image: vabene1111/recipes:1.5.34
+    image: ghcr.io/tandoorrecipes/recipes:2.0.0-alpha-1
     env_file:
       - ./.env
     volumes:
@@ -28,7 +28,7 @@ services:
 
   nginx_recipes:
     container_name: tandoor-proxy
-    image: nginx:mainline-alpine
+    image: nginx:mainline-alpine3.21
     restart: unless-stopped
     env_file:
       - ./.env
