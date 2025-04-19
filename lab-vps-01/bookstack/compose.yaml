@@ -21,7 +21,7 @@ services:
       traefik.http.services.bookstack.loadbalancer.server.port: 80
       traefik.http.routers.bookstack.rule: Host(`docs.hoebergen.net`)
     volumes:
-      - ./config:/config
+      - /home/jordy/docker/bookstack/config:/config
     restart: unless-stopped
     depends_on:
       - bookstack_db
@@ -37,7 +37,7 @@ services:
       - MYSQL_USER=bookstack
       - MYSQL_PASSWORD=${DB_PASS}
     volumes:
-      - ./data:/config
+      - /home/jordy/docker/bookstack/data:/config
     restart: unless-stopped
 
 networks:
