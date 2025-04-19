@@ -6,8 +6,8 @@ services:
     group_add:
       - "109" # Change this to match your "render" host group id
     volumes:
-      - ./jellyfin/config:/config
-      - ./jellyfin/cache:/cache
+      - /home/jordy/docker/mediastack/jellyfin/config:/config
+      - /home/jordy/docker/mediastack/jellyfin/cache:/cache
       - ${MEDIA_ROOT}:/data
     ports:
       - 8096:8096
@@ -28,7 +28,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=${JELLYSTAT_POSTGRES_PASSWORD}
     volumes:
-      - ./jellystat/postgres-data:/var/lib/postgresql/data
+      - /home/jordy/docker/mediastack/jellystat/postgres-data:/var/lib/postgresql/data
     restart: unless-stopped
 
   jellystat:
@@ -47,7 +47,7 @@ services:
       traefik.http.routers.jellystat.rule: Host(`stats.jellyfin.hoebergen.net`)
       traefik.http.routers.jellystat.middlewares: localAccess@file
     volumes:
-      - ./jellystat/backup-data:/app/backend/backup-data
+      - /home/jordy/docker/mediastack/jellystat/backup-data:/app/backend/backup-data
     depends_on:
       - jellystat-db
       - jellyfin
@@ -62,7 +62,7 @@ services:
     ports:
       - ${LOCAL_IP}:5055:5055
     volumes:
-      - ./jellyseerr/config:/app/config
+      - /home/jordy/docker/mediastack/jellyseerr/config:/app/config
     labels:
       traefik.enable: true
       traefik.http.routers.jellyseerr.entryPoints: websecure
@@ -82,7 +82,7 @@ services:
       - PGID=1000
       - TZ=Europe/Amsterdam
     volumes:
-      - ./radarr/config:/config
+      - /home/jordy/docker/mediastack/radarr/config:/config
       - ${MOUNT_ROOT}:/data
     ports:
       - ${LOCAL_IP}:7878:7878
@@ -122,7 +122,7 @@ services:
       - PGID=1000
       - TZ=Europe/Amsterdam
     volumes:
-      - ./bazarr/config:/config
+      - /home/jordy/docker/mediastack/bazarr/config:/config
       - ${MEDIA_ROOT}/movies:/movies
       - ${MEDIA_ROOT}/series:/series
     ports:
@@ -143,7 +143,7 @@ services:
       - PGID=1000
       - TZ=Europe/Amsterdam
     volumes:
-      - ./prowlarr/config:/config
+      - /home/jordy/docker/mediastack/prowlarr/config:/config
     ports:
       - ${LOCAL_IP}:9696:9696
     labels:
@@ -177,7 +177,7 @@ services:
       - VPN_ENABLED=yes
     volumes:
       - '/etc/localtime:/etc/localtime:ro'
-      - ./qbittorrent:/config
+      - /home/jordy/docker/mediastack/qbittorrent:/config
       - '${MOUNT_ROOT}/qbittorrent/downloads:/downloads'
     ports:
       - '58946:58946/udp'
@@ -198,7 +198,7 @@ services:
     image: ghcr.io/flmorg/cleanuperr:1.5.18
     restart: unless-stopped
     volumes:
-      - ./cleanuperr/logs:/var/logs
+      - /home/jordy/docker/mediastack/cleanuperr/logs:/var/logs
     environment:
       - TZ=Europe/Amsterdam
       - DRY_RUN=false
