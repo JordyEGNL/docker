@@ -14,7 +14,6 @@ services:
       TZ: Europe/Amsterdam
       # ICON_SERVICE: duckduckgo
       HTTP_REQUEST_BLOCK_NON_GLOBAL_IPS: false
-      LOG_FILE: /logs/vaultwarden.log
       EXPERIMENTAL_CLIENT_FEATURE_FLAGS: ${EXPERIMENTAL_CLIENT_FEATURE_FLAGS}
       ADMIN_TOKEN: ${VAULTWARDEN_ADMIN_TOKEN}
     labels:
