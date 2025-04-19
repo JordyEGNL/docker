@@ -4,7 +4,6 @@ services:
     container_name: vaultwarden
     volumes:
       - /home/jordy/docker/vaultwarden/data/:/data/
-      - /home/jordy/docker/vaultwarden/logs/:/logs/
     restart: unless-stopped
     environment:
       PUSH_ENABLED: true
