@@ -4,9 +4,9 @@ services:
     container_name: homepage
     restart: unless-stopped
     volumes:
-      - ./config:/app/config
-      - ./images:/app/public/images
-      - ./icons:/app/public/icons
+      - /home/jordy/docker/homepage/config:/app/config
+      - /home/jordy/docker/homepage/images:/app/public/images
+      - /home/jordy/docker/homepage/icons:/app/public/icons
     env_file:
       - ./.env
     environment:
