@@ -188,7 +188,6 @@ services:
     restart: unless-stopped
     labels:
       traefik.enable: true
-      traefik.docker.network: vpn
       traefik.http.routers.qbittorrent.entryPoints: websecure
       traefik.http.services.qbittorrent.loadbalancer.server.port: 8080
       traefik.http.routers.qbittorrent.rule: Host(`qbittorrent.hoebergen.net`)
