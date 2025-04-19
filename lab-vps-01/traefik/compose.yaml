@@ -14,7 +14,6 @@ services:
     volumes:
       - ./data/fileConfig.yml:/etc/traefik/fileConfig.yml
       - ./data/traefik.yml:/etc/traefik/traefik.yml
-      - /home/jordy/docker/traefik/logs/:/var/log/traefik/
     networks:
       - frontend
     labels:
