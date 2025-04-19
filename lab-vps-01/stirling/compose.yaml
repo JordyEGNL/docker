@@ -5,8 +5,8 @@ services:
     container_name: stirling
     restart: unless-stopped
     volumes:
-      - ./data:/usr/share/tesseract-ocr/4.00/tessdata
-      - ./data/config:/configs
+      - /home/jordy/docker/stirling/data:/usr/share/tesseract-ocr/4.00/tessdata
+      - /home/jordy/docker/stirling/data/config:/configs
     environment:
       APP_HOME_NAME: Stirling PDF
       APP_HOME_DESCRIPTION: Your locally hosted one-stop-shop for all your PDF needs.
