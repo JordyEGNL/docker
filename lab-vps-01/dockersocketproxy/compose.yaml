@@ -3,6 +3,7 @@ services:
     image: ghcr.io/tecnativa/docker-socket-proxy:0.3.0
     container_name: dockerproxy
     environment:
+      - INFO=1 # Crowdsec
       - CONTAINERS=1 # Allow access to viewing containers
       - POST=0 # Disallow any POST operations (effectively read-only)
     ports:

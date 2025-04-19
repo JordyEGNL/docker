@@ -1,0 +1,11 @@
+## Add resources to get started
+[[server]]
+name = "lab-vps-01"
+[server.config]
+address = "https://10.0.10.101:8120"
+enabled = true
+auto_prune = false
+send_unreachable_alerts = false
+send_cpu_alerts = false
+send_mem_alerts = false
+send_disk_alerts = false
