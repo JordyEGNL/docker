@@ -6,7 +6,7 @@ services:
     env_file:
       - ./.env
     volumes:
-      - ./config.json:/app/config.json:ro
+      - /home/jordy/docker/immich-public-proxy/config.json:/app/config.json:ro
     labels:
       traefik.enable: true
       traefik.http.routers.immich-proxy.entryPoints: websecure

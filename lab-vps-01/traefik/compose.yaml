@@ -12,8 +12,8 @@ services:
         protocol: tcp
         mode: host
     volumes:
-      - ./data/:/etc/traefik/
-      - ./logs/:/var/log/traefik/
+      - /home/jordy/docker/traefik/data/:/etc/traefik/
+      - /home/jordy/docker/traefik/logs/:/var/log/traefik/
     networks:
       - frontend
     labels:
