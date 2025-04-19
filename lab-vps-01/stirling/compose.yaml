@@ -1,4 +1,3 @@
-version: '3.3'
 services:
   stirling-pdf:
     image: ghcr.io/stirling-tools/s-pdf:0.45.6
