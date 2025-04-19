@@ -1,3 +1,4 @@
+# without github actions
 services:
   immich-server:
     container_name: immich-server
