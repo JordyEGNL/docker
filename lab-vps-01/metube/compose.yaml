@@ -16,7 +16,7 @@ networks:
     name: frontend
     external: true
 
-volumes:        
+volumes:
   MeTube:
     driver: local
     driver_opts:
