@@ -102,7 +102,7 @@ services:
       - PGID=1000
       - TZ=Europe/Amsterdam
     volumes:
-      - ./sonarr/config:/config
+      - /home/jordy/docker/mediastack/sonarr/config:/config
       - ${MOUNT_ROOT}:/data
     ports:
       - ${LOCAL_IP}:8989:8989
