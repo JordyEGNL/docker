@@ -23,5 +23,4 @@ services:
     ports:
       - 10.0.10.21:8080:8080
     restart: unless-stopped
-    networks:
-      - bridge
+    network_mode: bridge
