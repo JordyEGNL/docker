@@ -13,5 +13,5 @@ services:
 
 networks:
   default:
-    name: proxy
+    name: frontend
     external: true
