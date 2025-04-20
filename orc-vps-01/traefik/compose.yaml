@@ -12,8 +12,8 @@ services:
         protocol: tcp
         mode: host
     volumes:
-      - ./data/:/etc/traefik/
-      - ./logs/:/var/log/traefik/
+      - ./data/fileConfig.yml:/etc/traefik/fileConfig.yml
+      - ./data/traefik.yml:/etc/traefik/traefik.yml
     networks:
       - frontend
     labels:
