@@ -1,7 +1,7 @@
 services:
   tplink-api:
     container_name: tplink-api
-    image: ghcr.io/jordyegnl/tplink-sg108e-led-api:v0.1.1
+    image: ghcr.io/jordyegnl/tplink-sg108e-led-api:0.1.3
     environment:
       TP_LINK_IP: 10.0.0.11
       TP_LINK_USERNAME: admin
