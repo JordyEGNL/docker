@@ -17,7 +17,7 @@
       "groupName": "immich",
       "groupSlug": "immich",
       "matchPackageNames": [
-        "^ghcr\.io\/immich-app\/immich-"
+        "^ghcr\.io/immich-app/immich-"
       ]
     },
     {
