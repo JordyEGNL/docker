@@ -17,8 +17,9 @@
       "groupName": "immich",
       "groupSlug": "immich",
       "matchPackageNames": [
-        "/^ghcr.io/immich-app/immich-/"
-      ]
+        "immich-server",
+        "immich-machine-learning"
+      ],
     },
     {
       "matchUpdateTypes": ["patch"],
