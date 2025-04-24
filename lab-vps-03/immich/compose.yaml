@@ -2,7 +2,7 @@
 services:
   immich-server:
     container_name: immich-server
-    image: ghcr.io/immich-app/immich-server:v1.132.1
+    image: ghcr.io/immich-app/immich-server:v1.132.0
     group_add:
       - "109"
     extends:
@@ -43,7 +43,7 @@ services:
 
   redis:
     container_name: immich-redis
-    image: valkey/valkey:8-bookworm@sha256:8dbe14c0d070c80ae66640e0a8ab04a24c509b3c35795528d2939819126a5a00
+    image: valkey/valkey:8-bookworm@sha256:c855f98e09d558a0d7cc1a4e56473231206a4c54c0114ada9c485b47aeb92ec8
     healthcheck:
       test: redis-cli ping || exit 1
     restart: always
