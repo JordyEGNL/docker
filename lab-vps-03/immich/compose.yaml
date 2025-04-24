@@ -2,7 +2,7 @@
 services:
   immich-server:
     container_name: immich-server
-    image: altran1502/immich-server:v1.132.0
+    image: altran1502/immich-server:v1.132.1
     group_add:
       - "109"
     extends:
