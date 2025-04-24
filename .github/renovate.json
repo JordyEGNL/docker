@@ -17,8 +17,8 @@
       "groupName": "immich",
       "groupSlug": "immich",
       "matchPackageNames": [
-        "immich-server",
-        "immich-machine-learning"
+        "immich-app/immich-server",
+        "immich-app/immich-machine-learning"
       ],
     },
     {
