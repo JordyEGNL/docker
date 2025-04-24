@@ -19,7 +19,7 @@
       "matchPackageNames": [
         "immich-app/immich-server",
         "immich-app/immich-machine-learning"
-      ],
+      ]
     },
     {
       "matchUpdateTypes": ["patch"],
