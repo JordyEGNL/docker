@@ -14,7 +14,7 @@ general:
   sessionDuration: 3 months
 share:
   #Whether registration is allowed
-  allowRegistration: "true"
+  allowRegistration: "false"
   #Whether unauthenticated users can create shares
   allowUnauthenticatedShares: "false"
   #Maximum share expiration. Set to 0 to allow unlimited expiration.
