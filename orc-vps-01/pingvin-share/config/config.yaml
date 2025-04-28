@@ -1,0 +1,31 @@
+#This configuration is pre-filled with the default values.
+#You can remove keys you don't want to set. If a key is missing, the value set in the UI will be used; if that is also unset, the default value applies.
+
+general:
+  #Name of the application
+  appName: Hoebergen Shares
+  #On which URL Pingvin Share is available
+  appUrl: https://share.hoebergen.net
+  #Whether to set the secure flag on cookies. If enabled, the site will not function when accessed over HTTP.
+  secureCookies: "true"
+  #Whether to show the home page
+  showHomePage: "false"
+  #Time after which a user must log in again (default: 3 months).
+  sessionDuration: 3 months
+share:
+  #Whether registration is allowed
+  allowRegistration: "true"
+  #Whether unauthenticated users can create shares
+  allowUnauthenticatedShares: "false"
+  #Maximum share expiration. Set to 0 to allow unlimited expiration.
+  maxExpiration: 0 days
+  #Default length for the generated ID of a share. This value is also used to generate links for reverse shares. A value below 8 is not considered secure.
+  shareIdLength: "8"
+  #Maximum share size
+  maxSize: "1000000000"
+  #Adjust the level to balance between file size and compression speed. Valid values range from 0 to 9, with 0 being no compression and 9 being maximum compression. 
+  zipCompressionLevel: "9"
+  #Adjust the chunk size for your uploads to balance efficiency and reliability according to your internet connection. Smaller chunks can enhance success rates for unstable connections, while larger chunks make uploads faster for stable connections.
+  chunkSize: "10000000"
+  #The share creation modal automatically appears when a user selects files, eliminating the need to manually click the button.
+  autoOpenShareModal: "false"

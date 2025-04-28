@@ -1,0 +1,20 @@
+services:
+  pingvin-share:
+    image: stonith404/pingvin-share:v1.11.1
+    restart: unless-stopped
+    environment:
+      - TRUST_PROXY=true
+    volumes:
+      - "/home/jordy/docker/pingvin-share:/opt/app/backend/data"
+      - "/home/jordy/docker/pingvin-share:/opt/app/frontend/public/img"
+      - "./config/config.yaml:/opt/app/config.yaml"
+    labels:
+      traefik.enable: true
+      traefik.http.routers.pingvin-share.entryPoints: websecure
+      traefik.http.services.pingvin-share.loadbalancer.server.port: 3000
+      traefik.http.routers.pingvin-share.rule: Host(`share.hoebergen.net`)
+
+networks:
+  default:
+    name: frontend
+    external: true
