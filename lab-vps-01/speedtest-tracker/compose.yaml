@@ -16,8 +16,8 @@ services:
       - SPEEDTEST_SCHEDULE="0 */6 * * *"
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ./data:/config
-      - ./data/web:/etc/ssl/web
+      - /home/jordy/docker/speedtest-tracker/data:/config
+      - /home/jordy/docker/speedtest-tracker/data/web:/etc/ssl/web
     networks:
       - speedtest-tracker
       - frontend
@@ -32,7 +32,7 @@ services:
       traefik.http.routers.speedtest-tracker.middlewares: localAccess@file
   db:
     container_name: speedtest-tracker-db
-    image: mariadb:10
+    image: mariadb:11
     restart: always
     networks:
       - speedtest-tracker
@@ -42,7 +42,7 @@ services:
       - MARIADB_PASSWORD=${DB_PASSWORD}
       - MARIADB_RANDOM_ROOT_PASSWORD=true
     volumes:
-      - ./db:/var/lib/mysql
+      - /home/jordy/docker/speedtest-tracker/db:/var/lib/mysql
 networks:
   speedtest-tracker:
   frontend:
