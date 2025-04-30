@@ -39,7 +39,7 @@ services:
     environment:
       - MARIADB_DATABASE=speedtest_tracker
       - MARIADB_USER=jordy
-      - MARIADB_PASSWORD=SUPERSECUREPASSWORDBYERWINGROEPPA
+      - MARIADB_PASSWORD=${DB_PASSWORD}
       - MARIADB_RANDOM_ROOT_PASSWORD=true
     volumes:
       - ./db:/var/lib/mysql
