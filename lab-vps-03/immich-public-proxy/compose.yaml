@@ -20,4 +20,5 @@ networks:
   frontend:
     external: true
   immich:
+    name: backend-immich
     external: true
