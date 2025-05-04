@@ -93,7 +93,6 @@ networks:
     name: frontend
     external: true
   immich:
-    name: immich
-    external: true
+    name: backend-immich
 volumes:
   model-cache:
