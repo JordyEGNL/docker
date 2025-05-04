@@ -1,4 +1,12 @@
 services:
+  mediastack-diskchecker:
+    image: alpine:3.21.3
+    volumes:
+      - ${MOUNT_ROOT}:/mnt/externaldisk:ro
+    command:
+      - "/bin/sh"
+      - "-c"
+      - "[ -f /mnt/externaldisk/.995b1a8f-37db-4aaa-aa97-d703d7670595 ]"
   jellyfin:
     container_name: jellyfin
     image: jellyfin/jellyfin:10.10.7
@@ -9,6 +17,10 @@ services:
       - /home/jordy/docker/mediastack/jellyfin/config:/config
       - /home/jordy/docker/mediastack/jellyfin/cache:/cache
       - ${MEDIA_ROOT}:/data
+    depends_on:
+      mediastack-diskchecker:
+        condition: service_completed_successfully
+        restart: true
     ports:
       - 8096:8096
     devices:
@@ -84,6 +96,10 @@ services:
     volumes:
       - /home/jordy/docker/mediastack/radarr/config:/config
       - ${MOUNT_ROOT}:/data
+    depends_on:
+      mediastack-diskchecker:
+        condition: service_completed_successfully
+        restart: true
     ports:
       - ${LOCAL_IP}:7878:7878
     restart: unless-stopped
@@ -104,6 +120,10 @@ services:
     volumes:
       - /home/jordy/docker/mediastack/sonarr/config:/config
       - ${MOUNT_ROOT}:/data
+    depends_on:
+      mediastack-diskchecker:
+        condition: service_completed_successfully
+        restart: true
     ports:
       - ${LOCAL_IP}:8989:8989
     labels:
@@ -125,6 +145,10 @@ services:
       - /home/jordy/docker/mediastack/bazarr/config:/config
       - ${MEDIA_ROOT}/movies:/movies
       - ${MEDIA_ROOT}/series:/series
+    depends_on:
+      mediastack-diskchecker:
+        condition: service_completed_successfully
+        restart: true
     ports:
       - ${LOCAL_IP}:6767:6767
     labels:
@@ -179,6 +203,10 @@ services:
       - '/etc/localtime:/etc/localtime:ro'
       - /home/jordy/docker/mediastack/qbittorrent:/config
       - '${MOUNT_ROOT}/qbittorrent/downloads:/downloads'
+    depends_on:
+      mediastack-diskchecker:
+        condition: service_completed_successfully
+        restart: true
     ports:
       - '58946:58946/udp'
       - '58946:58946'
