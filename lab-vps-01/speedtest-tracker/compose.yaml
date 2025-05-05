@@ -45,5 +45,6 @@ services:
       - /home/jordy/docker/speedtest-tracker/db:/var/lib/mysql
 networks:
   speedtest-tracker:
+    name: backend-speedtest-tracker
   frontend:
     external: true
