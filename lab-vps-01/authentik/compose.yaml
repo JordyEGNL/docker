@@ -102,5 +102,6 @@ volumes:
 
 networks:
   authentik:
+    name: backend-authentik
   frontend:
     external: true
