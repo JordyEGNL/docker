@@ -50,6 +50,7 @@ services:
 
 networks:
   tandoor:
+    name: backend-tandoor
   frontend:
     external: true
 
