@@ -246,6 +246,9 @@ services:
       traefik.http.services.qbittorrent.loadbalancer.server.port: 8080
       traefik.http.routers.qbittorrent.rule: Host(`qbittorrent.hoebergen.net`)
       traefik.http.routers.qbittorrent.middlewares: localAccess@file
+    networks:
+      - mediastack
+      - frontend
 
   cleanuperr:
     container_name: cleanuperr
