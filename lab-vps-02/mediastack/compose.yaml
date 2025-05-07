@@ -252,7 +252,7 @@ services:
 
   cleanuperr:
     container_name: cleanuperr
-    image: ghcr.io/flmorg/cleanuperr:1.6.2
+    image: ghcr.io/flmorg/cleanuperr:1.6.3
     restart: unless-stopped
     volumes:
       - /home/jordy/docker/mediastack/cleanuperr/logs:/var/logs
