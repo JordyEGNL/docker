@@ -38,6 +38,11 @@ services:
       traefik.http.routers.immich.rule: Host(`photos.hoebergen.net`)
       # traefik.http.routers.api.middlewares: localAccess@file
       # Allow access via private tunnel
+      # Cloudflare
+      cloudflare.tunnel.enable: true
+      cloudflare.tunnel.hostname: "photos.hoebergen.net"
+      cloudflare.tunnel.service: "https://lab-vps-02:443"
+      cloudflare.tunnel.no_tls_verify: true
     restart: always
     networks:
       - immich
