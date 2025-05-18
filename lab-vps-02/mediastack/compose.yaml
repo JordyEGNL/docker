@@ -312,6 +312,13 @@ services:
       - RADARR__BLOCK__PATH=https://raw.githubusercontent.com/flmorg/cleanuperr/refs/heads/main/blacklist
       - RADARR__INSTANCES__0__URL=http://radarr:7878
       - RADARR__INSTANCES__0__APIKEY=${RADARR_API_KEY}
+    depends_on:
+      qbittorrent:
+        condition: service_started
+      radarr:
+        condition: service_started
+      sonarr:
+        condition: service_started
     networks:
       - mediastack
 
