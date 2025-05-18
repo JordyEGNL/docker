@@ -3,7 +3,7 @@ services:
     image: vaultwarden/server:1.33.2-alpine
     container_name: vaultwarden
     volumes:
-      - /home/jordy/docker/vaultwarden/data/:/data/
+      - /docker/vaultwarden/data/:/data/
     restart: unless-stopped
     environment:
       PUSH_ENABLED: true
@@ -12,7 +12,6 @@ services:
       PUSH_RELAY_URI: https://api.bitwarden.eu
       PUSH_IDENTITY_URI: https://identity.bitwarden.eu
       TZ: Europe/Amsterdam
-      # ICON_SERVICE: duckduckgo
       HTTP_REQUEST_BLOCK_NON_GLOBAL_IPS: false
       EXPERIMENTAL_CLIENT_FEATURE_FLAGS: ${EXPERIMENTAL_CLIENT_FEATURE_FLAGS}
       ADMIN_TOKEN: ${VAULTWARDEN_ADMIN_TOKEN}
