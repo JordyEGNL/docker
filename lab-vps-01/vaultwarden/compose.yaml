@@ -30,7 +30,7 @@ services:
       # Cloudflare
       cloudflare.tunnel.enable: "true"
       cloudflare.tunnel.hostname: "vault.hoebergen.net"
-      cloudflare.tunnel.service: "http://lab-vps-01:443"
+      cloudflare.tunnel.service: "https://lab-vps-01:443"
 
 networks:
   default:
