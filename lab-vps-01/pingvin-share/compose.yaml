@@ -8,7 +8,6 @@ services:
     volumes:
       - "/home/jordy/docker/pingvin-share:/opt/app/backend/data"
       - "/home/jordy/docker/pingvin-share:/opt/app/frontend/public/img"
-      - "./config/config.yaml:/opt/app/config.yaml"
     labels:
       traefik.enable: true
       traefik.http.routers.pingvin-share.entryPoints: websecure
