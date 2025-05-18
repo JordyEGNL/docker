@@ -41,7 +41,7 @@ services:
       # Cloudflare
       cloudflare.tunnel.enable: true
       cloudflare.tunnel.hostname: "photos.hoebergen.net"
-      cloudflare.tunnel.service: "https://lab-vps-02:443"
+      cloudflare.tunnel.service: "https://localhost:443"
       cloudflare.tunnel.no_tls_verify: true
     restart: always
     networks:
