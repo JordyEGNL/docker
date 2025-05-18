@@ -65,6 +65,11 @@ services:
       traefik.http.services.authentik.loadbalancer.server.scheme: https
       traefik.http.services.authentik.loadbalancer.server.port: 9443
       traefik.http.routers.authentik.rule: Host(`auth.hoebergen.net`)
+      # Cloudflare
+      cloudflare.tunnel.enable: true
+      cloudflare.tunnel.hostname: "auth.hoebergen.net"
+      cloudflare.tunnel.service: "https://lab-vps-01:443"
+      cloudflare.tunnel.no_tls_verify: true
     depends_on:
       - postgresql
       - redis
