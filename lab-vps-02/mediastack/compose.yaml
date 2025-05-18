@@ -119,6 +119,8 @@ services:
       mediastack-diskchecker:
         condition: service_completed_successfully
         restart: true
+      qbittorrent:
+        condition: service_started
     ports:
       - ${LOCAL_IP}:7878:7878
     restart: unless-stopped
@@ -146,6 +148,8 @@ services:
       mediastack-diskchecker:
         condition: service_completed_successfully
         restart: true
+      qbittorrent:
+        condition: service_started
     ports:
       - ${LOCAL_IP}:8989:8989
     labels:
