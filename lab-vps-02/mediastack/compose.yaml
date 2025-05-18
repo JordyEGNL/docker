@@ -17,8 +17,8 @@ services:
     group_add:
       - "109" # Change this to match your "render" host group id
     volumes:
-      - /home/jordy/docker/mediastack/jellyfin/config:/config
-      - /home/jordy/docker/mediastack/jellyfin/cache:/cache
+      - /docker/mediastack/jellyfin/config:/config
+      - /docker/mediastack/jellyfin/cache:/cache
       - ${MEDIA_ROOT}:/data
     depends_on:
       mediastack-diskchecker:
@@ -46,7 +46,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=${JELLYSTAT_POSTGRES_PASSWORD}
     volumes:
-      - /home/jordy/docker/mediastack/jellystat/postgres-data:/var/lib/postgresql/data
+      - /docker/mediastack/jellystat/postgres-data:/var/lib/postgresql/data
     restart: unless-stopped
     networks:
       - mediastack
@@ -67,7 +67,7 @@ services:
       traefik.http.routers.jellystat.rule: Host(`stats.jellyfin.hoebergen.net`)
       traefik.http.routers.jellystat.middlewares: localAccess@file
     volumes:
-      - /home/jordy/docker/mediastack/jellystat/backup-data:/app/backend/backup-data
+      - /docker/mediastack/jellystat/backup-data:/app/backend/backup-data
     depends_on:
       - jellystat-db
       - jellyfin
@@ -85,7 +85,7 @@ services:
     ports:
       - ${LOCAL_IP}:5055:5055
     volumes:
-      - /home/jordy/docker/mediastack/jellyseerr/config:/app/config
+      - /docker/mediastack/jellyseerr/config:/app/config
     labels:
       traefik.enable: true
       traefik.http.routers.jellyseerr.entryPoints: websecure
@@ -113,7 +113,7 @@ services:
       - PGID=1000
       - TZ=Europe/Amsterdam
     volumes:
-      - /home/jordy/docker/mediastack/radarr/config:/config
+      - /docker/mediastack/radarr/config:/config
       - ${MOUNT_ROOT}:/data
     depends_on:
       mediastack-diskchecker:
@@ -140,7 +140,7 @@ services:
       - PGID=1000
       - TZ=Europe/Amsterdam
     volumes:
-      - /home/jordy/docker/mediastack/sonarr/config:/config
+      - /docker/mediastack/sonarr/config:/config
       - ${MOUNT_ROOT}:/data
     depends_on:
       mediastack-diskchecker:
@@ -167,7 +167,7 @@ services:
       - PGID=1000
       - TZ=Europe/Amsterdam
     volumes:
-      - /home/jordy/docker/mediastack/bazarr/config:/config
+      - /docker/mediastack/bazarr/config:/config
       - ${MEDIA_ROOT}/movies:/movies
       - ${MEDIA_ROOT}/series:/series
     depends_on:
@@ -195,7 +195,7 @@ services:
       - PGID=1000
       - TZ=Europe/Amsterdam
     volumes:
-      - /home/jordy/docker/mediastack/prowlarr/config:/config
+      - /docker/mediastack/prowlarr/config:/config
     ports:
       - ${LOCAL_IP}:9696:9696
     labels:
@@ -232,7 +232,7 @@ services:
       - VPN_ENABLED=yes
     volumes:
       - '/etc/localtime:/etc/localtime:ro'
-      - /home/jordy/docker/mediastack/qbittorrent:/config
+      - /docker/mediastack/qbittorrent:/config
       - '${MOUNT_ROOT}/qbittorrent/downloads:/downloads'
     depends_on:
       mediastack-diskchecker:
@@ -260,7 +260,7 @@ services:
     image: ghcr.io/flmorg/cleanuperr:1.6.8
     restart: unless-stopped
     volumes:
-      - /home/jordy/docker/mediastack/cleanuperr/logs:/var/logs
+      - /docker/mediastack/cleanuperr/logs:/var/logs
     environment:
       - TZ=Europe/Amsterdam
       - DRY_RUN=false
