@@ -59,6 +59,7 @@ entryPoints:
       middlewares:
         - securityHeaders@file
         - realip@file
+        - crowdsec@file
 
 providers:
   providersThrottleDuration: 2s
