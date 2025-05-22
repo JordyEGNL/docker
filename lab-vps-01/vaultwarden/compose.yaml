@@ -34,7 +34,8 @@ services:
 
   vaultwarden-backup:
     image: ttionya/vaultwarden-backup:1.24.3
-    restart: always
+    container_name: vaultwarden-backup
+    restart: unless-stopped
     environment:
       RCLONE_REMOTE_NAME: 'BitwardenBackup'
       RCLONE_REMOTE_DIR: '/Backups/Bitwarden/'
