@@ -12,7 +12,7 @@ services:
 
   immich-server:
     container_name: immich-server
-    image: ghcr.io/immich-app/immich-server:v1.133.0
+    image: ghcr.io/immich-app/immich-server:v1.133.1
     group_add:
       - "109"
     extends:
