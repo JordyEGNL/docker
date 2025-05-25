@@ -5,7 +5,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - APP_URL="https://bookstack.hoebergen.net"
+      - APP_URL="https://docs.hoebergen.net"
       - DB_HOST=bookstack-db
       - DB_PORT=3306
       - DB_USER=bookstack
@@ -19,7 +19,7 @@ services:
       traefik.enable: true
       traefik.http.routers.bookstack.entryPoints: websecure
       traefik.http.services.bookstack.loadbalancer.server.port: 80
-      traefik.http.routers.bookstack.rule: Host(`bookstack.hoebergen.net`)
+      traefik.http.routers.bookstack.rule: Host(`docs.hoebergen.net`)
     volumes:
       - /home/jordy/docker/bookstack/config:/config
     restart: unless-stopped
