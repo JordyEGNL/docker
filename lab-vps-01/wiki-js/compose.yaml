@@ -15,12 +15,12 @@ services:
       traefik.enable: true
       traefik.http.routers.wiki-js.entryPoints: websecure
       traefik.http.services.wiki-js.loadbalancer.server.port: 3000
-      traefik.http.routers.wiki-js.rule: Host(`docs.hoebergen.net`)
+      traefik.http.routers.wiki-js.rule: Host(`wiki.hoebergen.net`)
       # traefik.http.routers.api.middlewares: localAccess@file
       # Allow access via private tunnel
       # Cloudflare
       cloudflare.tunnel.enable: true
-      cloudflare.tunnel.hostname: "docs.hoebergen.net"
+      cloudflare.tunnel.hostname: "wiki.hoebergen.net"
       cloudflare.tunnel.service: "https://localhost:443"
       cloudflare.tunnel.no_tls_verify: true
     restart: unless-stopped
