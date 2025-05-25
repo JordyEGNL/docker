@@ -14,7 +14,7 @@ services:
     labels:
       traefik.enable: true
       traefik.http.routers.wiki-js.entryPoints: websecure
-      traefik.http.services.wiki-js.loadbalancer.server.port: 2283
+      traefik.http.services.wiki-js.loadbalancer.server.port: 3000
       traefik.http.routers.wiki-js.rule: Host(`docs.hoebergen.net`)
       # traefik.http.routers.api.middlewares: localAccess@file
       # Allow access via private tunnel
