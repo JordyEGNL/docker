@@ -1,0 +1,28 @@
+services:
+  dockflare:
+    image: alplat/dockflare:stable
+    container_name: dockflare
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - STATE_FILE_PATH=/app/data/state.json
+      - TZ=Europe/Amsterdam
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /home/jordy/docker/dockflare/data:/app/data
+    networks:
+      - cloudflare-net
+      - frontend
+    labels:
+      traefik.enable: true
+      traefik.http.routers.dockflare.entryPoints: websecure
+      traefik.http.services.dockflare.loadbalancer.server.port: 5000
+      traefik.http.routers.dockflare.rule: Host(`dockflare.lab-vps-01.hoebergen.net`)
+
+networks:
+  cloudflare-net:
+    name: backend-dockflare
+  frontend:
+    name: frontend
+    external: true
