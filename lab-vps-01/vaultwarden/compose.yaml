@@ -32,7 +32,7 @@ services:
       cloudflare.tunnel.enable: true
       cloudflare.tunnel.hostname: "vault.hoebergen.net"
       cloudflare.tunnel.service: "https://lab-vps-01:443"
-      cloudflare.tunnel.no_tls_verify: true
+      cloudflare.tunnel.originsrvname: "vault.hoebergen.net"
 
   vaultwarden-backup:
     image: ttionya/vaultwarden-backup:1.24.3
