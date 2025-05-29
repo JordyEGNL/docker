@@ -1,10 +1,5 @@
 http:
 
-  routers:
-
-  services:
-
-  ## MIDDLEWARES ##
   middlewares:
 
     authentik:
