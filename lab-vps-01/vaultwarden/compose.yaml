@@ -19,12 +19,12 @@ services:
       traefik.enable: true
       # Web UI
       traefik.http.routers.vaultwarden.entryPoints: websecure
-      traefik.http.routers.vaultwarden.service: vaultwarden
-      traefik.http.services.vaultwarden.loadbalancer.server.port: 80
       traefik.http.routers.vaultwarden.rule: Host(`vault.hoebergen.net`)
+      traefik.http.routers.vaultwarden.service: vaultwarden
+      traefik.http.routers.vaultwarden.middlewares: vaultwardenSecurityHeaders@file
       # Admin dashboard
-      traefik.http.routers.vaultwarden-admin.rule: Host(`vault.hoebergen.net`) && PathPrefix(`/admin`)
       traefik.http.routers.vaultwarden-admin.entryPoints: websecure
+      traefik.http.routers.vaultwarden-admin.rule: Host(`vault.hoebergen.net`) && PathPrefix(`/admin`)
       traefik.http.routers.vaultwarden-admin.middlewares: localAccess@file, vaultwardenSecurityHeaders@file
       # Cloudflare
       cloudflare.tunnel.enable: true
