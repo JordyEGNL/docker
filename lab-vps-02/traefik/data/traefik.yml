@@ -6,13 +6,10 @@ serversTransport:
   insecureSkipVerify: true
 
 entryPoints:
-  # Not used in apps, but redirect everything from HTTP to HTTPS
   web:
     address: :80
     forwardedHeaders:
       trustedIPs: &trustedIps
-        - 172.16.2.3 # ORC-VPS-01 proxy
-        # Start of Clouflare public IP list for HTTP requests, remove this if you don't use it
         - 173.245.48.0/20
         - 103.21.244.0/22
         - 103.22.200.0/22
@@ -35,13 +32,12 @@ entryPoints:
         - 2405:8100::/32
         - 2a06:98c0::/29
         - 2c0f:f248::/32
-        # End of Cloudlare public IP list
     http:
       redirections:
         entryPoint:
           to: websecure
           scheme: https
-  # HTTPS endpoint, with domain wildcard
+
   websecure:
     address: :443
     forwardedHeaders:
@@ -62,13 +58,9 @@ entryPoints:
 
 providers:
   providersThrottleDuration: 2s
-
-  # File provider for connecting things that are outside of docker / defining middleware
   file:
     filename: /etc/traefik/fileConfig.yml
     watch: true
-
-  # Docker provider for connecting all apps that are inside of the docker network
   docker:
     watch: true
     network: frontend
@@ -83,7 +75,6 @@ api:
 log:
   level: INFO
 
-# Use letsencrypt to generate ssl serficiates
 certificatesResolvers:
   letsencrypt:
     acme:
