@@ -80,30 +80,8 @@ http:
     securityHeaders:
       headers:
         customResponseHeaders:
-          X-Robots-Tag: "none,noarchive,nosnippet,notranslate,noimageindex"
-          server: ""
-          X-Forwarded-Proto: "https"
-        sslProxyHeaders:
-          X-Forwarded-Proto: https
-        referrerPolicy: "strict-origin-when-cross-origin"
-        hostsProxyHeaders:
-          - "X-Forwarded-Host"
-          - "X-Forwarded-For"
-        customRequestHeaders:
-          X-Forwarded-Proto: "https"
-        contentTypeNosniff: true
-        browserXssFilter: true
-        forceSTSHeader: true
-        stsIncludeSubdomains: true
-        stsSeconds: 63072000
-        stsPreload: true
-
-    # Vaultwarden specific security headers
-    vaultwardenSecurityHeaders:
-      headers:
-        customResponseHeaders:
           x-xss-protection: "0"
-          x-robots-tag: "noindex, nofollow"
+          x-robots-tag: "noindex, nofollow, noarchive, nosnippet, notranslate, noimageindex"
           server: ""
           X-Forwarded-Proto: "https"
         sslProxyHeaders:
