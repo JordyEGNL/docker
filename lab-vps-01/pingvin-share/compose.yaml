@@ -16,8 +16,8 @@ services:
       # Cloudflare
       cloudflare.tunnel.enable: true
       cloudflare.tunnel.hostname: "share.hoebergen.net"
+      cloudflare.tunnel.originsrvname: "share.hoebergen.net"
       cloudflare.tunnel.service: "https://localhost:443"
-      cloudflare.tunnel.no_tls_verify: true
 
 networks:
   default:
