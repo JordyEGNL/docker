@@ -8,10 +8,17 @@ services:
     volumes:
       - ./config.json:/app/config.json:ro
     labels:
+      # Traefik
       traefik.enable: true
       traefik.http.routers.immich-proxy.entryPoints: websecure
       traefik.http.services.immich-proxy.loadbalancer.server.port: 3000
       traefik.http.routers.immich-proxy.rule: Host(`photos.hoebergen.net`) && PathPrefix(`/share`)
+      # Cloudflare
+      cloudflare.tunnel.enable: true
+      cloudflare.tunnel.hostname: "photos.hoebergen.net"
+      cloudflare.tunnel.originsrvname: "photos.hoebergen.net"
+      cloudflare.tunnel.path: "share"
+      cloudflare.tunnel.service: "https://localhost:443"
     networks:
       - immich
       - frontend
