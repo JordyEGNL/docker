@@ -108,7 +108,7 @@ http:
           X-Forwarded-Proto: "https"
         sslProxyHeaders:
           X-Forwarded-Proto: https
-        referrer-policy: "same-origin"
+        referrerPolicy: "same-origin"
         hostsProxyHeaders:
           - "X-Forwarded-Host"
           - "X-Forwarded-For"
