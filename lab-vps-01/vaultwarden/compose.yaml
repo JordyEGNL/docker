@@ -31,8 +31,8 @@ services:
       # Cloudflare
       cloudflare.tunnel.enable: true
       cloudflare.tunnel.hostname: "vault.hoebergen.net"
-      cloudflare.tunnel.service: "https://lab-vps-01:443"
       cloudflare.tunnel.originsrvname: "vault.hoebergen.net"
+      cloudflare.tunnel.service: "https://localhost:443"
 
   vaultwarden-backup:
     image: ttionya/vaultwarden-backup:1.24.3
