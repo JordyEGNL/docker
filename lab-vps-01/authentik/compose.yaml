@@ -68,8 +68,8 @@ services:
       # Cloudflare
       cloudflare.tunnel.enable: true
       cloudflare.tunnel.hostname: "auth.hoebergen.net"
+      cloudflare.tunnel.originsrvname: "auth.hoebergen.net"
       cloudflare.tunnel.service: "https://localhost:443"
-      cloudflare.tunnel.no_tls_verify: true
     depends_on:
       - postgresql
       - redis
