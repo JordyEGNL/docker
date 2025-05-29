@@ -25,7 +25,7 @@ services:
       # Admin dashboard
       traefik.http.routers.vaultwarden-admin.rule: Host(`vault.hoebergen.net`) && PathPrefix(`/admin`)
       traefik.http.routers.vaultwarden-admin.entryPoints: websecure
-      traefik.http.routers.vaultwarden-admin.middlewares: localAccess@file
+      traefik.http.routers.vaultwarden-admin.middlewares: localAccess@file, vaultwardenSecurityHeaders@file
       # Cloudflare
       cloudflare.tunnel.enable: true
       cloudflare.tunnel.hostname: "vault.hoebergen.net"
