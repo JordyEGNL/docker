@@ -1,0 +1,18 @@
+services:
+  convertx:
+    image: ghcr.io/c4illin/convertx:v0.14.1
+    container_name: convertx
+    restart: unless-stopped
+    labels:
+      traefik.enable: true
+      traefik.http.routers.convertx.entryPoints: websecure
+      traefik.http.services.convertx.loadbalancer.server.port: 3000
+      traefik.http.routers.convertx.rule: Host(`convert.hoebergen.net`)
+      traefik.http.routers.convertx.middlewares: localAccess@file
+    volumes:
+      - /docker/convertx/data:/app/data
+
+networks:
+  default:
+    name: frontend
+    external: true
