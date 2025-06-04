@@ -94,7 +94,7 @@ services:
       traefik.http.routers.immich-power-tools.entryPoints: websecure
       traefik.http.services.immich-power-tools.loadbalancer.server.port: 3000
       traefik.http.routers.immich-power-tools.rule: Host(`tools.photos.hoebergen.net`)
-      traefik.http.routers.api.middlewares: localAccess@file
+      traefik.http.routers.immich-power-tools.middlewares: localAccess@file
     restart: always
     networks:
       - immich
