@@ -66,10 +66,10 @@ services:
       traefik.http.services.authentik.loadbalancer.server.port: 9443
       traefik.http.routers.authentik.rule: Host(`auth.hoebergen.net`)
       # Cloudflare
-      cloudflare.tunnel.enable: true
-      cloudflare.tunnel.hostname: "auth.hoebergen.net"
-      cloudflare.tunnel.originsrvname: "auth.hoebergen.net"
-      cloudflare.tunnel.service: "https://localhost:443"
+      dockflare.enable: true
+      dockflare.hostname: "auth.hoebergen.net"
+      dockflare.originsrvname: "auth.hoebergen.net"
+      dockflare.service: "https://localhost:443"
     depends_on:
       - postgresql
       - redis

@@ -29,10 +29,10 @@ services:
       traefik.http.services.vaultwarden-admin.loadbalancer.server.port: 80
       traefik.http.routers.vaultwarden-admin.middlewares: localAccess@file
       # Cloudflare
-      cloudflare.tunnel.enable: true
-      cloudflare.tunnel.hostname: "vault.hoebergen.net"
-      cloudflare.tunnel.originsrvname: "vault.hoebergen.net"
-      cloudflare.tunnel.service: "https://localhost:443"
+      dockflare.enable: true
+      dockflare.hostname: "vault.hoebergen.net"
+      dockflare.originsrvname: "vault.hoebergen.net"
+      dockflare.service: "https://localhost:443"
 
   vaultwarden-backup:
     image: ttionya/vaultwarden-backup:1.24.3

@@ -14,10 +14,10 @@ services:
       traefik.http.services.pingvin-share.loadbalancer.server.port: 3000
       traefik.http.routers.pingvin-share.rule: Host(`share.hoebergen.net`)
       # Cloudflare
-      cloudflare.tunnel.enable: true
-      cloudflare.tunnel.hostname: "share.hoebergen.net"
-      cloudflare.tunnel.originsrvname: "share.hoebergen.net"
-      cloudflare.tunnel.service: "https://localhost:443"
+      dockflare.enable: true
+      dockflare.hostname: "share.hoebergen.net"
+      dockflare.originsrvname: "share.hoebergen.net"
+      dockflare.service: "https://localhost:443"
 
 networks:
   default:
