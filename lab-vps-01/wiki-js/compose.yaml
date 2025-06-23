@@ -19,10 +19,10 @@ services:
       # traefik.http.routers.api.middlewares: localAccess@file
       # Allow access via private tunnel
       # Cloudflare
-      cloudflare.tunnel.enable: true
-      cloudflare.tunnel.hostname: "wiki.hoebergen.net"
-      cloudflare.tunnel.originsrvname: "wiki.hoebergen.net"
-      cloudflare.tunnel.service: "https://localhost:443"
+      dockflare.enable: true
+      dockflare.hostname: "wiki.hoebergen.net"
+      dockflare.originsrvname: "wiki.hoebergen.net"
+      dockflare.service: "https://localhost:443"
     restart: unless-stopped
     networks:
       - frontend
