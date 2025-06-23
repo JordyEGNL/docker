@@ -1,6 +1,6 @@
 services:
   dockflare:
-    image: alplat/dockflare:v1.8.9
+    image: alplat/dockflare:v1.9.0
     container_name: dockflare
     restart: unless-stopped
     env_file:
