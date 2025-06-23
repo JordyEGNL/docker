@@ -92,10 +92,10 @@ services:
       traefik.http.services.jellyseerr.loadbalancer.server.port: 5055
       traefik.http.routers.jellyseerr.rule: Host(`request.hoebergen.net`)
       # Cloudflare
-      cloudflare.tunnel.enable: true
-      cloudflare.tunnel.hostname: "request.hoebergen.net"
-      cloudflare.tunnel.originsrvname: "request.hoebergen.net"
-      cloudflare.tunnel.service: "https://localhost:443"
+      dockflare.enable: true
+      dockflare.hostname: "request.hoebergen.net"
+      dockflare.originsrvname: "request.hoebergen.net"
+      dockflare.service: "https://localhost:443"
     restart: unless-stopped
     depends_on:
       - jellyfin
