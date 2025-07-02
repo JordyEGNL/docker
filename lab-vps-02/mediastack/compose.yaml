@@ -215,7 +215,7 @@ services:
 
   qbittorrent:
     container_name: qbittorrent
-    image: binhex/arch-qbittorrentvpn:5.1.1-1-01
+    image: binhex/arch-qbittorrentvpn:5.1.2-1-01
     environment:
       - PGID=1000
       - PUID=1000
