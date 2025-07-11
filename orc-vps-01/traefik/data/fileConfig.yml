@@ -18,6 +18,8 @@ http:
       tls:
         certResolver: letsencrypt
         options: acmeClient
+        domains:
+          - main: "photos.hoebergen.net"  
 
   # Remote services are listed here, for when Docker integration is not possible
   services:
