@@ -17,7 +17,9 @@ http:
       service: immich
       tls:
         certResolver: letsencrypt
-        options: acmeClient
+        options:
+          - default
+          - acmeClient
         domains:
           - main: "photos.hoebergen.net"  
 
