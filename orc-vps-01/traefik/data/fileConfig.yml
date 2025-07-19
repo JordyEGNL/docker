@@ -13,19 +13,10 @@ http:
     immich-public:
       entryPoints:
         - websecure
-      rule: 'Host(`photos.hoebergen.net`) && PathPrefix(`/share`)'
-      service: immich
-      tls:
-        certResolver: letsencrypt
-
-    immich-private:
-      entryPoints:
-        - websecure
       rule: 'Host(`photos.hoebergen.net`)'
       service: immich
       tls:
         certResolver: letsencrypt
-        options: acmeClient
 
   # Remote services are listed here, for when Docker integration is not possible
   services:
