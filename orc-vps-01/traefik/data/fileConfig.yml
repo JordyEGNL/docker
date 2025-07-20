@@ -36,7 +36,7 @@ http:
     immich-public-proxy:
       loadBalancer:
         servers:
-          - url: https://lab-vps-02:3000
+          - url: http://lab-vps-02:3000
 
     immich-private:
       loadBalancer:
