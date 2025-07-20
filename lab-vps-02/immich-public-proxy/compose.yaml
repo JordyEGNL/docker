@@ -9,12 +9,12 @@ services:
       - ./config.json:/app/config.json:ro
     ports:
       - 3000:3000
-    #labels:
-      ## Traefik
-      #traefik.enable: true
-      #traefik.http.routers.immich-proxy.entryPoints: websecure
-      #traefik.http.services.immich-proxy.loadbalancer.server.port: 3000
-      #traefik.http.routers.immich-proxy.rule: Host(`photos.hoebergen.net`) && PathPrefix(`/share`)
+    labels:
+      # Traefik
+      traefik.enable: true
+      traefik.http.routers.immich-proxy.entryPoints: websecure
+      traefik.http.services.immich-proxy.loadbalancer.server.port: 3000
+      traefik.http.routers.immich-proxy.rule: Host(`publicphotos.hoebergen.net`)
       ## Cloudflare
       #dockflare.enable: true
       #dockflare.hostname: "photos.hoebergen.net"
