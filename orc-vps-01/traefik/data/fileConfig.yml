@@ -37,12 +37,12 @@ http:
     immich-public-proxy:
       loadBalancer:
         servers:
-          - url: http://lab-vps-02:443
+          - url: https://lab-vps-02:443
 
     immich-private:
       loadBalancer:
         servers:
-          - url: http://lab-vps-02:443
+          - url: https://lab-vps-02:443
 
   ## MIDDLEWARES ##
   middlewares:
