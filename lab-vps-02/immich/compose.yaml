@@ -36,7 +36,8 @@ services:
       traefik.http.routers.immich.entryPoints: websecure
       traefik.http.services.immich.loadbalancer.server.port: 2283
       traefik.http.routers.immich.rule: Host(`photos.hoebergen.net`)
-      traefik.http.routers.immich.middlewares: localAccess@file
+      #traefik.http.routers.immich.middlewares: localAccess@file
+      traefik.http.routers.immich.tls.options: acmeClient@file
     restart: always
     networks:
       - immich
