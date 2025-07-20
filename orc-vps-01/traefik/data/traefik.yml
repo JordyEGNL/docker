@@ -81,7 +81,7 @@ api:
 
 # Log level INFO|DEBUG|ERROR
 log:
-  level: INFO
+  level: DEBUG
 
 # Use letsencrypt to generate ssl serficiates
 certificatesResolvers:
