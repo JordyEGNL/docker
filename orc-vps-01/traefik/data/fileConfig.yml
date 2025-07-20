@@ -41,7 +41,7 @@ http:
     immich-private:
       loadBalancer:
         servers:
-          - url: https://lab-vps-02:443
+          - url: https://photos.hoebergen.net:443
 
   ## MIDDLEWARES ##
   middlewares:
