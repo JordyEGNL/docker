@@ -77,7 +77,7 @@ services:
       - frontend
 
   jellyseerr:
-    image: fallenbagel/jellyseerr:2.7.1
+    image: fallenbagel/jellyseerr:2.7.2
     container_name: jellyseerr
     environment:
       - LOG_LEVEL=info
