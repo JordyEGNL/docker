@@ -86,7 +86,7 @@ services:
 
   power-tools:
     container_name: immich-power-tools
-    image: ghcr.io/varun-raj/immich-power-tools:0.16.0
+    image: ghcr.io/varun-raj/immich-power-tools:0.17.0
     env_file:
       - ./.env
     labels:
