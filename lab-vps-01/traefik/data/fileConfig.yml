@@ -37,7 +37,7 @@ http:
     dns-01:
       loadBalancer:
         servers:
-          - url: http://10.0.10.202:80/
+          - url: http://10.0.10.201:80/
 
     dns-02:
       loadBalancer:
@@ -47,7 +47,7 @@ http:
     adguardsync-rpi-01:
       loadBalancer:
         servers:
-          - url: http://10.0.10.202:8080/
+          - url: http://10.0.10.21:8080/
 
   ## MIDDLEWARES ##
   middlewares:
