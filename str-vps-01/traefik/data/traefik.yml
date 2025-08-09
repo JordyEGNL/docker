@@ -7,7 +7,7 @@ serversTransport:
 
 entryPoints:
   # Not used in apps, but redirect everything from HTTP to HTTPS
-  http:
+  web:
     address: :80
     forwardedHeaders:
       trustedIPs: &trustedIps
@@ -42,10 +42,10 @@ entryPoints:
     http:
       redirections:
         entryPoint:
-          to: https
+          to: websecure
           scheme: https
   # HTTPS endpoint, with domain wildcard
-  https:
+  websecure:
     address: :443
     proxyProtocol:
       trustedIPs: *trustedIps
