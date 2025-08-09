@@ -25,6 +25,6 @@ services:
     restart: unless-stopped
 
 networks:
-  proxy:
+  frontend:
     driver: bridge
     external: true
