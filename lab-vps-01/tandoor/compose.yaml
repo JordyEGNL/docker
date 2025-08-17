@@ -23,7 +23,7 @@ services:
       # traefik
       traefik.enable: true
       traefik.http.routers.tandoor.entryPoints: websecure
-      traefik.http.services.tandoor.loadbalancer.server.port: 80
+      #traefik.http.services.tandoor.loadbalancer.server.port: 80
       traefik.http.routers.tandoor.rule: Host(`recipes.hoebergen.net`)
     depends_on:
       - db_recipes
