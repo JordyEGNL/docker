@@ -18,32 +18,15 @@ services:
       - ./.env
     volumes:
       - staticfiles:/opt/recipes/staticfiles
-      # Do not make this a bind mount, see https://docs.tandoor.dev/install/docker/#volumes-vs-bind-mounts
-      - nginx_config:/opt/recipes/nginx/conf.d
       - ./mediafiles:/opt/recipes/mediafiles
-    depends_on:
-      - db_recipes
-    networks:
-      - tandoor
-
-  nginx_recipes:
-    container_name: tandoor-proxy
-    image: nginx:mainline-alpine3.21
-    restart: unless-stopped
-    env_file:
-      - ./.env
-    volumes:
-      # Do not make this a bind mount, see https://docs.tandoor.dev/install/docker/#volumes-vs-bind-mounts
-      - nginx_config:/etc/nginx/conf.d:ro
-      - staticfiles:/static:ro
-      - /home/jordy/docker/tandoor/mediafiles:/media:ro
-    labels: # traefik example labels
+    labels:
+      # traefik
       traefik.enable: true
       traefik.http.routers.tandoor.entryPoints: websecure
       traefik.http.services.tandoor.loadbalancer.server.port: 80
       traefik.http.routers.tandoor.rule: Host(`recipes.hoebergen.net`)
     depends_on:
-      - web_recipes
+      - db_recipes
     networks:
       - tandoor
       - frontend
@@ -55,5 +38,4 @@ networks:
     external: true
 
 volumes:
-  nginx_config:
   staticfiles:
