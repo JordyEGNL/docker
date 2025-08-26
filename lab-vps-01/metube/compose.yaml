@@ -4,7 +4,7 @@ services:
     container_name: metube
     restart: unless-stopped
     volumes:
-      - MeTube:/downloads
+      - /docker/metube/downloads:/downloads
     labels:
       traefik.enable: true
       traefik.http.routers.metube.entryPoints: websecure
@@ -15,11 +15,3 @@ networks:
   default:
     name: frontend
     external: true
-
-volumes:
-  MeTube:
-    driver: local
-    driver_opts:
-      type: nfs
-      o: addr=10.0.10.51,rw,nfsvers=3
-      device: :/MeTube/
