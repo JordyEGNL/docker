@@ -13,7 +13,7 @@ services:
   web_recipes:
     container_name: tandoor-web
     restart: unless-stopped
-    image: ghcr.io/tandoorrecipes/recipes:2.2.0
+    image: ghcr.io/tandoorrecipes/recipes:2.2.1
     env_file:
       - ./.env
     volumes:
