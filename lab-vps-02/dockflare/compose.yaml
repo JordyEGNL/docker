@@ -11,7 +11,7 @@ services:
       - TZ=Europe/Amsterdam
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /home/jordy/docker/dockflare/data2:/app/data
+      - /home/jordy/docker/dockflare/data:/app/data
     depends_on:
       dockflare-init:
         condition: service_completed_successfully
