@@ -3,8 +3,14 @@ services:
     image: ghcr.io/tecnativa/docker-socket-proxy:v0.4.1
     container_name: dockerproxy
     environment:
-      - CONTAINERS=1 # Allow access to viewing containers
-      - POST=0 # Disallow any POST operations (effectively read-only)
+      - CONTAINERS=1
+      - EVENTS=1
+      - NETWORKS=1
+      - IMAGES=1
+      - POST=1
+      - PING=1
+      - INFO=1
+      - EXEC=1
     ports:
       - 10.0.10.102:2375:2375
     volumes:
