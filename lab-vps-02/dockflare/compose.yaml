@@ -28,7 +28,7 @@ services:
       traefik.http.routers.dockflare.middlewares: localAccess@file
 
   dockflare-init:
-    image: alpine:3.20
+    image: alpine:3.22
     command: ["sh", "-c", "chown -R 65532:65532 /app/data"]
     volumes:
       - dockflare_data:/app/data
