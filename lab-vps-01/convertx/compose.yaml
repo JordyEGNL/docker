@@ -1,6 +1,6 @@
 services:
   convertx:
-    image: ghcr.io/c4illin/convertx:v0.14.1
+    image: ghcr.io/c4illin/convertx:v0.15.1
     container_name: convertx
     restart: unless-stopped
     labels:
