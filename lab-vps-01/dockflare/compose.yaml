@@ -1,29 +1,73 @@
 services:
+  docker-socket-proxy:
+    image: tecnativa/docker-socket-proxy:v0.4.1
+    container_name: dockflare-docker-socket-proxy
+    restart: unless-stopped
+    environment:
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - CONTAINERS=1
+      - EVENTS=1
+      - NETWORKS=1
+      - IMAGES=1
+      - POST=1
+      - PING=1
+      - INFO=1
+      - EXEC=1
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - backend-dockflare
+
+  dockflare-init:
+    container_name: dockflare-init
+    image: alpine:3.20
+    command: ["sh", "-c", "chown -R 65532:65532 /app/data"]
+    volumes:
+      - dockflare_data:/app/data
+    networks:
+      - backend-dockflare
+    restart: "no"
+
   dockflare:
-    image: alplat/dockflare:v2.1.7
+    image: alplat/dockflare:stable
     container_name: dockflare
     restart: unless-stopped
-    env_file:
-      - .env
-    environment:
-      - STATE_FILE_PATH=/app/data/state.json
-      - TZ=Europe/Amsterdam
+    ports:
+      - "5000:5000"
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /home/jordy/docker/dockflare/data:/app/data
+      - dockflare_data:/app/data
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - REDIS_DB_INDEX=0  # Optional: specify Redis database index (0-15) for isolation from other containers
+      - DOCKER_HOST=tcp://docker-socket-proxy:2375
+    depends_on:
+      docker-socket-proxy:
+        condition: service_started
+      dockflare-init:
+        condition: service_completed_successfully
+      redis:
+        condition: service_started
     networks:
-      - cloudflare-net
       - frontend
-    labels:
-      traefik.enable: true
-      traefik.http.routers.dockflare.entryPoints: websecure
-      traefik.http.services.dockflare.loadbalancer.server.port: 5000
-      traefik.http.routers.dockflare.rule: Host(`dockflare.lab-vps-01.hoebergen.net`)
-      traefik.http.routers.dockflare.middlewares: localAccess@file
+      - backend-dockflare
+
+  redis:
+    image: redis:7-alpine
+    container_name: dockflare-redis
+    restart: unless-stopped
+    command: ["redis-server", "--save", "", "--appendonly", "no"]
+    volumes:
+      - dockflare_redis:/data
+    networks:
+      - backend-dockflare
+
+volumes:
+  dockflare_data:
+  dockflare_redis:
 
 networks:
-  cloudflare-net:
-    name: backend-dockflare
   frontend:
     name: frontend
     external: true
+  backend-dockflare:
+    name: backend-dockflare
