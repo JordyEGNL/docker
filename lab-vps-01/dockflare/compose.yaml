@@ -56,7 +56,7 @@ services:
       - backend-dockflare
 
   redis:
-    image: redis:7-alpine
+    image: redis:8-alpine
     container_name: dockflare-redis
     restart: unless-stopped
     command: ["redis-server", "--save", "", "--appendonly", "no"]
