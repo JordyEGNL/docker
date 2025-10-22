@@ -32,8 +32,12 @@ services:
     image: alplat/dockflare:stable
     container_name: dockflare
     restart: unless-stopped
-    ports:
-      - "5000:5000"
+    labels:
+      traefik.enable: true
+      traefik.http.routers.dockflare.entryPoints: websecure
+      traefik.http.services.dockflare.loadbalancer.server.port: 5000
+      traefik.http.routers.dockflare.rule: Host(`dockflare.lab-vps-01.hoebergen.net`)
+      traefik.http.routers.dockflare.middlewares: localAccess@file
     volumes:
       - dockflare_data:/app/data
     environment:
