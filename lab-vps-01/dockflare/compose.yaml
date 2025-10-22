@@ -44,6 +44,8 @@ services:
       - REDIS_URL=redis://redis:6379/0
       - REDIS_DB_INDEX=0  # Optional: specify Redis database index (0-15) for isolation from other containers
       - DOCKER_HOST=tcp://docker-socket-proxy:2375
+      - USE_EXTERNAL_CLOUDFLARED=true
+      - EXTERNAL_TUNNEL_ID=d4059baf-3d7e-4d7a-be93-f3daba67c184
     depends_on:
       docker-socket-proxy:
         condition: service_started
