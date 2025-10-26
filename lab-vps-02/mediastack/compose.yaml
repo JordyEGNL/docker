@@ -261,7 +261,7 @@ services:
 
   cleanuperr:
     container_name: cleanuperr
-    image: ghcr.io/cleanuparr/cleanuparr:2.3.3
+    image: ghcr.io/cleanuparr/cleanuparr:2.4.0
     restart: unless-stopped
     volumes:
       - /docker/mediastack/cleanuperr/logs:/var/logs
