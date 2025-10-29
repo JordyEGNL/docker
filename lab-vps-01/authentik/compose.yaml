@@ -56,7 +56,6 @@ services:
       dockflare.service: "https://localhost:443"
     depends_on:
       - postgresql
-      - redis
 
   worker:
     container_name: authentik-worker
@@ -83,7 +82,6 @@ services:
       - .env
     depends_on:
       - postgresql
-      - redis
 
 volumes:
   redis:
