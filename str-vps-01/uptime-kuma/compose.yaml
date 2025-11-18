@@ -10,6 +10,17 @@ services:
       traefik.http.routers.uptime-kuma.entryPoints: websecure
       traefik.http.services.uptime-kuma.loadbalancer.server.port: 3001
       traefik.http.routers.uptime-kuma.rule: Host(`status.hoebergen.net`)
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 128M
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
 networks:
   default:

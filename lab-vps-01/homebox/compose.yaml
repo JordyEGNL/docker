@@ -2,7 +2,7 @@ services:
   homebox:
     image: ghcr.io/sysadminsmedia/homebox:0.21.0
     container_name: homebox
-    restart: always
+    restart: unless-stopped
     environment:
     - HBOX_LOG_LEVEL=info
     - HBOX_LOG_FORMAT=text
@@ -15,6 +15,17 @@ services:
       traefik.http.services.homebox.loadbalancer.server.port: 7745
       traefik.http.routers.homebox.rule: Host(`homebox.hoebergen.net`)
       traefik.http.routers.homebox.middlewares: localAccess@file
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 64M
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
 networks:
   default:
