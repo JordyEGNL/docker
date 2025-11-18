@@ -23,7 +23,8 @@ services:
       - frontend
     restart: unless-stopped
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     labels:
       traefik.enable: true
       traefik.http.routers.speedtest-tracker.entryPoints: websecure
@@ -33,7 +34,7 @@ services:
   db:
     container_name: speedtest-tracker-db
     image: mariadb:11.8.5
-    restart: always
+    restart: unless-stopped
     networks:
       - speedtest-tracker
     environment:
@@ -43,6 +44,12 @@ services:
       - MARIADB_RANDOM_ROOT_PASSWORD=true
     volumes:
       - /home/jordy/docker/speedtest-tracker/db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 networks:
   speedtest-tracker:
     name: backend-speedtest-tracker

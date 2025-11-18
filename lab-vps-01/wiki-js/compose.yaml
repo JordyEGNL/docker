@@ -3,7 +3,8 @@ services:
     image: ghcr.io/requarks/wiki:2.5.308
     container_name: wiki-js
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
       DB_TYPE: postgres
       DB_HOST: db
@@ -40,9 +41,12 @@ services:
     restart: unless-stopped
     volumes:
       - /docker/wikijs/database:/var/lib/postgresql/data
-
-volumes:
-  db-data:
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U wikijs -d wiki"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
 networks:
   frontend:

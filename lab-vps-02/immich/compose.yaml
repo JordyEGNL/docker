@@ -41,6 +41,17 @@ services:
     networks:
       - immich
       - frontend
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+        reservations:
+          memory: 1G
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   immich-machine-learning:
     container_name: immich-machine-learning
@@ -53,13 +64,26 @@ services:
     networks:
       - immich
     healthcheck:
-      interval: 5m
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+        reservations:
+          memory: 1G
 
   redis:
     container_name: immich-redis
     image: valkey/valkey:8@sha256:81db6d39e1bba3b3ff32bd3a1b19a6d69690f94a3954ec131277b9a26b95b3aa
     healthcheck:
       test: redis-cli ping || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
     restart: always
     networks:
       - immich
@@ -83,6 +107,12 @@ services:
     restart: always
     networks:
       - immich
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${DB_USERNAME} -d $${DB_DATABASE_NAME}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
   power-tools:
     container_name: immich-power-tools
