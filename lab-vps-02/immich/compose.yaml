@@ -87,6 +87,11 @@ services:
     restart: always
     networks:
       - immich
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   database:
     container_name: immich-postgres
@@ -113,6 +118,11 @@ services:
       timeout: 5s
       retries: 5
       start_period: 10s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   power-tools:
     container_name: immich-power-tools
