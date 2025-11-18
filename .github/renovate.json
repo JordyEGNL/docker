@@ -1,44 +1,166 @@
 {
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
+    "config:recommended",
+    ":dependencyDashboard",
+    ":semanticCommits",
+    ":enablePreCommit",
+    "docker:enableMajor"
   ],
+  "timezone": "Europe/Amsterdam",
+  "schedule": [
+    "after 10pm every weekday",
+    "before 5am every weekday",
+    "every weekend"
+  ],
+  "prConcurrentLimit": 5,
   "prHourlyLimit": 0,
   "assignees": [
     "JordyEGNL"
   ],
   "commitMessageAction": "update {{packageFileDir}} -",
   "additionalBranchPrefix": "{{packageFileDir}}-",
-  "timezone": "Europe/Amsterdam",
+  "labels": [
+    "dependencies",
+    "renovate"
+  ],
+  "rebaseWhen": "behind-base-branch",
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "labels": [
+      "security"
+    ],
+    "assignees": [
+      "JordyEGNL"
+    ]
+  },
+  "digest": {
+    "enabled": true,
+    "automerge": true
+  },
   "packageRules": [
     {
+      "description": "Group Immich updates",
       "matchDatasources": [
         "docker"
       ],
       "groupName": "immich",
-      "groupSlug": "immich",
       "matchPackageNames": [
         "ghcr.io/immich-app/immich-server",
-        "ghcr.io/immich-app/immich-machine-learning"
+        "ghcr.io/immich-app/immich-machine-learning",
+        "ghcr.io/immich-app/postgres"
       ]
     },
     {
-      "matchUpdateTypes": ["patch"],
-      "automerge": true,
-      "automergeType": "branch",
-      "automergeSchedule": [
-        "* 0-6,22-23 * *"
+      "description": "Group linuxserver.io Docker images",
+      "matchDatasources": [
+        "docker"
       ],
-      "matchCurrentVersion": "!/^0/",
-      "ignoreTests": true
+      "matchPackagePrefixes": [
+        "lscr.io/linuxserver/"
+      ],
+      "groupName": "linuxserver.io images"
     },
     {
+      "description": "Group PostgreSQL updates",
       "matchDatasources": [
         "docker"
       ],
       "matchPackageNames": [
-        "ghcr.io/bakito/adguardhome-sync*"
+        "postgres",
+        "docker.io/library/postgres"
+      ],
+      "groupName": "PostgreSQL"
+    },
+    {
+      "description": "Group Traefik updates",
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "traefik"
+      ],
+      "groupName": "Traefik"
+    },
+    {
+      "description": "Group database images",
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "mariadb",
+        "redis",
+        "valkey/valkey"
+      ],
+      "groupName": "database images"
+    },
+    {
+      "description": "Custom versioning for adguardhome-sync",
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "ghcr.io/bakito/adguardhome-sync"
       ],
       "versioning": "regex:^(?<compatibility>alpine)-v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
+    },
+    {
+      "description": "Automerge patch updates for stable versions",
+      "matchUpdateTypes": [
+        "patch"
+      ],
+      "matchCurrentVersion": "!/^0/",
+      "automerge": true,
+      "automergeType": "branch",
+      "automergeSchedule": [
+        "after 10pm every weekday",
+        "before 5am every weekday",
+        "every weekend"
+      ],
+      "ignoreTests": true
+    },
+    {
+      "description": "Automerge minor updates for stable versions during off-hours",
+      "matchUpdateTypes": [
+        "minor"
+      ],
+      "matchCurrentVersion": "!/^0/",
+      "matchDatasources": [
+        "docker"
+      ],
+      "automerge": true,
+      "automergeType": "branch",
+      "automergeSchedule": [
+        "after 10pm every weekday",
+        "before 5am every weekday",
+        "every weekend"
+      ],
+      "ignoreTests": true
+    },
+    {
+      "description": "Major updates require manual review",
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "automerge": false,
+      "labels": [
+        "major-update"
+      ],
+      "schedule": [
+        "before 5am on monday"
+      ]
+    },
+    {
+      "description": "Pin digest for images using SHA",
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "alexta69/metube",
+        "ghcr.io/immich-app/postgres",
+        "valkey/valkey"
+      ],
+      "pinDigests": true
     }
   ]
 }
