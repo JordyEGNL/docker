@@ -47,30 +47,8 @@
       "groupName": "immich",
       "matchPackageNames": [
         "ghcr.io/immich-app/immich-server",
-        "ghcr.io/immich-app/immich-machine-learning",
-        "ghcr.io/immich-app/postgres"
+        "ghcr.io/immich-app/immich-machine-learning"
       ]
-    },
-    {
-      "description": "Group linuxserver.io Docker images",
-      "matchDatasources": [
-        "docker"
-      ],
-      "matchPackagePrefixes": [
-        "lscr.io/linuxserver/"
-      ],
-      "groupName": "linuxserver.io images"
-    },
-    {
-      "description": "Group PostgreSQL updates",
-      "matchDatasources": [
-        "docker"
-      ],
-      "matchPackageNames": [
-        "postgres",
-        "docker.io/library/postgres"
-      ],
-      "groupName": "PostgreSQL"
     },
     {
       "description": "Group Traefik updates",
@@ -81,18 +59,6 @@
         "traefik"
       ],
       "groupName": "Traefik"
-    },
-    {
-      "description": "Group database images",
-      "matchDatasources": [
-        "docker"
-      ],
-      "matchPackageNames": [
-        "mariadb",
-        "redis",
-        "valkey/valkey"
-      ],
-      "groupName": "database images"
     },
     {
       "description": "Custom versioning for adguardhome-sync",
@@ -156,9 +122,7 @@
         "docker"
       ],
       "matchPackageNames": [
-        "alexta69/metube",
-        "ghcr.io/immich-app/postgres",
-        "valkey/valkey"
+        "alexta69/metube"
       ],
       "pinDigests": true
     }
