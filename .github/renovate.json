@@ -8,11 +8,6 @@
     "docker:enableMajor"
   ],
   "timezone": "Europe/Amsterdam",
-  "schedule": [
-    "after 10pm every weekday",
-    "before 5am every weekday",
-    "every weekend"
-  ],
   "prConcurrentLimit": 5,
   "prHourlyLimit": 0,
   "assignees": [
@@ -94,13 +89,10 @@
       "matchDatasources": [
         "docker"
       ],
-      "automerge": true,
-      "automergeType": "branch",
-      "automergeSchedule": [
-        "after 10pm every weekday",
-        "before 5am every weekday",
-        "every weekend"
+      "labels": [
+        "minor-update"
       ],
+      "automerge": false,
       "ignoreTests": true
     },
     {
