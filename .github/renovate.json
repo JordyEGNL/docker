@@ -72,11 +72,6 @@
       "matchCurrentVersion": "!/^0/",
       "automerge": true,
       "automergeType": "branch",
-      "automergeSchedule": [
-        "after 10pm every weekday",
-        "before 5am every weekday",
-        "every weekend"
-      ],
       "ignoreTests": true
     },
     {
