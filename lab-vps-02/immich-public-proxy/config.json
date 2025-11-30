@@ -8,11 +8,11 @@
   },
   "lightGallery": {
     "controls": true,
-    "download": false,
+    "download": true,
     "mobileSettings": {
       "controls": true,
       "showCloseIcon": true,
-      "download": false
+      "download": true
     }
   }
 }
