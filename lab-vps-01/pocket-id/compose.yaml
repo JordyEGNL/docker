@@ -1,16 +1,30 @@
-## Add your compose file here
 services:
-  hello_world:
-    image: hello-world
-    # networks:
-    #   - default
-    # ports:
-    #   - 3000:3000
-    # volumes:
-    #   - data:/data
+  pocket-id:
+    image: ghcr.io/pocket-id/pocket-id:v1.16.0
+    restart: unless-stopped
+    ports:
+      - 10.0.10.101:1411:1411
+    volumes:
+      - "./data:/app/data"
+    labels:
+      traefik.enable: true
+      traefik.http.routers.pocket-id.entryPoints: websecure
+      traefik.http.services.pocket-id.loadbalancer.server.scheme: https
+      traefik.http.services.pocket-id.loadbalancer.server.port: 1411
+      traefik.http.routers.pocket-id.rule: Host(`auth.hoebergen.net`)
+      # Cloudflare
+      dockflare.enable: true
+      dockflare.hostname: "auth.hoebergen.net"
+      dockflare.originsrvname: "auth.hoebergen.net"
+      dockflare.service: "https://localhost:443"
+    healthcheck:
+      test: [ "CMD", "/app/pocket-id", "healthcheck" ]
+      interval: 1m30s
+      timeout: 5s
+      retries: 2
+      start_period: 10s
 
-# networks:
-#   default: {}
-
-# volumes:
-#   data:
+networks:
+  default:
+    name: frontend
+    external: true
