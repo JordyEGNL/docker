@@ -18,7 +18,6 @@
     "dependencies",
     "renovate"
   ],
-  "rebaseWhen": "behind-base-branch",
   "vulnerabilityAlerts": {
     "enabled": true,
     "labels": [
