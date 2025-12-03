@@ -6,7 +6,7 @@ services:
     ports:
       - 10.0.10.101:1411:1411
     volumes:
-      - "./data:/app/data"
+      - "/docker/pocket-id/data:/app/data"
     labels:
       traefik.enable: true
       traefik.http.routers.pocket-id.entryPoints: websecure
