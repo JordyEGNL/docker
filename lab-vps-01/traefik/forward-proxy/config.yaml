@@ -1,16 +1,17 @@
-## Add your compose file here
-services:
-  hello_world:
-    image: hello-world
-    # networks:
-    #   - default
-    # ports:
-    #   - 3000:3000
-    # volumes:
-    #   - data:/data
+server:
+  # Hostname where the application can be reached at externally
+  hostname: "authproxy.lab-vps-01.hoebergen.net"
 
-# networks:
-#   default: {}
+cookies:
+  # Domain for setting cookies
+  domain: "hoebergen.net"
 
-# volumes:
-#   data:
+portals:
+  - name: "main"
+    providers:
+      - pocketID:
+        #name: "my-pocketid-auth"
+        #displayName: "Pocket ID"
+        endpoint: "https://auth.hoebergen.net"
+        clientID: "25ae4a85-5a2e-48d9-a224-03e8d374a20c"
+        clientSecret: "QlJVC0t8U1DcBNtaflsQ5Nozw0KaZHuQ"
