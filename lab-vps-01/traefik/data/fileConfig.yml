@@ -24,7 +24,7 @@ http:
 
     adguard-sync:
       middlewares:
-        - "authentik@file"
+        - "traefik-forward-auth@docker"
       entryPoints:
         - websecure
       rule: 'Host(`dnssync.hoebergen.net`)'
