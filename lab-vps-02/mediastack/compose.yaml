@@ -129,7 +129,7 @@ services:
       traefik.http.routers.radarr.entryPoints: websecure
       traefik.http.services.radarr.loadbalancer.server.port: 7878
       traefik.http.routers.radarr.rule: Host(`radarr.hoebergen.net`)
-      traefik.http.routers.radarr.middlewares: authentik@file,localAccess@file
+      traefik.http.routers.radarr.middlewares: traefik-forward-auth@docker,localAccess@file
     networks:
       - mediastack
       - frontend
@@ -157,7 +157,7 @@ services:
       traefik.http.routers.sonarr.entryPoints: websecure
       traefik.http.services.sonarr.loadbalancer.server.port: 8989
       traefik.http.routers.sonarr.rule: Host(`sonarr.hoebergen.net`)
-      traefik.http.routers.sonarr.middlewares: authentik@file,localAccess@file
+      traefik.http.routers.sonarr.middlewares: traefik-forward-auth@docker,localAccess@file
     restart: unless-stopped
     networks:
       - mediastack
@@ -185,7 +185,7 @@ services:
       traefik.http.routers.bazarr.entryPoints: websecure
       traefik.http.services.bazarr.loadbalancer.server.port: 6767
       traefik.http.routers.bazarr.rule: Host(`bazarr.hoebergen.net`)
-      traefik.http.routers.bazarr.middlewares: authentik@file,localAccess@file
+      traefik.http.routers.bazarr.middlewares: traefik-forward-auth@docker,localAccess@file
     restart: unless-stopped
     networks:
       - mediastack
@@ -207,7 +207,7 @@ services:
       traefik.http.routers.prowlarr.entryPoints: websecure
       traefik.http.services.prowlarr.loadbalancer.server.port: 9696
       traefik.http.routers.prowlarr.rule: Host(`prowlarr.hoebergen.net`)
-      traefik.http.routers.prowlarr.middlewares: authentik@file,localAccess@file
+      traefik.http.routers.prowlarr.middlewares: traefik-forward-auth@docker,localAccess@file
     restart: unless-stopped
     networks:
       - mediastack
