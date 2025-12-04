@@ -1,7 +1,7 @@
 services:
   postgresql:
     container_name: authentik-db
-    image: docker.io/library/postgres:16.11-alpine3.22
+    image: docker.io/library/postgres:18.1-alpine3.22
     restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
