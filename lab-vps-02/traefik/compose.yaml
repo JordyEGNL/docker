@@ -26,6 +26,26 @@ services:
       - ./.env
     restart: unless-stopped
 
+  traefik-forward-auth:
+    image: ghcr.io/italypaleale/traefik-forward-auth:4.3.1
+    volumes:
+      - ./forward-proxy:/etc/traefik-forward-auth
+    networks:
+      - frontend
+    labels:
+      traefik.enable: true
+      traefik.http.middlewares.traefik-forward-auth.forwardauth.address: http://traefik-forward-auth:4181/portals/mediastack
+      traefik.http.middlewares.traefik-forward-auth.forwardauth.authResponseHeaders: X-Forwarded-User,X-Forwarded-Displayname,X-Authenticated-User
+      traefik.http.middlewares.traefik-forward-auth.forwardauth.trustForwardHeader: true
+      traefik.http.services.traefik-forward-auth.loadbalancer.server.port: 4181
+      traefik.http.routers.traefik-forward-auth.rule: Host(`authproxy.lab-vps-02.hoebergen.net`)
+      traefik.http.routers.traefik-forward-auth.entrypoints: websecure
+     # Cloudflare
+      dockflare.enable: true
+      dockflare.hostname: "authproxy.lab-vps-02.hoebergen.net"
+      dockflare.originsrvname: "authproxy.lab-vps-02.hoebergen.net"
+      dockflare.service: "https://localhost:443"
+
 networks:
   frontend:
     driver: bridge
