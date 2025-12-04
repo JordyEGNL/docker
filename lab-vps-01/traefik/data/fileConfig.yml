@@ -3,8 +3,8 @@ http:
   routers:
     # Custom routers are listed here. For example when a remote service is needed
     dns-01:
-      middlewares:
-        - "authentik@file"
+      #middlewares:
+      #  - "authentik@file"
       entryPoints:
         - websecure
       rule: 'Host(`dns-01.hoebergen.net`)'
@@ -13,8 +13,8 @@ http:
         certResolver: letsencrypt
 
     dns-02:
-      middlewares:
-        - "authentik@file"
+      #middlewares:
+      #  - "authentik@file"
       entryPoints:
         - websecure
       rule: 'Host(`dns-02.hoebergen.net`)'
