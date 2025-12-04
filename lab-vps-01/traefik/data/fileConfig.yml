@@ -4,7 +4,7 @@ http:
     # Custom routers are listed here. For example when a remote service is needed
     dns-01:
       middlewares:
-        - "pocket-id@file"
+        - "traefik-forward-auth@docker"
       entryPoints:
         - websecure
       rule: 'Host(`dns-01.hoebergen.net`)'
@@ -14,7 +14,7 @@ http:
 
     dns-02:
       middlewares:
-        - "pocket-id@file"
+        - "traefik-forward-auth@docker"
       entryPoints:
         - websecure
       rule: 'Host(`dns-02.hoebergen.net`)'
