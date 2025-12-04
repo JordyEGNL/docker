@@ -32,6 +32,7 @@ services:
     networks:
       - frontend
     labels:
+      traefik.enable: true
       traefik.http.middlewares.traefik-forward-auth.forwardauth.address: http://traefik-forward-auth:4181/portals/main
       traefik.http.middlewares.traefik-forward-auth.forwardauth.authResponseHeaders: X-Forwarded-User,X-Forwarded-Displayname,X-Authenticated-User
       traefik.http.middlewares.traefik-forward-auth.forwardauth.trustForwardHeader: true
