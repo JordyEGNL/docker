@@ -1,16 +1,17 @@
-## Add your compose file here
-services:
-  hello_world:
-    image: hello-world
-    # networks:
-    #   - default
-    # ports:
-    #   - 3000:3000
-    # volumes:
-    #   - data:/data
+server:
+  # Hostname where the application can be reached at externally
+  hostname: "authproxy.lab-vps-02.hoebergen.net"
 
-# networks:
-#   default: {}
+cookies:
+  # Domain for setting cookies
+  domain: "hoebergen.net"
 
-# volumes:
-#   data:
+portals:
+  - name: "mediastack"
+    providers:
+    - pocketID:
+        name: "my-pocketid-auth"
+        displayName: "Pocket ID"
+        endpoint: "https://auth.hoebergen.net"
+        clientID: "2"
+        clientSecret: "2"
