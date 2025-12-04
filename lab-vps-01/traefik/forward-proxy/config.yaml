@@ -7,10 +7,9 @@ cookies:
   domain: "hoebergen.net"
 
 portals:
-  - name: "default"
+  - name: "main"
     providers:
-    -
-        pocketID:
+    - pocketID:
         name: "my-pocketid-auth"
         displayName: "Pocket ID"
         endpoint: "https://auth.hoebergen.net"
