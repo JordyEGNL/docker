@@ -7,7 +7,7 @@ cookies:
   domain: "hoebergen.net"
 
 portals:
-  - name: "main"
+  - name: "default"
     providers:
       - pocketID:
         name: "my-pocketid-auth"
