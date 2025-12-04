@@ -13,5 +13,5 @@ portals:
         name: "my-pocketid-auth"
         displayName: "Pocket ID"
         endpoint: "https://auth.hoebergen.net"
-        clientID: "2"
-        clientSecret: "2"
+        clientID: "2e30a388-fc52-41e4-915d-da7507bcce68"
+        clientSecret: "ZBiebA6jnPOpu3hpImoEZ1TAWaWLPnZB"
