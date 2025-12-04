@@ -21,6 +21,8 @@ services:
       - /etc/localtime:/etc/localtime:ro #timezone
       - /docker/zerobyte:/var/lib/zerobyte #zerobyte config
       - /root/.config/rclone:/root/.config/rclone #rclone config
+      - /run/docker/plugins:/run/docker/plugins #docker volume support
+      - /var/run/docker.sock:/var/run/docker.sock #docker volume support
       - /home/jordy/docker:/dockerold
       - /docker:/docker
       - /etc/komodo:/komodo
