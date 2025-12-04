@@ -40,10 +40,10 @@ services:
       traefik.http.routers.traefik-forward-auth.rule: Host(`authproxy.lab-vps-01.hoebergen.net`)
       traefik.http.routers.traefik-forward-auth.entrypoints: websecure
      # Cloudflare
-      dockflare.enable: true
-      dockflare.hostname: "authproxy.lab-vps-01.hoebergen.net"
-      dockflare.originsrvname: "authproxy.lab-vps-01.hoebergen.net"
-      dockflare.service: "https://localhost:443"
+     # dockflare.enable: true
+     # dockflare.hostname: "authproxy.lab-vps-01.hoebergen.net"
+     # dockflare.originsrvname: "authproxy.lab-vps-01.hoebergen.net"
+     # dockflare.service: "https://localhost:443"
 
 networks:
   frontend:
