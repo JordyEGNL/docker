@@ -254,7 +254,7 @@ services:
       traefik.http.routers.qbittorrent.entryPoints: websecure
       traefik.http.services.qbittorrent.loadbalancer.server.port: 8080
       traefik.http.routers.qbittorrent.rule: Host(`qbittorrent.hoebergen.net`)
-      traefik.http.routers.qbittorrent.middlewares: localAccess@file
+      traefik.http.routers.qbittorrent.middlewares: traefik-forward-auth@docker,localAccess@file
     networks:
       - mediastack
       - frontend
