@@ -11,6 +11,9 @@ services:
       DB_USER: wikijs
       DB_PASS: ${DB_PASSWORD}
       DB_NAME: wiki
+      NODE_EXTRA_CA_CERTS: /certs/hoebergen-net.pem
+    volumes:
+      - ./certs:/certs:ro
     labels:
       traefik.enable: true
       traefik.http.routers.wiki-js.entryPoints: websecure

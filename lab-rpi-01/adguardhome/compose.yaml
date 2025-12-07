@@ -1,7 +1,7 @@
 services:
   adguardhome:
     image: adguard/adguardhome:v0.107.70
-    container_name: adguardhome
+    containzer_name: adguardhome
     restart: unless-stopped
     volumes:
       - /home/jordy/docker/adguardhome/work:/opt/adguardhome/work
