@@ -55,7 +55,7 @@ services:
     environment:
       LOG_LEVEL: info
       DATABASE_URL: postgresql://patchmon_user:${POSTGRES_PASSWORD}@database:5432/patchmon_db
-      JWT_SECRET: ${JTW_SECRET}
+      JWT_SECRET: ${JWT_SECRET}
       SERVER_PROTOCOL: https
       SERVER_HOST: patchmon.hoebergen.net
       SERVER_PORT: 443
