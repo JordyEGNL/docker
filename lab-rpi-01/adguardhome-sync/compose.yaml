@@ -18,8 +18,8 @@ services:
       - REPLICA1_USERNAME=${USERNAME}
       - REPLICA1_PASSWORD=${PASSWORD}
       - API_PORT=8080
-      - API_USERNAME=${USERNAME}
-      - API_PASSWORD=${PASSWORD}
+      #- API_USERNAME=${USERNAME}
+      #- API_PASSWORD=${PASSWORD}
     ports:
       - 10.0.10.21:8080:8080
     restart: unless-stopped
