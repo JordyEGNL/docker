@@ -54,7 +54,7 @@ services:
     # See PatchMon Docker README for additional environment variables and configuration instructions
     environment:
       LOG_LEVEL: info
-      DATABASE_URL: postgresql://patchmon_user:${POSTGRES_PASSWORD}@database:5432/patchmon_db
+      DATABASE_URL: ${POSTGRES_CONNECTION}
       JWT_SECRET: ${JWT_SECRET}
       SERVER_PROTOCOL: https
       SERVER_HOST: patchmon.hoebergen.net
