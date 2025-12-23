@@ -108,3 +108,8 @@ services:
 
 volumes:
   redis_data:
+
+networks:
+  backend_patchmon:
+  frontend:
+    external: true
