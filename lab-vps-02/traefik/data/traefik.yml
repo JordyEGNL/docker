@@ -40,6 +40,11 @@ entryPoints:
 
   websecure:
     address: :443
+    transport:
+      respondingTimeouts:
+        readTimeout: 600s
+        idleTimeout: 600s
+        writeTimeout: 600s
     forwardedHeaders:
       # Reuse list of Cloudflare Trusted IP's above for HTTPS requests
       trustedIPs: *trustedIps
