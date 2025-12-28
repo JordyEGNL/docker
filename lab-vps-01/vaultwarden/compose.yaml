@@ -1,6 +1,6 @@
 services:
   vaultwarden:
-    image: vaultwarden/server:testing-alpine
+    image: vaultwarden/server:1.35.0-alpine
     container_name: vaultwarden
     volumes:
       - /docker/vaultwarden/data/:/data/
