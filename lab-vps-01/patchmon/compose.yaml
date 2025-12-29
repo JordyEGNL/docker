@@ -35,7 +35,7 @@ services:
       retries: 7
 
   redis:
-    image: redis:7-alpine
+    image: redis:8-alpine
     restart: unless-stopped
     command: redis-server --requirepass ${REDIS_PASSWORD} # CHANGE THIS TO YOUR REDIS PASSWORD
     volumes:
