@@ -27,7 +27,7 @@ services:
     restart: unless-stopped
 
   traefik-forward-auth:
-    image: ghcr.io/italypaleale/traefik-forward-auth:4.4.0
+    image: ghcr.io/italypaleale/traefik-forward-auth:4.5.0
     restart: unless-stopped
     volumes:
       - ./forward-proxy:/etc/traefik-forward-auth
