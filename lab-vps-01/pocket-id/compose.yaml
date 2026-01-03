@@ -24,20 +24,6 @@ services:
       retries: 2
       start_period: 10s
 
-  pocket-id-whoami:
-    image: traefik/whoami
-    restart: unless-stopped
-    labels:
-      traefik.enable: true
-      traefik.http.routers.pocket-id-test.entryPoints: websecure
-      traefik.http.services.pocket-id-test.loadbalancer.server.port: 80
-      traefik.http.routers.pocket-id-test.rule: Host(`auth2.hoebergen.net`)
-      # Cloudflare
-      dockflare.enable: true
-      dockflare.hostname: "auth2.hoebergen.net"
-      dockflare.originsrvname: "auth2.hoebergen.net"
-      dockflare.service: "https://localhost:443"
-
 networks:
   default:
     name: frontend
