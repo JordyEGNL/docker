@@ -18,15 +18,6 @@ http:
       tls:
         certResolver: letsencrypt
 
-    immich-private:
-      entryPoints:
-        - websecure
-      rule: 'Host(`photos.hoebergen.net`)'
-      service: immich-private
-      tls:
-        certResolver: letsencrypt
-        options: acmeClient@file
-
   # Remote services are listed here, for when Docker integration is not possible
   services:
     jellyfin:
@@ -39,10 +30,6 @@ http:
         servers:
           - url: https://lab-vps-02:443
 
-    immich-private:
-      loadBalancer:
-        servers:
-          - url: https://lab-vps-02:443
 
   ## MIDDLEWARES ##
   middlewares:
@@ -106,8 +93,3 @@ tls:
         - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
         - TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305
         - TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305
-    acmeClient:
-      clientAuth:
-        caFiles:
-          - /etc/traefik/root_ca.crt
-        clientAuthType: RequireAndVerifyClientCert
