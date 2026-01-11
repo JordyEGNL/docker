@@ -13,7 +13,7 @@ http:
     immich-public-proxy:
       entryPoints:
         - websecure
-      rule: 'Host(`publicphotos.hoebergen.net`)'
+      rule: 'Host(`img.hoebergen.net`)'
       service: immich-public-proxy
       tls:
         certResolver: letsencrypt
