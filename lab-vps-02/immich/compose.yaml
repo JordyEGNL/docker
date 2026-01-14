@@ -16,7 +16,7 @@ services:
     group_add:
       - "109"
     ports:
-      - 10.0.10.102:2283
+      - 10.0.10.102:2283:2283
     extends:
       file: hwaccel.transcoding.yml
       service: quicksync
