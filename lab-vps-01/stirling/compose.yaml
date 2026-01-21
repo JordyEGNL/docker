@@ -1,17 +1,12 @@
 services:
-  stirling-pdf:
-    image: ghcr.io/stirling-tools/s-pdf:2.3.0
-    container_name: stirling
+  bentopdf:
+    # simple mode - bentopdf/bentopdf-simple:latest
+    # default mode - bentopdf/bentopdf:latest
+    image: bentopdf/bentopdf-simple:1.15.4
+    container_name: bentopdf
     restart: unless-stopped
-    volumes:
-      - /home/jordy/docker/stirling/data:/usr/share/tesseract-ocr/4.00/tessdata
-      - /home/jordy/docker/stirling/data/config:/configs
-    environment:
-      APP_HOME_NAME: Stirling PDF
-      APP_HOME_DESCRIPTION: Your locally hosted one-stop-shop for all your PDF needs.
-      APP_NAVBAR_NAME: Stirling PDF
-      APP_ROOT_PATH: /
-      ALLOW_GOOGLE_VISABILITY: false
+    #ports:
+    #  - '8080:8080'
     labels:
       traefik.enable: true
       traefik.http.routers.stirling.entryPoints: websecure
