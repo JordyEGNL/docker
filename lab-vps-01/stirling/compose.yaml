@@ -2,15 +2,15 @@ services:
   bentopdf:
     # simple mode - bentopdf/bentopdf-simple:latest
     # default mode - bentopdf/bentopdf:latest
-    image: bentopdf/bentopdf:1.15.3
+    image: bentopdf/bentopdf-simple:1.15.4
     container_name: bentopdf
     restart: unless-stopped
     #ports:
     #  - '8080:8080'
     labels:
       traefik.enable: true
-      traefik.http.routers.stirling.entryPoints: websecure
-      traefik.http.routers.stirling.rule: Host(`pdf.hoebergen.net`)
+      traefik.http.routers.bentopdf.entryPoints: websecure
+      traefik.http.routers.bentopdf.rule: Host(`pdf.hoebergen.net`)
 
 networks:
   default:
