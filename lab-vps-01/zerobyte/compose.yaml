@@ -1,6 +1,6 @@
 services:
   zerobyte:
-    image: ghcr.io/nicotsx/zerobyte:v0.22.0
+    image: ghcr.io/nicotsx/zerobyte:v0.24.0
     container_name: zerobyte
     restart: unless-stopped
     cap_add:
@@ -11,7 +11,7 @@ services:
       traefik.enable: true
       traefik.http.routers.zerobyte.entryPoints: websecure
       traefik.http.services.zerobyte.loadbalancer.server.port: 4096
-      traefik.http.routers.zerobyte.rule: Host(`zerobyte.lab-vps-01.hoebergen.net`)
+      traefik.http.routers.zerobyte.rule: Host(`backups.lab-vps-01.hoebergen.net`)
       traefik.http.routers.zerobyte.middlewares: localAccess@file
     devices:
       - /dev/fuse:/dev/fuse
