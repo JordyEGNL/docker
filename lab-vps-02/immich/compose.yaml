@@ -1,7 +1,7 @@
 services:
   immich-diskchecker:
     container_name: immich-diskchecker
-    image: alpine:3.23.2
+    image: alpine:3.23.3
     network_mode: none
     volumes:
       - ${DISK_ROOT}:/mnt/externaldisk:ro
