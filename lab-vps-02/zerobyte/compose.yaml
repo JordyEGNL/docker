@@ -12,7 +12,7 @@ services:
       traefik.enable: true
       traefik.http.routers.zerobyte.entryPoints: websecure
       traefik.http.services.zerobyte.loadbalancer.server.port: 4096
-      traefik.http.routers.zerobyte.rule: Host(`zerobyte.lab-vps-02.hoebergen.net`)
+      traefik.http.routers.zerobyte.rule: Host(`backups.lab-vps-02.hoebergen.net`)
       traefik.http.routers.zerobyte.middlewares: localAccess@file
     devices:
       - /dev/fuse:/dev/fuse
