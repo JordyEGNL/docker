@@ -12,7 +12,7 @@ services:
 
   immich-server:
     container_name: immich-server
-    image: ghcr.io/immich-app/immich-server:v2.5.0
+    image: ghcr.io/immich-app/immich-server:v2.5.2
     group_add:
       - "109"
     ports:
@@ -47,7 +47,7 @@ services:
 
   immich-machine-learning:
     container_name: immich-machine-learning
-    image: ghcr.io/immich-app/immich-machine-learning:v2.5.0
+    image: ghcr.io/immich-app/immich-machine-learning:v2.5.2
     env_file:
       - ./.env
     volumes:
