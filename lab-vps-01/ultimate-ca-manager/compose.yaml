@@ -42,7 +42,3 @@ networks:
   default:
     name: frontend
     external: true
-
-volumes:
-  ucm-data:
-    driver: local
