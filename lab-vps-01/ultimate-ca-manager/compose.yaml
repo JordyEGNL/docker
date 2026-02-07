@@ -1,16 +1,48 @@
-## Add your compose file here
+version: '3.8'
+
 services:
-  hello_world:
-    image: hello-world
-    # networks:
-    #   - default
-    # ports:
-    #   - 3000:3000
-    # volumes:
-    #   - data:/data
+  ucm:
+    image: ghcr.io/neyslim/ultimate-ca-manager:1.8.3
+    container_name: ucm
+    restart: unless-stopped
+    volumes:
+      -/docker/ultimate-ca-manager:/app/backend/data
+    env_file:
+      - .env    
+    healthcheck:
+      test: ["CMD", "curl", "-f", "-k", "https://localhost:${UCM_HTTPS_PORT:-8443}/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    
+    # Security settings
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - SETGID
+      - SETUID
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+    labels:
+      - "com.ultimate-ca-manager.version=1.8.3"
+      - "com.ultimate-ca-manager.description=Certificate Authority Management"
+      - "traefik.enable=false"  # Disable if using Traefik
 
-# networks:
-#   default: {}
+networks:
+  default:
+    name: frontend
+    external: true
 
-# volumes:
-#   data:
+volumes:
+  ucm-data:
+    driver: local
