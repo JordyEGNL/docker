@@ -9,15 +9,8 @@
   "timezone": "Europe/Amsterdam",
   "prConcurrentLimit": 5,
   "prHourlyLimit": 0,
-  "assignees": [
-    "JordyEGNL"
-  ],
   "commitMessageAction": "update {{packageFileDir}} -",
   "additionalBranchPrefix": "{{packageFileDir}}-",
-  "labels": [
-    "dependencies",
-    "renovate"
-  ],
   "vulnerabilityAlerts": {
     "enabled": true,
     "labels": [
