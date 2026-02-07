@@ -36,6 +36,7 @@ services:
     labels:
       traefik.enable: true
       traefik.http.routers.ultimate-ca-manager.entryPoints: websecure
+      traefik.http.services.ultimate-ca-manager.loadbalancer.server.port: 8443
       traefik.http.routers.ultimate-ca-manager.rule: Host(`certificates.hoebergen.net`)
 
 networks:
