@@ -358,7 +358,7 @@ services:
       traefik.http.routers.mediamanager.entryPoints: websecure
       traefik.http.services.mediamanager.loadbalancer.server.port: 8000
       traefik.http.routers.mediamanager.rule: Host(`mediamanager.hoebergen.net`)
-      traefik.http.routers.mediamanager.middlewares: traefik-forward-auth@docker,localAccess@file
+      traefik.http.routers.mediamanager.middlewares: localAccess@file
     networks:
       - mediastack
       - frontend
