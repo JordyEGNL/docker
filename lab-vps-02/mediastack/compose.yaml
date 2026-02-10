@@ -381,6 +381,8 @@ services:
       POSTGRES_USER: MediaManager
       POSTGRES_DB: MediaManager
       POSTGRES_PASSWORD: ${MEDIAMANAGER_DB_PASSWORD}
+    networks:
+      - mediastack
 
 networks:
   frontend:
