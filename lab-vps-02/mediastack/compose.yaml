@@ -339,6 +339,49 @@ services:
     networks:
       - mediastack
 
+  mediamanager:
+    container_name: mediamanager_server
+    image: quay.io/maxdorninger/mediamanager:1.12.2
+    #ports:
+    #  - "8000:8000"
+    environment:
+      - CONFIG_DIR=/app/config
+    volumes:
+      # Mount your actual media directories here - these paths should match your config.toml
+      - /docker/mediastack/mediamanager/data/:/data/  # Example: change ./data/ to your actual media root
+      # Config folder for application configuration
+      - /docker/mediastack/mediamanager/config/:/app/config/
+      # Image folder
+      - /docker/mediastack/mediamanager/images/:/data/images/
+    labels:
+      traefik.enable: true
+      traefik.http.routers.mediamanager.entryPoints: websecure
+      traefik.http.services.mediamanager.loadbalancer.server.port: 8000
+      traefik.http.routers.mediamanager.rule: Host(`mediamanager.hoebergen.net`)
+      traefik.http.routers.mediamanager.middlewares: traefik-forward-auth@docker,localAccess@file
+    networks:
+      - mediastack
+      - frontend
+    depends_on:
+      mediamanager-db:
+        condition: service_healthy
+
+  mediamanager-db:
+    container_name: mediamanager_postgres
+    image: postgres:17
+    restart: unless-stopped
+    volumes:
+      - /docker/mediastack/mediamanager/postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}" ]
+      interval: 30s
+      timeout: 15s
+      retries: 5
+    environment:
+      POSTGRES_USER: MediaManager
+      POSTGRES_DB: MediaManager
+      POSTGRES_PASSWORD: ${MEDIAMANAGER_DB_PASSWORD}
+
 networks:
   frontend:
     name: frontend
