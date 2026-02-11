@@ -341,7 +341,7 @@ services:
 
   mediamanager:
     container_name: mediamanager_server
-    image: quay.io/maxdorninger/mediamanager:1.12.2
+    image: quay.io/maxdorninger/mediamanager:1.12.3
     #ports:
     #  - "8000:8000"
     environment:
