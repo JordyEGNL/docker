@@ -13,12 +13,8 @@
   "additionalBranchPrefix": "{{packageFileDir}}-",
   "vulnerabilityAlerts": {
     "enabled": true,
-    "labels": [
-      "security"
-    ],
-    "assignees": [
-      "JordyEGNL"
-    ]
+    "labels": ["security"],
+    "assignees": ["JordyEGNL"]
   },
   "digest": {
     "enabled": true,
@@ -27,9 +23,7 @@
   "packageRules": [
     {
       "description": "Group Immich updates",
-      "matchDatasources": [
-        "docker"
-      ],
+      "matchDatasources": ["docker"],
       "groupName": "immich",
       "matchPackageNames": [
         "ghcr.io/immich-app/immich-server",
@@ -38,29 +32,25 @@
     },
     {
       "description": "Group Traefik updates",
-      "matchDatasources": [
-        "docker"
-      ],
-      "matchPackageNames": [
-        "traefik"
-      ],
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["traefik"],
       "groupName": "Traefik"
     },
     {
+      "description": "Custom versioning for metube",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["ghcr.io/alexta69/metube"],
+      "versioning": "regex:^(?<major>\\d{4})\\.(?<minor>\\d{2})\\.(?<patch>\\d{2})$"
+    },
+    {
       "description": "Custom versioning for adguardhome-sync",
-      "matchDatasources": [
-        "docker"
-      ],
-      "matchPackageNames": [
-        "ghcr.io/bakito/adguardhome-sync"
-      ],
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["ghcr.io/bakito/adguardhome-sync"],
       "versioning": "regex:^(?<compatibility>alpine)-v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
     },
     {
       "description": "Automerge patch updates for stable versions",
-      "matchUpdateTypes": [
-        "patch"
-      ],
+      "matchUpdateTypes": ["patch"],
       "matchCurrentVersion": "!/^0/",
       "automerge": true,
       "automergeType": "branch",
@@ -68,41 +58,19 @@
     },
     {
       "description": "Automerge minor updates for stable versions during off-hours",
-      "matchUpdateTypes": [
-        "minor"
-      ],
+      "matchUpdateTypes": ["minor"],
       "matchCurrentVersion": "!/^0/",
-      "matchDatasources": [
-        "docker"
-      ],
-      "labels": [
-        "minor-update"
-      ],
+      "matchDatasources": ["docker"],
+      "labels": ["minor-update"],
       "automerge": false,
       "ignoreTests": true
     },
     {
       "description": "Major updates require manual review",
-      "matchUpdateTypes": [
-        "major"
-      ],
+      "matchUpdateTypes": ["major"],
       "automerge": false,
-      "labels": [
-        "major-update"
-      ],
-      "schedule": [
-        "before 5am on monday"
-      ]
-    },
-    {
-      "description": "Pin digest for images using SHA",
-      "matchDatasources": [
-        "docker"
-      ],
-      "matchPackageNames": [
-        "alexta69/metube"
-      ],
-      "pinDigests": true
+      "labels": ["major-update"],
+      "schedule": ["before 5am on monday"]
     }
   ]
 }
