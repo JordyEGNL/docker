@@ -1,16 +1,26 @@
-## Add your compose file here
 services:
-  hello_world:
-    image: hello-world
-    # networks:
-    #   - default
-    # ports:
-    #   - 3000:3000
-    # volumes:
-    #   - data:/data
+  zerobyte:
+    image: ghcr.io/nicotsx/zerobyte:v0.28.1
+    container_name: zerobyte
+    restart: unless-stopped
+    cap_add:
+      - SYS_ADMIN
+    env_file: ./.env
+    ports:
+      - "10.0.10.21:4096:4096"
+    devices:
+      - /dev/fuse:/dev/fuse
+    environment:
+      - TZ=Europe/Amsterdam
+    volumes:
+      - /etc/localtime:/etc/localtime:ro #timezone
+      - /docker/zerobyte:/var/lib/zerobyte #zerobyte config
+      - /root/.config/rclone:/root/.config/rclone #rclone config
+      - /home/jordy/docker:/dockerold
+      - /docker:/docker
+      - /etc/komodo:/komodo
 
-# networks:
-#   default: {}
-
-# volumes:
-#   data:
+networks:
+  default:
+    name: frontend
+    external: true
