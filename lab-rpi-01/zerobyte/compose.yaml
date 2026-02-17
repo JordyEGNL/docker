@@ -19,8 +19,4 @@ services:
       - /home/jordy/docker:/dockerold
       - /docker:/docker
       - /etc/komodo:/komodo
-
-networks:
-  default:
-    name: frontend
-    external: true
+    network_mode: bridge
