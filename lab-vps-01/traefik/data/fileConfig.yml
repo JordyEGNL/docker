@@ -28,7 +28,17 @@ http:
       entryPoints:
         - websecure
       rule: 'Host(`dnssync.hoebergen.net`)'
-      service: adguardsync-rpi-01
+      service: adguardsync-lab-rpi-01
+      tls:
+        certResolver: letsencrypt
+
+    zerobyte-lab-rpi-01:
+      middlewares:
+        - "traefik-forward-auth@docker"
+      entryPoints:
+        - websecure
+      rule: 'Host(`zerobyte.lab-rpi-01.hoebergen.net`)'
+      service: zerobyte-lab-rpi-01
       tls:
         certResolver: letsencrypt
 
@@ -44,10 +54,15 @@ http:
         servers:
           - url: http://10.0.10.21:80/
 
-    adguardsync-rpi-01:
+    adguardsync-lab-rpi-01:
       loadBalancer:
         servers:
           - url: http://10.0.10.21:8080/
+
+    zerobyte-lab-rpi-01:
+      loadBalancer:
+        servers:
+          - url: http://10.0.10.21:4096/
 
   ## MIDDLEWARES ##
   middlewares:
