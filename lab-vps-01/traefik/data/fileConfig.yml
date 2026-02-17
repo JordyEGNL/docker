@@ -37,7 +37,7 @@ http:
         - "traefik-forward-auth@docker"
       entryPoints:
         - websecure
-      rule: 'Host(`zerobyte.lab-rpi-01.hoebergen.net`)'
+      rule: 'Host(`backupslab-rpi-01.hoebergen.net`)'
       service: zerobyte-lab-rpi-01
       tls:
         certResolver: letsencrypt
