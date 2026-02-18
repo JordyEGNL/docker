@@ -60,6 +60,7 @@ services:
       SERVER_HOST: patchmon.hoebergen.net
       SERVER_PORT: 443
       CORS_ORIGIN: https://patchmon.hoebergen.net
+      TRUST_PROXY: true
       # Database Connection Pool Configuration (Prisma)
       DB_CONNECTION_LIMIT: 30
       DB_POOL_TIMEOUT: 20
