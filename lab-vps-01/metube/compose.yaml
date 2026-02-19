@@ -1,6 +1,6 @@
 services:
   metube:
-    image: alexta69/metube:2026.02.14
+    image: alexta69/metube:2026.02.19
     container_name: metube
     restart: unless-stopped
     volumes:
