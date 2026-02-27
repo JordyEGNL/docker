@@ -53,6 +53,18 @@ services:
       - /docker/pangolin/config/letsencrypt:/letsencrypt # Volume to store the Let's Encrypt certificates
       - /docker/pangolin/config/traefik/logs:/var/log/traefik # Volume to store Traefik logs
 
+  geoipupdate:
+    container_name: geoipupdate
+    image: ghcr.io/maxmind/geoipupdate
+    restart: unless-stopped
+   env_file:
+    - ./.env
+    environment:
+      - 'GEOIPUPDATE_EDITION_IDS=GeoLite2-Country GeoLite2-ASN'
+      - 'GEOIPUPDATE_FREQUENCY=72'
+    volumes:
+      - '/docker/pangolin/config/GeoLite2:/usr/share/GeoIP'
+
 networks:
   default:
     driver: bridge
