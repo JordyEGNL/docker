@@ -57,8 +57,8 @@ services:
     container_name: geoipupdate
     image: ghcr.io/maxmind/geoipupdate
     restart: unless-stopped
-   env_file:
-    - ./.env
+    env_file:
+      - ./.env
     environment:
       - 'GEOIPUPDATE_EDITION_IDS=GeoLite2-Country GeoLite2-ASN'
       - 'GEOIPUPDATE_FREQUENCY=72'
