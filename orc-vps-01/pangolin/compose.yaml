@@ -11,7 +11,6 @@ services:
       interval: "10s"
       timeout: "10s"
       retries: 15
-
   gerbil:
     image: docker.io/fosrl/gerbil:latest # https://github.com/fosrl/gerbil/releases
     container_name: gerbil
