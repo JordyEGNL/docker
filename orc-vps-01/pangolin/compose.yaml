@@ -96,9 +96,3 @@ services:
       - 'GEOIPUPDATE_FREQUENCY=72'
     volumes:
       - '/docker/pangolin/config/GeoLite2:/usr/share/GeoIP'
-
-networks:
-  default:
-    driver: bridge
-    name: pangolin
-    #enable_ipv6: true # activate if your system supports IPv6
