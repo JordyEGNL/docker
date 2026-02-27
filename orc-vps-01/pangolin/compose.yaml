@@ -73,6 +73,8 @@ services:
     command:
       - --configFile=/etc/traefik/traefik_config.yml
     container_name: traefik
+    env_file:
+      - ./.env
     depends_on:
       crowdsec:
         condition: service_healthy
