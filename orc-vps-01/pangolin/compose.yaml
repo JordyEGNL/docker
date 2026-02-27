@@ -68,7 +68,7 @@ services:
     image: docker.io/fosrl/pangolin:ee-1.16.0
     restart: unless-stopped
     volumes:
-      - ./config:/app/config
+      - /docker/pangolin/config//app/config
   traefik:
     command:
       - --configFile=/etc/traefik/traefik_config.yml
