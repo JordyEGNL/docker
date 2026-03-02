@@ -5,3 +5,8 @@ services:
     restart: unless-stopped
     env_file:
       - .env
+
+networks:
+  default:
+    name: frontend
+    external: true
