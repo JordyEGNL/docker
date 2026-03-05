@@ -1,16 +1,12 @@
-## Add your compose file here
 services:
-  hello_world:
-    image: hello-world
-    # networks:
-    #   - default
-    # ports:
-    #   - 3000:3000
-    # volumes:
-    #   - data:/data
+  newt:
+    image: fosrl/newt
+    container_name: newt
+    restart: unless-stopped
+    env_file:
+      - .env
 
-# networks:
-#   default: {}
-
-# volumes:
-#   data:
+networks:
+  default:
+    name: frontend
+    external: true
