@@ -47,10 +47,10 @@ services:
         condition: service_healthy
     image: docker.io/fosrl/gerbil:1.3.0
     ports:
-      - 51820:51820/udp
-      - 21820:21820/udp
-      - 443:443
-      - 80:80
+      - "80:80"        # HTTP/SSL verification and non-SSL resources
+      - "443:443"      # HTTPS for web UI and SSL resources
+      - "51820:51820"  # WireGuard for Newt connections
+      - "21820:21820"  # WireGuard for client connections
     restart: unless-stopped
     volumes:
       - /docker/pangolin/config/:/var/config
