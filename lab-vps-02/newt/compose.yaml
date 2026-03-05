@@ -8,7 +8,7 @@ services:
     volumes:
         - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
-        - DOCKER_SOCKET=unix:///var/run/docker.sock
+        - DOCKER_SOCKET=http://dockerproxy:2375
 
 networks:
   default:
