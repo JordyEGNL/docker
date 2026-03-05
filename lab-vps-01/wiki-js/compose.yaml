@@ -19,13 +19,9 @@ services:
       traefik.http.routers.wiki-js.entryPoints: websecure
       traefik.http.services.wiki-js.loadbalancer.server.port: 3000
       traefik.http.routers.wiki-js.rule: Host(`wiki.hoebergen.net`)
-      # traefik.http.routers.api.middlewares: localAccess@file
-      # Allow access via private tunnel
-      # Cloudflare
-      dockflare.enable: true
-      dockflare.hostname: "wiki.hoebergen.net"
-      dockflare.originsrvname: "wiki.hoebergen.net"
-      dockflare.service: "https://localhost:443"
+    dns:
+      - 1.1.1.1
+      - 9.9.9.9
     restart: unless-stopped
     networks:
       - frontend
