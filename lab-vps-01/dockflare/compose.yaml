@@ -47,8 +47,8 @@ services:
       - USE_EXTERNAL_CLOUDFLARED=true
       - EXTERNAL_TUNNEL_ID=d4059baf-3d7e-4d7a-be93-f3daba67c184
     depends_on:
-      docker-socket-proxy:
-        condition: service_started
+      #docker-socket-proxy:
+      #  condition: service_started
       dockflare-init:
         condition: service_completed_successfully
       redis:
