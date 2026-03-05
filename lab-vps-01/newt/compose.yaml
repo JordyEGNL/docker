@@ -6,7 +6,7 @@ services:
     env_file:
       - .env
     environment:
-        - DOCKER_SOCKET=http://dockerproxy:2375
+      - DOCKER_SOCKET=http://dockerproxy:2375
 
 networks:
   default:
