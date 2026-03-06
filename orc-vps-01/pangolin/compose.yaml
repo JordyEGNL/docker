@@ -103,6 +103,8 @@ services:
     image: ghcr.io/tarampampam/error-pages:3.8.1
     container_name: error-pages
     restart: unless-stopped
+    ports:
+      - 8080:8080
     environment:
       TEMPLATE_NAME: connection
       SHOW_DETAILS: 'true'
