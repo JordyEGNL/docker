@@ -98,3 +98,19 @@ services:
       - 'GEOIPUPDATE_FREQUENCY=72'
     volumes:
       - '/docker/pangolin/config/GeoLite2:/usr/share/GeoIP'
+  # https://github.com/tarampampam/error-pages?tab=readme-ov-file
+  error-pages:
+    image: ghcr.io/tarampampam/error-pages:3.8.1
+    container_name: error-pages
+    restart: unless-stopped
+    environment:
+      TEMPLATE_NAME: connection
+      SHOW_DETAILS: 'true'
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/404.html"]
+      interval: "30s"
+      timeout: "10s"
+      retries: 3
+    depends_on:
+      traefik:
+        condition: service_started  # Ensure Traefik can reach it
