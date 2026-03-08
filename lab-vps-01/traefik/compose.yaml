@@ -26,7 +26,7 @@ services:
     restart: unless-stopped
 
   traefik-forward-auth:
-    image: ghcr.io/italypaleale/traefik-forward-auth:4.7.0
+    image: ghcr.io/italypaleale/traefik-forward-auth:4.8.0
     container_name: traefik-forward-auth
     restart: unless-stopped
     volumes:
