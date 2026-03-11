@@ -24,7 +24,7 @@ x-env: &x-env
     PWP__ENABLE_URL_PUSHES: "true"
     PWP__ENABLE_FILE_PUSHES: "true"
     PWP__ENABLE_QR_PUSHES: "true"
-    PWP__ALLOW_ANONYMOUS: "true"
+    PWP__ALLOW_ANONYMOUS: "false"
 
     # --- Deployment & URL ---
     PWP__HOST_DOMAIN: "share.hoebergen.net"
@@ -36,7 +36,7 @@ x-env: &x-env
 
     # --- Authentication ---
     # PWP__LOGIN_SESSION_TIMEOUT: "2 hours"
-    # PWP__DISABLE_SIGNUPS: "false"
+    PWP__DISABLE_SIGNUPS: "true"
     # PWP__DISABLE_LOGINS: "false"
     # PWP__SIGNUP_EMAIL_REGEXP: ""
     # PWP__ENABLE_USER_ACCOUNT_EMAILS: "false"
