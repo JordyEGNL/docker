@@ -137,6 +137,11 @@ services:
   pwpush:
     image: docker.io/pglombardo/pwpush:2.0.0-a
     restart: unless-stopped
+    labels:
+      traefik.enable: true
+      traefik.http.routers.password-pusher.entryPoints: websecure
+      traefik.http.services.password-pusher.loadbalancer.server.port: 80
+      traefik.http.routers.password-pusher.rule: Host(`share.hoebergen.net`)
     volumes:
       - pwpush-storage:/opt/PasswordPusher/storage
     healthcheck:
