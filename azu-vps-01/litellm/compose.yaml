@@ -55,7 +55,7 @@ services:
     networks:
       - backend-litellm
 
-redis:
+  redis:
     image: redis:7
     container_name: litellm-redis
     restart: always
