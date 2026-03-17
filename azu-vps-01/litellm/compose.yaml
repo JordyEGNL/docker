@@ -1,16 +1,79 @@
-## Add your compose file here
 services:
-  hello_world:
-    image: hello-world
-    # networks:
-    #   - default
-    # ports:
-    #   - 3000:3000
-    # volumes:
-    #   - data:/data
+  litellm:
+    image: ghcr.io/berriai/litellm-database:main-stable
+    container_name: LiteLLM_Server
+    restart: always
+    depends_on:
+      database:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      LITELLM_MASTER_KEY: ${LITELLM_MASTER_KEY}  # encryption for stored creds
+      LITELLM_SALT_KEY: ${LITELLM_SALT_KEY}     # encryption for stored creds
+      DATABASE_URL: ${LITELLM_DATABASE_URL} #postgresql://litellm:<Password>0@db:5432/litellm
+      STORE_MODEL_IN_DB: "True" # allows adding models to proxy via UI
+      #AZURE_API_KEY: ${AZURE_API_KEY}
+      #AZURE_API_BASE: ${AZURE_API_BASE}
+      # Optional Redis (good when scaling replicas)
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+    volumes:
+      - ${LITELLM_CONFIG}:/app/config.yaml:ro   # Mount the config file as read-only
+    command: ["--config", "/app/config.yaml"]
+    healthcheck:  # Defines the health check configuration for the container
+      test:
+        - CMD-SHELL
+        - python3 -c "import urllib.request; urllib.request.urlopen('http://localhost:4000/health/liveliness')"  # Command to execute for health check
+      interval: 30s  # Perform health check every 30 seconds
+      timeout: 10s   # Health check command times out after 10 seconds
+      retries: 3     # Retry up to 3 times if health check fails
+      start_period: 40s  # Wait 40 seconds after container start before beginning health checks
+    ports:
+      - 4000:4000
+    networks:
+      - backend-litellm
+      - frontend
 
-# networks:
-#   default: {}
+  database:
+    image: postgres:16
+    container_name: LiteLLM_DB
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER} #litellm_user
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD} #litellm_password            
+      POSTGRES_DB: ${POSTGRES_DB} #litellm_db
+    volumes:
+      - ${LITELLM_DB}:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d ${POSTGRES_DB} -U ${POSTGRES_USER}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    networks:
+      - backend-litellm
 
-# volumes:
-#   data:
+
+redis:
+    image: redis:7
+    container_name: LiteLLM_Redis
+    restart: always
+    command: ["redis-server", "--appendonly", "yes", "--requirepass", "${REDIS_PASSWORD}"]
+    volumes:
+      - ${LITELLM_REDIS}:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
+    networks:
+      - backend-litellm
+
+networks:
+  backend-litellm:
+  frontend:
+    external: true
+    name: frontend
