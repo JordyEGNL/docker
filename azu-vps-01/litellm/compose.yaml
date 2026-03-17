@@ -20,7 +20,7 @@ services:
       REDIS_PORT: ${REDIS_PORT}
       REDIS_PASSWORD: ${REDIS_PASSWORD}
     volumes:
-      - ${LITELLM_CONFIG}:/app/config.yaml:ro   # Mount the config file as read-only
+      - ./config/config.yaml:/app/config.yaml:ro   # Mount the config file as read-only
     command: ["--config", "/app/config.yaml"]
     healthcheck:  # Defines the health check configuration for the container
       test:
