@@ -55,7 +55,6 @@ services:
     networks:
       - backend-litellm
 
-
 redis:
     image: redis:7
     container_name: LiteLLM_Redis
