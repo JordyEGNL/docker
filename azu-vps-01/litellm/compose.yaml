@@ -45,7 +45,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD} #litellm_password            
       POSTGRES_DB: ${POSTGRES_DB} #litellm_db
     volumes:
-      - ${LITELLM_DB}:/var/lib/postgresql/data
+      - /docker/litellm/database:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -d ${POSTGRES_DB} -U ${POSTGRES_USER}"]
       interval: 5s
@@ -61,7 +61,7 @@ redis:
     restart: always
     command: ["redis-server", "--appendonly", "yes", "--requirepass", "${REDIS_PASSWORD}"]
     volumes:
-      - ${LITELLM_REDIS}:/data
+      - /docker/litellm/redis:/data
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
