@@ -34,7 +34,6 @@ services:
       - 4000:4000
     networks:
       - backend-litellm
-      - frontend
 
   database:
     image: postgres:16
@@ -73,6 +72,3 @@ services:
 
 networks:
   backend-litellm:
-  frontend:
-    external: true
-    name: frontend
