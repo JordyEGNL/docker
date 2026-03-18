@@ -10,6 +10,8 @@ general_settings:
   database_url: os.environ/DATABASE_URL           # Postgres
   ui_access_mode: admin_only
   json_logs: true
+  store_model_in_db: true
+  store_prompts_in_spend_logs: true
   user_header_mappings:
     - header_name: X-OpenWebUI-User-Id
       litellm_user_role: internal_user
