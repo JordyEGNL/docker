@@ -30,10 +30,16 @@ services:
       timeout: 10s   # Health check command times out after 10 seconds
       retries: 3     # Retry up to 3 times if health check fails
       start_period: 40s  # Wait 40 seconds after container start before beginning health checks
+    labels:
+      traefik.enable: true
+      traefik.http.routers.litellm.entryPoints: websecure
+      traefik.http.services.litellm.loadbalancer.server.port: 4000
+      traefik.http.routers.litellm.rule: Host(`litellm.hoebergen.net`)
     ports:
       - 4000:4000
     networks:
       - backend-litellm
+      - frontend
 
   database:
     image: postgres:16
@@ -72,3 +78,6 @@ services:
 
 networks:
   backend-litellm:
+  frontend:
+    external: true
+    name: frontend
