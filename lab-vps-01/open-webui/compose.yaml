@@ -9,7 +9,7 @@ services:
     volumes:
       - /docker/open-webui/data:/app/backend/data
     environment:
-      ENABLE_FORWARD_USER_INFO_HEADERS=True
+      - ENABLE_FORWARD_USER_INFO_HEADERS: true
     networks:
       - frontend
 
