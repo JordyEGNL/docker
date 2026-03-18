@@ -2,7 +2,6 @@ model_list:
   - model_name: azure/gpt-5.4-pro
     litellm_params:
       model: azure/gpt-5.4-pro
-      thinking: {"type": "enabled", "budget_tokens": 1024}
       merge_reasoning_content_in_choices: true
         
 litellm_settings:
