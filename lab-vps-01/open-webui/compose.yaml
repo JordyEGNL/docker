@@ -8,6 +8,8 @@ services:
       traefik.http.routers.open-webui.rule: Host(`chat.hoebergen.net`)
     volumes:
       - /docker/open-webui/data:/app/backend/data
+    environment:
+      - ENABLE_FORWARD_USER_INFO_HEADERS: True
     networks:
       - frontend
 
