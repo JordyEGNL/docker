@@ -1,11 +1,9 @@
 model_list:
-#  - model_name: DeepSeek-V3.2
-#    litellm_params:
-#      model: azure/DeepSeek-V3.2                   
-#      api_base: os.environ/AZURE_API_BASE
-#      api_key: os.environ/AZURE_API_KEY
-#      api_version: 2024-05-01-preview     
-
+  - model_name: azure/gpt-5.4-pro
+    litellm_params:
+      model: azure/gpt-5.4-pro
+      thinking: {"type": "enabled", "budget_tokens": 1024}
+      merge_reasoning_content_in_choices: true
         
 litellm_settings:
   timeout: 600
