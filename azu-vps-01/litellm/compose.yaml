@@ -61,7 +61,7 @@ services:
       - backend-litellm
 
   redis:
-    image: redis:7
+    image: redis:8
     container_name: litellm-redis
     restart: always
     command: ["redis-server", "--appendonly", "yes", "--requirepass", "${REDIS_PASSWORD}"]
