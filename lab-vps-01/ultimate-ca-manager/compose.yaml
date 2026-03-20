@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   ucm:
-    image: ghcr.io/neyslim/ultimate-ca-manager:2.0.7
+    image: ghcr.io/neyslim/ultimate-ca-manager:2.1.6
     container_name: ucm
     restart: unless-stopped
     volumes:
