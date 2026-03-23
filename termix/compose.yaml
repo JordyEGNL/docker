@@ -11,7 +11,7 @@ services:
       - guacd
     networks:
       - termix-backend
-      - pangolin
+      - frontend
 
   guacd:
     image: guacamole/guacd:latest
@@ -24,6 +24,6 @@ services:
 
 networks:
   termix-backend:
-  pangolin:
-    name: pangolin
+  frontend:
+    name: frontend
     external: true
