@@ -1,16 +1,29 @@
-## Add your compose file here
 services:
-  hello_world:
-    image: hello-world
-    # networks:
-    #   - default
-    # ports:
-    #   - 3000:3000
-    # volumes:
-    #   - data:/data
+  termix:
+    image: ghcr.io/lukegus/termix:latest
+    container_name: termix-server
+    restart: unless-stopped
+    environment:
+      PORT: "8080"
+    volumes:
+      - /docker/termix/data:/app/data
+    depends_on:
+      - guacd
+    networks:
+      - termix-backend
+      - pangolin
 
-# networks:
-#   default: {}
+  guacd:
+    image: guacamole/guacd:latest
+    container_name: termix-guacd
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - termix-backend
 
-# volumes:
-#   data:
+networks:
+  termix-backend:
+  pangolin:
+    name: pangolin
+    external: true
