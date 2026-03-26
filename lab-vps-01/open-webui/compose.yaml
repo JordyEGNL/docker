@@ -1,6 +1,6 @@
 services:
   openwebui:
-    image: ghcr.io/open-webui/open-webui:0.8.10-slim
+    image: ghcr.io/open-webui/open-webui:v0.8.11-slim
     labels:
       traefik.enable: true
       traefik.http.routers.open-webui.entryPoints: websecure
