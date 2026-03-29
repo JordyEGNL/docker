@@ -10,7 +10,7 @@ entryPoints:
     address: :80
     forwardedHeaders:
       trustedIPs: &trustedIps
-        - 172.16.0.0/12
+        - 172.16.0.0/16
         - 173.245.48.0/20
         - 103.21.244.0/22
         - 103.22.200.0/22
