@@ -35,7 +35,7 @@ services:
       dockflare.service: "https://localhost:443"
 
   vaultwarden-backup:
-    image: ttionya/vaultwarden-backup:1.26.5
+    image: ttionya/vaultwarden-backup:1.26.6
     container_name: vaultwarden-backup
     restart: unless-stopped
     environment:
