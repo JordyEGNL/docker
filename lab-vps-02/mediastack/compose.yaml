@@ -243,6 +243,7 @@ services:
         condition: service_completed_successfully
         restart: true
     ports:
+      - "${LOCAL_IP}:8080:8080"
       - '58946:58946/udp'
       - '58946:58946'
     privileged: true
