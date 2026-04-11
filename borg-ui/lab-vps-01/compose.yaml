@@ -1,16 +1,52 @@
-## Add your compose file here
+
+
 services:
-  hello_world:
-    image: hello-world
-    # networks:
-    #   - default
-    # ports:
-    #   - 3000:3000
-    # volumes:
-    #   - data:/data
+  borg-ui:
+    image: ainullcode/borg-ui:latest
+    container_name: borg-web-ui
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    volumes:
+      - /docker/borgbackup/data:/data
+      - /docker/borgbackup/cache:/home/borg/.cache/borg
+      - /home/jordy/docker:/local/dockerold
+      - /docker:/local/docker
+      - /etc/komodo:/local/komodo
+    labels:
+      traefik.enable: true
+      traefik.http.routers.borgbackup.entryPoints: websecure
+      traefik.http.services.borgbackup.loadbalancer.server.port: 8081
+      traefik.http.routers.borgbackup.rule: Host(`backups2.lab-vps-01.hoebergen.net`)
+      traefik.http.routers.borgbackup.middlewares: localAccess@file
+    environment:
+      - TZ=Europe/Amsterdam
+      - PUID=1000
+      - PGID=1000
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - backend-borgbackup
+      - frontend
 
-# networks:
-#   default: {}
+  redis:
+    image: redis:7-alpine
+    container_name: borg-redis
+    restart: unless-stopped
+    command: redis-server --maxmemory 2gb --maxmemory-policy allkeys-lru
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    networks:
+      - backend-borgbackup
 
-# volumes:
-#   data:
+networks:
+  backend-borgbackup:
+  frontend:
+    name: frontend
+    external: true
