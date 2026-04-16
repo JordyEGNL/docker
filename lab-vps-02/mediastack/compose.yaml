@@ -1,7 +1,7 @@
 services:
   mediastack-diskchecker:
     container_name: mediastack-diskchecker
-    image: alpine:3.23.3
+    image: alpine:3.23.4
     volumes:
       - ${MOUNT_ROOT}:/mnt/externaldisk:ro
     command:
