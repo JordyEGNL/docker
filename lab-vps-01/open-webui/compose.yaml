@@ -12,6 +12,7 @@ services:
       ENABLE_FORWARD_USER_INFO_HEADERS: true
     env_file:
       - .env
+    restart: unless-stopped
     networks:
       - frontend
 
