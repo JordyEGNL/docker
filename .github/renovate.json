@@ -55,6 +55,12 @@
       "versioning": "regex:^(?<compatibility>alpine)-v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
     },
     {
+      "description": "Custom versioning for termix",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["ghcr.io/lukegus/termix"],
+      "versioning": "regex:^release-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
+    },
+    {
       "description": "Automerge patch updates for stable versions",
       "matchUpdateTypes": ["patch"],
       "matchCurrentVersion": "!/^0/",
