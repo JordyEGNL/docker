@@ -3,7 +3,7 @@ services:
     container_name: tplink-api
     image: ghcr.io/jordyegnl/tplink-sg108e-led-api:0.1.5
     environment:
-      TP_LINK_IP: 10.0.40.148
+      TP_LINK_IP: 10.0.0.252
       TP_LINK_USERNAME: admin
       TP_LINK_PASSWORD: ${PASSWORD}
     restart: unless-stopped
