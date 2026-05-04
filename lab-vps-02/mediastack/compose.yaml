@@ -238,7 +238,6 @@ services:
       - '/etc/localtime:/etc/localtime:ro'
       - /docker/mediastack/qbittorrent:/config
       - '${MOUNT_ROOT}/qbittorrent/downloads:/downloads'
-      - '/lib/modules:/lib/modules:ro'
     depends_on:
       mediastack-diskchecker:
         condition: service_completed_successfully
