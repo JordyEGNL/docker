@@ -100,7 +100,7 @@ services:
       - '/docker/pangolin/config/GeoLite2:/usr/share/GeoIP'
   # https://github.com/tarampampam/error-pages?tab=readme-ov-file
   error-pages:
-    image: ghcr.io/tarampampam/error-pages:3.8.1
+    image: ghcr.io/tarampampam/error-pages:4.0.0
     container_name: error-pages
     restart: unless-stopped
     ports:
