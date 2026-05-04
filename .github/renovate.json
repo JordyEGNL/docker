@@ -22,6 +22,11 @@
   },
   "packageRules": [
     {
+      "description": "Detect calendar versioning and disable Renovate's 500 major version limit",
+      "matchCurrentVersion": ">=10000",
+      "maxMajorIncrement": 0
+    },
+    {
       "description": "Group Immich updates",
       "matchDatasources": ["docker"],
       "groupName": "immich",
