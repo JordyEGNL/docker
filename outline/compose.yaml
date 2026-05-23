@@ -44,9 +44,6 @@ services:
   https-portal:
     image: steveltn/https-portal
     env_file: .env
-    ports:
-      - '80:80'
-      - '443:443'
     links:
       - outline
     restart: always
