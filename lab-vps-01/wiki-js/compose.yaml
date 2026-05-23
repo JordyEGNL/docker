@@ -18,7 +18,7 @@ services:
       traefik.enable: true
       traefik.http.routers.wiki-js.entryPoints: websecure
       traefik.http.services.wiki-js.loadbalancer.server.port: 3000
-      traefik.http.routers.wiki-js.rule: Host(`wiki.hoebergen.net`)
+      traefik.http.routers.wiki-js.rule: Host(`wiki.lab-vps-01.hoebergen.net`)
     dns:
       - 1.1.1.1
       - 9.9.9.9
