@@ -37,8 +37,6 @@ services:
       timeout: 20s
       retries: 3
     environment:
-      POSTGRES_USER: 'user'
-      POSTGRES_PASSWORD: 'pass'
       POSTGRES_DB: 'outline'
 
 volumes:
