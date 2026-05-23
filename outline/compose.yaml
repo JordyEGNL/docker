@@ -5,7 +5,7 @@ services:
     expose:
       - "3000"
     volumes:
-      - storage-data:/var/lib/outline/data
+      - /docker/outline/config:/var/lib/outline/data
     depends_on:
       - postgres
       - redis
@@ -16,7 +16,7 @@ services:
     expose:
       - "6379"
     volumes:
-      - ./redis.conf:/redis.conf
+      - /docker/outline/redis/redis.conf:/redis.conf
     command: ["redis-server", "/redis.conf"]
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
@@ -30,7 +30,7 @@ services:
     expose:
       - "5432"
     volumes:
-      - database-data:/var/lib/postgresql
+      - /docker/outline/database:/var/lib/postgresql
     healthcheck:
       test: ["CMD", "pg_isready", "-d", "outline", "-U", "user"]
       interval: 30s
