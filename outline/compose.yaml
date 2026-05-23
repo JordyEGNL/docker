@@ -9,6 +9,9 @@ services:
     depends_on:
       - postgres
       - redis
+    networks:
+      - backend-outline
+      - pangolin
 
   redis:
     image: redis
@@ -23,6 +26,8 @@ services:
       interval: 10s
       timeout: 30s
       retries: 3
+    networks:
+      - backend-outline
 
   postgres:
     image: postgres:18
@@ -38,7 +43,10 @@ services:
       retries: 3
     environment:
       POSTGRES_DB: 'outline'
+    networks:
+      - backend-outline
 
-volumes:
-  storage-data:
-  database-data:
+networks:
+  pangolin:
+    external: true
+  backend-outline:
