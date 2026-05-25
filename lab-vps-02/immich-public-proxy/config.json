@@ -5,14 +5,5 @@
     },
     "singleImageGallery": true,
     "showHomePage": false
-  },
-  "lightGallery": {
-    "controls": true,
-    "download": true,
-    "mobileSettings": {
-      "controls": true,
-      "showCloseIcon": true,
-      "download": true
-    }
   }
 }
