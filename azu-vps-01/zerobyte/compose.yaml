@@ -1,0 +1,25 @@
+services:
+  zerobyte:
+    image: ghcr.io/nicotsx/zerobyte:v0.38.1
+    container_name: zerobyte
+    restart: unless-stopped
+    cap_add:
+      - SYS_ADMIN
+    env_file: ./.env
+    ports:
+      - "4096:4096"
+    devices:
+      - /dev/fuse:/dev/fuse
+    environment:
+      - TZ=Europe/Amsterdam
+    volumes:
+      - /etc/localtime:/etc/localtime:ro #timezone
+      - /docker/zerobyte:/var/lib/zerobyte #zerobyte config
+      - /root/.config/rclone:/root/.config/rclone #rclone config
+      - /docker:/docker
+      - /etc/komodo:/komodo
+
+networks:
+  default:
+    name: frontend
+    external: true
