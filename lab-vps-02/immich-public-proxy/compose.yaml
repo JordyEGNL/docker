@@ -6,7 +6,7 @@ services:
     env_file:
       - ./.env
     volumes:
-      - ./config.json:/app/config.json:ro
+      - ./config.json:/app/config.json
     ports:
       - 3000:3000
     labels:
@@ -15,12 +15,6 @@ services:
       traefik.http.routers.immich-proxy.entryPoints: websecure
       traefik.http.services.immich-proxy.loadbalancer.server.port: 3000
       traefik.http.routers.immich-proxy.rule: Host(`img.hoebergen.net`)
-      ## Cloudflare
-      #dockflare.enable: true
-      #dockflare.hostname: "photos.hoebergen.net"
-      #dockflare.originsrvname: "photos.hoebergen.net"
-      #dockflare.path: "share"
-      #dockflare.service: "https://localhost:443"
     networks:
       - immich
       - frontend
