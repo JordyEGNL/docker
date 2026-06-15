@@ -8,8 +8,28 @@
          "groupByDate":true
       },
       "lightbox":{
-         "controls":true,
          "showDownload":true
+      },
+      "showMetadata":{
+         "description":{
+            "caption":false,
+            "sidebar":true
+         },
+         "exif":{
+            "dateTimeOriginal":true,
+            "make":true,
+            "model":true,
+            "lensModel":true,
+            "exposureTime":true,
+            "iso":true,
+            "fNumber":true,
+            "focalLength":true
+         },
+         "location":{
+            "city":true,
+            "state":true,
+            "country":true
+         }
       }
    }
 }
