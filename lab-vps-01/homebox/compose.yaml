@@ -7,6 +7,7 @@ services:
     - HBOX_LOG_LEVEL=info
     - HBOX_LOG_FORMAT=text
     - HBOX_WEB_MAX_UPLOAD_SIZE=50
+    env_file: .env
     volumes:
       - /home/jordy/docker/homebox/data/:/data/
     labels:
