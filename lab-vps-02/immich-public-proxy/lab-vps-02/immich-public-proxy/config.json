@@ -5,11 +5,11 @@
       },
       "gallery":{
          "showTitle":true,
-         "groupByDate":true,
-         "lightbox":{
-            "controls":true,
-            "showDownload":true
-         }
+         "groupByDate":true
+      },
+      "lightbox":{
+         "controls":true,
+         "showDownload":true
       }
    }
 }
