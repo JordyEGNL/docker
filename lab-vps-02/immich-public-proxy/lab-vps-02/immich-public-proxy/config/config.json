@@ -1,16 +1,36 @@
-## Add your compose file here
-services:
-  hello_world:
-    image: hello-world
-    # networks:
-    #   - default
-    # ports:
-    #   - 3000:3000
-    # volumes:
-    #   - data:/data
-
-# networks:
-#   default: {}
-
-# volumes:
-#   data:
+{
+   "ipp":{
+      "responseHeaders":{
+         "Cache-Control":"public, max-age=86400"
+      },
+      "allowDownloadAll": true,
+      "gallery":{
+         "showTitle":true,
+         "groupByDate":true
+      },
+      "lightbox":{
+         "showDownload":true
+      },
+      "showMetadata":{
+         "description":{
+            "caption":false,
+            "sidebar":true
+         },
+         "exif":{
+            "dateTimeOriginal":true,
+            "make":true,
+            "model":true,
+            "lensModel":true,
+            "exposureTime":true,
+            "iso":true,
+            "fNumber":true,
+            "focalLength":true
+         },
+         "location":{
+            "city":true,
+            "state":true,
+            "country":true
+         }
+      }
+   }
+}
