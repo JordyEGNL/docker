@@ -3,6 +3,7 @@
       "responseHeaders":{
          "Cache-Control":"public, max-age=86400"
       },
+      "allowDownloadAll": 1,
       "gallery":{
          "showTitle":true,
          "groupByDate":true
