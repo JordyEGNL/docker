@@ -24,12 +24,15 @@
             "exposureTime":true,
             "iso":true,
             "fNumber":true,
-            "focalLength":true
+            "focalLength":true,
+            "dimensions": true,
+            "fileSize": true
          },
          "location":{
             "city":true,
             "state":true,
-            "country":true
+            "country":true,
+            "gps": true
          }
       }
    }
