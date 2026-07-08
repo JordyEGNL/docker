@@ -3,7 +3,9 @@
       "responseHeaders":{
          "Cache-Control":"public, max-age=86400"
       },
-      "allowDownloadAll": 1,
+      "allowDownload": 1,
+      "downloadOriginalPhoto":true,
+      "maxZoomQuality": "fullsize",
       "gallery":{
          "showTitle":true,
          "groupByDate":true
