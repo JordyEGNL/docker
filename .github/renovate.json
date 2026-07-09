@@ -69,7 +69,7 @@
       "description": "Custom versioning for binhex qBittorrentVPN",
       "matchDatasources": ["docker"],
       "matchPackageNames": ["binhex/arch-qbittorrentvpn"],
-      "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)(?:-(?<compatibility>\\d+-\\d+))?$"
+      "versioning": "loose"
     },
     {
       "description": "Automerge patch updates for stable versions",
