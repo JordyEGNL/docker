@@ -101,7 +101,7 @@ services:
       - frontend
 
   radarr:
-    image: lscr.io/linuxserver/radarr:6.2.1
+    image: lscr.io/linuxserver/radarr:6.3.0
     container_name: radarr
     environment:
       - PUID=1000
