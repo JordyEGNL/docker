@@ -49,6 +49,7 @@ services:
       BACKUP_FILE_SUFFIX: '%Y-%m-%d_%H%M%S'
       BACKUP_KEEP_DAYS: 14
       TIMEZONE: 'CET'
+      PING_URL_WHEN_SUCCESS: '${PING_URL_WHEN_SUCCESS}'
     volumes:
       - /docker/vaultwarden/data/:/bitwarden/data/
       - vaultwarden-rclone-data:/config
