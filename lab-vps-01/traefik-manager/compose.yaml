@@ -1,0 +1,25 @@
+services:
+  traefik-manager:
+    image: ghcr.io/chr0nzz/traefik-manager:latest
+    container_name: traefik-manager
+    restart: unless-stopped
+    labels:
+      traefik.enable: true
+      traefik.http.routers.traefik-manager.entryPoints: websecure
+      traefik.http.services.traefik-manager.loadbalancer.server.port: 5000
+      traefik.http.routers.traefik-manager.rule: Host(`traefik.hoebergen.net`)
+    environment:
+      COOKIE_SECURE: true
+    volumes:
+      - ../traefik/data/fileConfig.yml:/app/config/dynamic.yml
+      - ../traefik/data/traefik.yml:/app/traefik.yml
+      - ../traefik/data/acme.json:/app/acme.json:ro
+      - ./config:/app/config
+      - ./backups:/app/backups
+    networks:
+      - frontend
+
+networks:
+  frontend:
+    name: frontend
+    external: true
