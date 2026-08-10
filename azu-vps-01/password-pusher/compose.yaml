@@ -135,6 +135,7 @@ x-env: &x-env
 
 services:
   pwpush:
+    container_name: password-pusher
     image: docker.io/pglombardo/pwpush:2.0.0-a
     restart: unless-stopped
     labels:
