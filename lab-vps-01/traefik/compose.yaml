@@ -13,6 +13,7 @@ services:
         mode: host
     volumes:
       - ./data/:/etc/traefik/
+      - /var/log/traefik/:/var/log/traefik/
     networks:
       - frontend
     labels:
