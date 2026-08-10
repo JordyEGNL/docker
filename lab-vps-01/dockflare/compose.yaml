@@ -42,6 +42,7 @@ services:
       - REDIS_DB_INDEX=0
       - DOCKER_HOST=tcp://docker-socket-proxy:2375
       - CLOUDFLARED_NETWORK_NAME=frontend
+      - CLOUDFLARED_CONTAINER_NAME=dockflare-cloudflared
     labels:
       traefik.enable: true
       traefik.http.routers.dockflare.entryPoints: websecure
