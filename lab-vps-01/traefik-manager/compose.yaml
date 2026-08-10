@@ -17,7 +17,7 @@ services:
       - ../traefik/data/acme.json:/app/acme.json:ro
       - ./config:/app/config
       - ./backups:/app/backups
-      - /var/log/traefik/:/var/log/traefik/
+      - /var/log/traefik/traefik.log:/var/log/traefik/traefik.log
     networks:
       - frontend
 
