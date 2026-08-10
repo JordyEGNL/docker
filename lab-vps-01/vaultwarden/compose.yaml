@@ -32,7 +32,7 @@ services:
       dockflare.enable: true
       dockflare.hostname: "vault.hoebergen.net"
       dockflare.originsrvname: "vault.hoebergen.net"
-      dockflare.service: "https://localhost:443"
+      dockflare.service: "https://traefik:443"
 
   vaultwarden-backup:
     image: ttionya/vaultwarden-backup:1.27.0
