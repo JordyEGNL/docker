@@ -3,6 +3,18 @@ services:
     container_name: outline
     image: docker.getoutline.com/outlinewiki/outline:latest
     env_file: .env
+    labels:
+      # Traefik
+      traefik.enable: true
+      traefik.http.routers.outline.entryPoints: websecure
+      traefik.http.routers.outline.rule: Host(`wiki.hoebergen.net`)
+      traefik.http.services.outline.loadbalancer.server.port: 3000
+      # Cloudflare
+      dockflare.enable: true
+      dockflare.hostname: "wiki.hoebergen.net"
+      dockflare.originsrvname: "wiki.hoebergen.net"
+      dockflare.service: "https://traefik:443"
+      dockflare.access.group: "block-all-except-trusted"
     expose:
       - "3000"
     volumes:
@@ -12,7 +24,7 @@ services:
       - redis
     networks:
       - backend-outline
-      - pangolin
+      - frontend
 
   redis:
     container_name: outline-redis
@@ -50,6 +62,6 @@ services:
       - backend-outline
 
 networks:
-  pangolin:
+  frontend:
     external: true
   backend-outline:
