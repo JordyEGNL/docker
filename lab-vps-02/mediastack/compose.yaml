@@ -29,49 +29,17 @@ services:
     devices:
       - /dev/dri/renderD128:/dev/dri/renderD128
     labels:
+      # Traefik
       traefik.enable: true
       traefik.http.routers.jellyfin.entryPoints: websecure
       traefik.http.services.jellyfin.loadbalancer.server.port: 8096
       traefik.http.routers.jellyfin.rule: Host(`jellyfin.hoebergen.net`)
+      # Cloudflare
+      dockflare.enable: true
+      dockflare.hostname: "jellyfin.hoebergen.net"
+      dockflare.originsrvname: "jellyfin.hoebergen.net"
+      dockflare.service: "https://traefik:443"
     restart: always
-    networks:
-      - mediastack
-      - frontend
-
-  jellystat-db:
-    container_name: jellystat-db
-    image: postgres:15.17
-    environment:
-      - POSTGRES_DB=jfstat
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=${JELLYSTAT_POSTGRES_PASSWORD}
-    volumes:
-      - /docker/mediastack/jellystat/postgres-data:/var/lib/postgresql/data
-    restart: unless-stopped
-    networks:
-      - mediastack
-
-  jellystat:
-    container_name: jellystat
-    image: cyfershepard/jellystat:1.1.11
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=${JELLYSTAT_POSTGRES_PASSWORD}
-      - POSTGRES_IP=jellystat-db
-      - POSTGRES_PORT=5432
-      - JWT_SECRET="${JELLYSTAT_JWT}"
-    labels:
-      traefik.enable: true
-      traefik.http.routers.jellystat.entryPoints: websecure
-      traefik.http.services.jellystat.loadbalancer.server.port: 3000
-      traefik.http.routers.jellystat.rule: Host(`stats.jellyfin.hoebergen.net`)
-      traefik.http.routers.jellystat.middlewares: localAccess@file
-    volumes:
-      - /docker/mediastack/jellystat/backup-data:/app/backend/backup-data
-    depends_on:
-      - jellystat-db
-      - jellyfin
-    restart: unless-stopped
     networks:
       - mediastack
       - frontend
@@ -87,10 +55,16 @@ services:
     volumes:
       - /docker/mediastack/jellyseerr/config:/app/config
     labels:
+      # Traefik
       traefik.enable: true
       traefik.http.routers.jellyseerr.entryPoints: websecure
       traefik.http.services.jellyseerr.loadbalancer.server.port: 5055
       traefik.http.routers.jellyseerr.rule: Host(`request.hoebergen.net`)
+      # Cloudflare
+      dockflare.enable: true
+      dockflare.hostname: "request.hoebergen.net"
+      dockflare.originsrvname: "request.hoebergen.net"
+      dockflare.service: "https://traefik:443"
     restart: unless-stopped
     depends_on:
       - jellyfin
