@@ -39,6 +39,7 @@ services:
       dockflare.hostname: "jellyfin.hoebergen.net"
       dockflare.originsrvname: "jellyfin.hoebergen.net"
       dockflare.service: "https://traefik:443"
+      dockflare.access.group: "block-all-except-trusted"
     restart: always
     networks:
       - mediastack
@@ -65,6 +66,7 @@ services:
       dockflare.hostname: "request.hoebergen.net"
       dockflare.originsrvname: "request.hoebergen.net"
       dockflare.service: "https://traefik:443"
+      dockflare.access.group: "block-all-except-trusted"
     restart: unless-stopped
     depends_on:
       - jellyfin
