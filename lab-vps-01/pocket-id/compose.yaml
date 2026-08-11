@@ -9,6 +9,7 @@ services:
     volumes:
       - "/docker/pocket-id/data:/app/data"
     labels:
+      # Traefik
       traefik.enable: true
       traefik.http.routers.pocket-id.entryPoints: websecure
       traefik.http.services.pocket-id.loadbalancer.server.port: 1411
@@ -17,7 +18,8 @@ services:
       dockflare.enable: true
       dockflare.hostname: "auth.hoebergen.net"
       dockflare.originsrvname: "auth.hoebergen.net"
-      dockflare.service: "https://localhost:443"
+      dockflare.service: "https://traefik:443"
+      dockflare.access.group: "block-all-except-trusted"
     healthcheck:
       test: [ "CMD", "/app/pocket-id", "healthcheck" ]
       interval: 1m30s
