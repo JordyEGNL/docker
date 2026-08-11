@@ -22,7 +22,7 @@ services:
       timeout: 10s
       retries: 3
       start_period: 40s
-    env_file: - .env
+    env_file: .env
 
 # Persists SQLite DB and file uploads. To use a host path instead, replace the
 # pwpush-storage service volume with: - /path/on/host:/opt/PasswordPusher/storage
