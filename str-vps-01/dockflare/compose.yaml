@@ -1,0 +1,43 @@
+services:
+  docker-socket-proxy:
+    container_name: dockflare--docker-socket-proxy
+    image: tecnativa/docker-socket-proxy:v0.5.0
+    restart: unless-stopped
+    environment:
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - CONTAINERS=1
+      - EVENTS=1
+      - NETWORKS=1
+      - IMAGES=1
+      - POST=1
+      - PING=1
+      - EXEC=1
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - backend-dockflare
+
+  dockflare-agent:
+    container_name: dockflare-agent
+    image: alplat/dockflare-agent:latest
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - DOCKER_HOST=${DOCKER_HOST:-tcp://docker-socket-proxy:2375}
+      - TZ=${TZ:-UTC}
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+    volumes:
+      - /docker/dockflare/data:/app/data
+    depends_on:
+      - docker-socket-proxy
+    networks:
+      - frontend
+      - backend-dockflare
+
+networks:
+  backend-dockflare:
+    name: backend-dockflare
+  frontend:
+    name: frontend
+    external: true
