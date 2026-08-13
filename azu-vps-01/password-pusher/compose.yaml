@@ -1,7 +1,7 @@
 services:
   pwpush:
     container_name: password-pusher
-    image: pglombardo/pwpush:2.9.7
+    image: pglombardo/pwpush:2.9.8
     restart: unless-stopped
     labels:
       # Traefik
