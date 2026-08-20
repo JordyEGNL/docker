@@ -33,6 +33,7 @@ entryPoints:
         - 2405:8100::/32
         - 2a06:98c0::/29
         - 2c0f:f248::/32
+        - 172.22.0.0/24     # Cloudflared Proxy
     proxyProtocol:
       trustedIPs: *trustedIps
     http:
