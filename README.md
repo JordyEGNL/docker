@@ -6,5 +6,5 @@ This repository contains everything I need to deploy my Docker Containers on my 
 ```
 <HOST>
 ├── <SERVICE>
-│   ├── docker-compose.yml
+│   ├── compose.yaml
 ```
