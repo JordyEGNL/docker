@@ -99,7 +99,7 @@ services:
       traefik.enable: true
       traefik.http.routers.radarr.entryPoints: websecure
       traefik.http.services.radarr.loadbalancer.server.port: 7878
-      traefik.http.routers.radarr.rule: Host(`radarr.hoebergen.net`)
+      traefik.http.routers.radarr.rule: Host(`radarr.hoebergen.net`) || Host(`movies.hoebergen.net`)
       traefik.http.routers.radarr.middlewares: traefik-forward-auth@docker,localAccess@file
     networks:
       - mediastack
@@ -127,7 +127,7 @@ services:
       traefik.enable: true
       traefik.http.routers.sonarr.entryPoints: websecure
       traefik.http.services.sonarr.loadbalancer.server.port: 8989
-      traefik.http.routers.sonarr.rule: Host(`sonarr.hoebergen.net`)
+      traefik.http.routers.sonarr.rule: Host(`sonarr.hoebergen.net`) || Host(`series.hoebergen.net`)
       traefik.http.routers.sonarr.middlewares: traefik-forward-auth@docker,localAccess@file
     restart: unless-stopped
     networks:
