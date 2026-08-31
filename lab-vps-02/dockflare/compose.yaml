@@ -1,6 +1,6 @@
 services:
   docker-socket-proxy:
-    container_name: dockflare--docker-socket-proxy
+    container_name: dockflare-docker-socket-proxy
     image: tecnativa/docker-socket-proxy:v0.5.0
     restart: unless-stopped
     environment:
@@ -19,6 +19,7 @@ services:
 
   dockflare-agent:
     container_name: dockflare-agent
+    hostname: dockflare-agent-lab-vps-02
     image: alplat/dockflare-agent:latest
     restart: unless-stopped
     env_file:
