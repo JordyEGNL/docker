@@ -1,0 +1,36 @@
+services:
+  grafana-loki:
+    image: grafana/loki:3.7.7
+    container_name: loki
+    user: "1000:1000"
+    restart: unless-stopped
+    volumes:
+      # We koppelen specifiek het bestand, om te voorkomen dat de hele map wordt overschreven
+      - ./config/local-config.yaml:/etc/loki/local-config.yaml:ro
+      - /docker/grafana-loki/data:/loki
+    command: -config.file=/etc/loki/local-config.yaml
+    networks:
+      - frontend
+    labels:
+      traefik.enable: true
+      traefik.http.routers.loki.rule: Host(`loki.str-vps-01.hoebergen.net`)
+      traefik.http.routers.loki.entryPoints: websecure
+      traefik.http.services.loki.loadbalancer.server.port: 3100
+      
+      # [Belangrijk] BasicAuth voor Loki
+      # Zonder basicauth kan *iedereen* logs sturen of uitlezen via loki.str-vps-01.hoebergen.net
+      # Haal onderstaande uit de commentaar om in te schakelen en wijzig het wachtwoord:
+      # traefik.http.routers.loki.middlewares: loki-auth
+      # traefik.http.middlewares.loki-auth.basicauth.users: "admin:$$apr1$$H6uskkkW$$IgXLP6ewTrSuBkTrqE8wj/"
+
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+    environment:
+      - TZ=Europe/Amsterdam
+
+networks:
+  frontend:
+    external: true

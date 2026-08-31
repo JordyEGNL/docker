@@ -1,0 +1,30 @@
+discovery.docker "local" {
+  host = "tcp://dockerproxy:2375"
+}
+
+discovery.relabel "docker" {
+  targets = discovery.docker.local.targets
+
+  rule {
+    source_labels = ["__meta_docker_container_name"]
+    regex         = "/(.*)"
+    target_label  = "container"
+  }
+}
+
+loki.source.docker "default" {
+  host       = "tcp://dockerproxy:2375"
+  targets    = discovery.relabel.docker.output
+  forward_to = [loki.write.remote.receiver]
+}
+
+loki.write "remote" {
+  endpoint {
+    url = "https://loki.str-vps-01.hoebergen.net/loki/api/v1/push"
+    
+    // basic_auth {
+    //   username = "admin"
+    //   password = "jouw_wachtwoord_hier"
+    // }
+  }
+}
