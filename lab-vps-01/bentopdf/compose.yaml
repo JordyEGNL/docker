@@ -1,6 +1,6 @@
 services:
   bentopdf:
-    image: bentopdfteam/bentopdf-simple:2.8.7
+    image: bentopdfteam/bentopdf-simple:2.8.8
     container_name: bentopdf
     restart: unless-stopped
     #ports:

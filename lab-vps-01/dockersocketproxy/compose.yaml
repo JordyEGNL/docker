@@ -5,6 +5,7 @@ services:
     environment:
       - INFO=1 # Crowdsec
       - CONTAINERS=1 # Allow access to viewing containers
+      - NETWORKS=1 # Allow access to viewing networks (needed by Alloy)
       - POST=0 # Disallow any POST operations (effectively read-only)
       - TZ=Europe/Amsterdam
     ports:
