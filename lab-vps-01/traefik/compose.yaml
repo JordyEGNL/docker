@@ -26,6 +26,21 @@ services:
       - ./.env
     restart: unless-stopped
 
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.10'
+          memory: 128M
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+    environment:
+      - TZ=Europe/Amsterdam
   traefik-forward-auth:
     image: ghcr.io/italypaleale/traefik-forward-auth:4.14.1
     container_name: traefik-forward-auth
@@ -36,11 +51,15 @@ services:
       - frontend
     labels:
       traefik.enable: true
-      traefik.http.middlewares.traefik-forward-auth.forwardauth.address: http://traefik-forward-auth:4181/portals/dns
-      traefik.http.middlewares.traefik-forward-auth.forwardauth.authResponseHeaders: X-Forwarded-User,X-Forwarded-Displayname,X-Authenticated-User
-      traefik.http.middlewares.traefik-forward-auth.forwardauth.trustForwardHeader: true
+      traefik.http.middlewares.traefik-forward-auth.forwardauth.address: 
+        http://traefik-forward-auth:4181/portals/dns
+      traefik.http.middlewares.traefik-forward-auth.forwardauth.authResponseHeaders: 
+        X-Forwarded-User,X-Forwarded-Displayname,X-Authenticated-User
+      traefik.http.middlewares.traefik-forward-auth.forwardauth.trustForwardHeader: 
+        true
       traefik.http.services.traefik-forward-auth.loadbalancer.server.port: 4181
-      traefik.http.routers.traefik-forward-auth.rule: Host(`authproxy.lab-vps-01.hoebergen.net`)
+      traefik.http.routers.traefik-forward-auth.rule: 
+        Host(`authproxy.lab-vps-01.hoebergen.net`)
       traefik.http.routers.traefik-forward-auth.entrypoints: websecure
      # Cloudflare
      # dockflare.enable: true
@@ -48,7 +67,21 @@ services:
      # dockflare.originsrvname: "authproxy.lab-vps-01.hoebergen.net"
      # dockflare.service: "https://localhost:443"
 
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.10'
+          memory: 128M
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+    environment:
+      - TZ=Europe/Amsterdam
 networks:
   frontend:
-    driver: bridge
     external: true

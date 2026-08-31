@@ -7,3 +7,18 @@ services:
       - /home/jordy/docker/adguardhome/work:/opt/adguardhome/work
       - /home/jordy/docker/adguardhome/config:/opt/adguardhome/conf
     network_mode: host
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.10'
+          memory: 128M
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+    environment:
+      - TZ=Europe/Amsterdam

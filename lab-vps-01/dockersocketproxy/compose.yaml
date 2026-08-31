@@ -6,12 +6,26 @@ services:
       - INFO=1 # Crowdsec
       - CONTAINERS=1 # Allow access to viewing containers
       - POST=0 # Disallow any POST operations (effectively read-only)
+      - TZ=Europe/Amsterdam
     ports:
       - 10.0.10.101:2375:2375
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro # Mounted as read-only
     restart: unless-stopped
 
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.10'
+          memory: 128M
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
 networks:
   default:
     name: frontend

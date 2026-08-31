@@ -11,12 +11,26 @@ services:
       - /docker/open-webui/data:/app/backend/data
     environment:
       ENABLE_FORWARD_USER_INFO_HEADERS: true
+      TZ: Europe/Amsterdam
     env_file:
       - .env
     restart: unless-stopped
     networks:
       - frontend
 
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.10'
+          memory: 128M
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
 networks:
   frontend:
     name: frontend

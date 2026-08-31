@@ -20,3 +20,16 @@ services:
       - /docker:/docker
       - /etc/komodo:/komodo
     network_mode: bridge
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.10'
+          memory: 128M
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
