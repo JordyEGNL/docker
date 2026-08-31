@@ -26,14 +26,6 @@ services:
       - backend-outline
       - frontend
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
     logging:
       driver: json-file
       options:
@@ -58,14 +50,6 @@ services:
     networks:
       - backend-outline
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
     logging:
       driver: json-file
       options:
@@ -92,14 +76,6 @@ services:
     networks:
       - backend-outline
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
     logging:
       driver: json-file
       options:

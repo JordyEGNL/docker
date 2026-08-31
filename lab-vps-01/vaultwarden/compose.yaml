@@ -36,14 +36,6 @@ services:
       dockflare.service: "https://traefik:443"
       dockflare.access.group: "block-all-except-trusted"
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
     logging:
       driver: json-file
       options:
@@ -70,14 +62,6 @@ services:
       - /docker/vaultwarden/data/:/bitwarden/data/
       - vaultwarden-rclone-data:/config
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
     logging:
       driver: json-file
       options:

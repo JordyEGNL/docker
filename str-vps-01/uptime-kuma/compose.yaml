@@ -11,14 +11,6 @@ services:
       traefik.http.services.uptime-kuma.loadbalancer.server.port: 3001
       traefik.http.routers.uptime-kuma.rule: Host(`status.hoebergen.net`)
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
     logging:
       driver: json-file
       options:

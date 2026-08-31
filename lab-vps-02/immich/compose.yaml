@@ -10,14 +10,6 @@ services:
       - "-c"
       - "[ -f /mnt/externaldisk/.883f4828-a568-40c6-b21e-dc3b93c2aedd ]"
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
     logging:
       driver: json-file
       options:
@@ -60,14 +52,6 @@ services:
       - immich
       - frontend
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
     logging:
       driver: json-file
       options:
@@ -88,14 +72,6 @@ services:
     healthcheck:
       interval: 5m
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
     logging:
       driver: json-file
       options:
@@ -113,14 +89,6 @@ services:
     networks:
       - immich
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
     logging:
       driver: json-file
       options:
@@ -150,14 +118,6 @@ services:
     networks:
       - immich
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
     logging:
       driver: json-file
       options:
@@ -181,14 +141,6 @@ services:
       - immich
       - frontend
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
     logging:
       driver: json-file
       options:

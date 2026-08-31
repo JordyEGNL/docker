@@ -10,14 +10,6 @@ services:
       traefik.http.routers.bentopdf.entryPoints: websecure
       traefik.http.routers.bentopdf.rule: Host(`pdf.hoebergen.net`)
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
     logging:
       driver: json-file
       options:

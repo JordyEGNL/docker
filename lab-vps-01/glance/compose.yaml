@@ -17,14 +17,6 @@ services:
       traefik.http.routers.glance.rule: Host(`home.hoebergen.net`)
       traefik.http.routers.glance.middlewares: localAccess@file
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
     logging:
       driver: json-file
       options:

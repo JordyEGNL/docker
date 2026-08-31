@@ -28,14 +28,6 @@ services:
       - frontend
       - wiki-js
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
     logging:
       driver: json-file
       options:
@@ -55,14 +47,6 @@ services:
     volumes:
       - /docker/wikijs/database:/var/lib/postgresql/data
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
     logging:
       driver: json-file
       options:

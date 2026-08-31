@@ -21,14 +21,6 @@ services:
     networks:
       - backend-dockflare
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
   dockflare-init:
     image: alpine:3.24
     command: ["sh", "-c", "chown -R ${DOCKFLARE_UID:-65532}:${DOCKFLARE_GID:-65532}
@@ -39,14 +31,6 @@ services:
       - backend-dockflare
     restart: "no"
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
     logging:
       driver: json-file
       options:
@@ -85,14 +69,6 @@ services:
       - backend-dockflare
       - frontend
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
     logging:
       driver: json-file
       options:
@@ -110,14 +86,6 @@ services:
     networks:
       - backend-dockflare
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
     environment:
       - TZ=Europe/Amsterdam
 networks:

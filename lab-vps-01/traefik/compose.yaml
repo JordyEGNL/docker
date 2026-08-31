@@ -26,14 +26,6 @@ services:
       - ./.env
     restart: unless-stopped
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
     logging:
       driver: json-file
       options:
@@ -67,14 +59,6 @@ services:
      # dockflare.originsrvname: "authproxy.lab-vps-01.hoebergen.net"
      # dockflare.service: "https://localhost:443"
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
     logging:
       driver: json-file
       options:

@@ -15,14 +15,6 @@ services:
       traefik.http.routers.tplink-api.rule: Host(`tplinkapi.hoebergen.net`)
       traefik.http.routers.tplink-api.middlewares: localAccess@file
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
     logging:
       driver: json-file
       options:
