@@ -14,7 +14,7 @@ services:
     labels:
       traefik.enable: true
       traefik.http.routers.loki.rule: Host(`loki.str-vps-01.hoebergen.net`)
-      traefik.http.routers.loki.entryPoints: https
+      traefik.http.routers.loki.entryPoints: websecure
       traefik.http.services.loki.loadbalancer.server.port: 3100
       
       # [Belangrijk] BasicAuth voor Loki
