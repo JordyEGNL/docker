@@ -26,6 +26,21 @@ services:
       - backend-outline
       - frontend
 
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.10'
+          memory: 128M
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+    environment:
+      - TZ=Europe/Amsterdam
   redis:
     container_name: outline-redis
     image: redis
@@ -43,6 +58,21 @@ services:
     networks:
       - backend-outline
 
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.10'
+          memory: 128M
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+    environment:
+      - TZ=Europe/Amsterdam
   postgres:
     container_name: outline-postgres
     image: postgres:18
@@ -58,9 +88,23 @@ services:
       retries: 3
     environment:
       POSTGRES_DB: 'outline'
+      TZ: Europe/Amsterdam
     networks:
       - backend-outline
 
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.10'
+          memory: 128M
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
 networks:
   frontend:
     external: true

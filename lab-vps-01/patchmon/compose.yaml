@@ -34,6 +34,16 @@ services:
         max-size: "10m"
         max-file: "3"
 
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.10'
+          memory: 128M
+    environment:
+      - TZ=Europe/Amsterdam
   database:
     image: postgres:17-alpine
     restart: unless-stopped
@@ -53,6 +63,16 @@ services:
         max-size: "10m"
         max-file: "3"
 
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.10'
+          memory: 128M
+    environment:
+      - TZ=Europe/Amsterdam
   redis:
     image: redis:7-alpine
     restart: unless-stopped
@@ -99,6 +119,16 @@ services:
 #       max-size: "10m"
 #       max-file: "3"
 
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.10'
+          memory: 128M
+    environment:
+      - TZ=Europe/Amsterdam
 networks:
   backend_patchmon:
   frontend:

@@ -11,6 +11,7 @@ services:
     environment:
       COOKIE_SECURE: true
       TRAEFIK_INSECURE_SKIP_VERIFY: true
+      TZ: Europe/Amsterdam
     volumes:
       - ../traefik/data/fileConfig.yml:/app/config/dynamic.yml
       - ../traefik/data/traefik.yml:/app/traefik.yml
@@ -21,6 +22,19 @@ services:
     networks:
       - frontend
 
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.10'
+          memory: 128M
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
 networks:
   frontend:
     name: frontend

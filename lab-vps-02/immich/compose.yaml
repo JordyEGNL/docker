@@ -10,6 +10,21 @@ services:
       - "-c"
       - "[ -f /mnt/externaldisk/.883f4828-a568-40c6-b21e-dc3b93c2aedd ]"
 
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.10'
+          memory: 128M
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+    environment:
+      - TZ=Europe/Amsterdam
   immich-server:
     container_name: immich-server
     image: ghcr.io/immich-app/immich-server:v3.2.0-rc.1
@@ -45,6 +60,21 @@ services:
       - immich
       - frontend
 
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.10'
+          memory: 128M
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+    environment:
+      - TZ=Europe/Amsterdam
   immich-machine-learning:
     container_name: immich-machine-learning
     image: ghcr.io/immich-app/immich-machine-learning:v3.2.0-rc.1
@@ -58,18 +88,50 @@ services:
     healthcheck:
       interval: 5m
 
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.10'
+          memory: 128M
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+    environment:
+      - TZ=Europe/Amsterdam
   redis:
     container_name: immich-redis
-    image: docker.io/valkey/valkey:9@sha256:4963247afc4cd33c7d3b2d2816b9f7f8eeebab148d29056c2ca4d7cbc966f2d9
+    image: 
+      docker.io/valkey/valkey:9@sha256:4963247afc4cd33c7d3b2d2816b9f7f8eeebab148d29056c2ca4d7cbc966f2d9
     healthcheck:
       test: redis-cli ping || exit 1
     restart: always
     networks:
       - immich
 
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.10'
+          memory: 128M
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+    environment:
+      - TZ=Europe/Amsterdam
   database:
     container_name: immich-postgres
-    image: ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0@sha256:bcf63357191b76a916ae5eb93464d65c07511da41e3bf7a8416db519b40b1c23
+    image: 
+      ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0@sha256:bcf63357191b76a916ae5eb93464d65c07511da41e3bf7a8416db519b40b1c23
     env_file:
       - ./.env
     environment:
@@ -77,6 +139,7 @@ services:
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_DB: ${DB_DATABASE_NAME}
       POSTGRES_INITDB_ARGS: --data-checksums
+      TZ: Europe/Amsterdam
     volumes:
       - ${DATABASE_LOCATION}:/var/lib/postgresql/data
     depends_on:
@@ -87,6 +150,19 @@ services:
     networks:
       - immich
 
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.10'
+          memory: 128M
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
   power-tools:
     container_name: immich-power-tools
     image: ghcr.io/varun-raj/immich-power-tools:0.19.1
@@ -96,7 +172,8 @@ services:
       traefik.enable: true
       traefik.http.routers.immich-power-tools.entryPoints: websecure
       traefik.http.services.immich-power-tools.loadbalancer.server.port: 3000
-      traefik.http.routers.immich-power-tools.rule: Host(`tools.photos.hoebergen.net`)
+      traefik.http.routers.immich-power-tools.rule: 
+        Host(`tools.photos.hoebergen.net`)
       traefik.http.routers.immich-power-tools.tls.certresolver: letsencrypt
       traefik.http.routers.immich-power-tools.middlewares: localAccess@file
     restart: always
@@ -104,6 +181,21 @@ services:
       - immich
       - frontend
 
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.10'
+          memory: 128M
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+    environment:
+      - TZ=Europe/Amsterdam
 networks:
   frontend:
     name: frontend

@@ -24,7 +24,8 @@ services:
       traefik.http.services.vaultwarden.loadbalancer.server.port: 80
       # Admin dashboard
       traefik.http.routers.vaultwarden-admin.entryPoints: websecure
-      traefik.http.routers.vaultwarden-admin.rule: Host(`vault.hoebergen.net`) && PathPrefix(`/admin`)
+      traefik.http.routers.vaultwarden-admin.rule: Host(`vault.hoebergen.net`) 
+        && PathPrefix(`/admin`)
       traefik.http.routers.vaultwarden-admin.service: vaultwarden-admin
       traefik.http.services.vaultwarden-admin.loadbalancer.server.port: 80
       #traefik.http.routers.vaultwarden-admin.middlewares: localAccess@file
@@ -35,6 +36,19 @@ services:
       dockflare.service: "https://traefik:443"
       dockflare.access.group: "block-all-except-trusted"
 
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.10'
+          memory: 128M
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
   vaultwarden-backup:
     image: ttionya/vaultwarden-backup:1.27.0
     container_name: vaultwarden-backup
@@ -51,10 +65,24 @@ services:
       BACKUP_KEEP_DAYS: 14
       TIMEZONE: 'CET'
       PING_URL_WHEN_SUCCESS: '${PING_URL_WHEN_SUCCESS}'
+      TZ: Europe/Amsterdam
     volumes:
       - /docker/vaultwarden/data/:/bitwarden/data/
       - vaultwarden-rclone-data:/config
 
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.10'
+          memory: 128M
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
 networks:
   default:
     name: frontend
