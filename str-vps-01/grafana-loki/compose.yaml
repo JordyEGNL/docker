@@ -1,7 +1,8 @@
 services:
   grafana-loki:
     image: grafana/loki:3.7.7
-    container_name: grafana-loki
+    container_name: loki
+    user: "1000:1000"
     restart: unless-stopped
     volumes:
       # We koppelen specifiek het bestand, om te voorkomen dat de hele map wordt overschreven
