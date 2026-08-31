@@ -10,6 +10,11 @@ discovery.relabel "docker" {
     regex         = "/(.*)"
     target_label  = "container"
   }
+
+  rule {
+    target_label = "server"
+    replacement  = sys.env("SERVER_NAME")
+  }
 }
 
 loki.source.docker "default" {
