@@ -7,6 +7,11 @@ services:
       - /home/jordy/docker/tandoor/postgresql:/var/lib/postgresql/data
     env_file:
       - ./.env
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
     networks:
       - tandoor
     environment:
@@ -17,6 +22,11 @@ services:
     image: ghcr.io/tandoorrecipes/recipes:2.6.13
     env_file:
       - ./.env
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
     volumes:
       - staticfiles:/opt/recipes/staticfiles
       - /home/jordy/docker/tandoor/mediafiles/:/opt/recipes/mediafiles

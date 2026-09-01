@@ -12,6 +12,11 @@ services:
     environment:
       ENABLE_FORWARD_USER_INFO_HEADERS: true
       TZ: Europe/Amsterdam
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
     env_file:
       - .env
     restart: unless-stopped

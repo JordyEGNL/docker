@@ -8,6 +8,11 @@ services:
       - NETWORKS=1 # Allow access to viewing networks (needed by Alloy)
       - POST=0 # Disallow any POST operations (effectively read-only)
       - TZ=Europe/Amsterdam
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
     ports:
       - 10.0.10.101:2375:2375
     volumes:
