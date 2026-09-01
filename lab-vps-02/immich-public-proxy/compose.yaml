@@ -22,7 +22,8 @@ services:
       dockflare.service: "https://traefik:443"
     networks:
       - immich
-      - frontend    environment:
+      - frontend
+    environment:
       - TZ=Europe/Amsterdam
 networks:
   frontend:

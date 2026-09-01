@@ -24,7 +24,8 @@ services:
       - redis
     networks:
       - backend-outline
-      - frontend    environment:
+      - frontend
+    environment:
       - TZ=Europe/Amsterdam
   redis:
     container_name: outline-redis

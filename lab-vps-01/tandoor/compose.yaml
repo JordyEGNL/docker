@@ -30,7 +30,8 @@ services:
       - db_recipes
     networks:
       - tandoor
-      - frontend    environment:
+      - frontend
+    environment:
       - TZ=Europe/Amsterdam
 networks:
   tandoor:

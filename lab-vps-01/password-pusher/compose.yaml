@@ -26,7 +26,6 @@ services:
 
 # Persists SQLite DB and file uploads. To use a host path instead, replace the
 # pwpush-storage service volume with: - /path/on/host:/opt/PasswordPusher/storage    environment:
-      - TZ=Europe/Amsterdam
 volumes:
   pwpush-storage:
     driver: local
