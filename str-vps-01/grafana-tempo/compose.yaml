@@ -7,7 +7,7 @@ services:
     command: [ "-config.file=/etc/tempo.yaml" ]
     volumes:
       - ./config/tempo.yaml:/etc/tempo.yaml:ro
-      - tempo-data:/var/tempo
+      - /docker/grafana-tempo/data:/var/tempo
     networks:
       - frontend
     labels:
@@ -29,10 +29,6 @@ services:
         max-file: '3'
     environment:
       - TZ=Europe/Amsterdam
-
-volumes:
-  tempo-data:
-    name: tempo-data
 
 networks:
   frontend:
