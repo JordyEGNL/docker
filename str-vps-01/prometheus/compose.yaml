@@ -17,7 +17,7 @@ services:
     labels:
       traefik.enable: true
       traefik.http.routers.prometheus.rule: Host(`prometheus.str-vps-01.hoebergen.net`)
-      traefik.http.routers.prometheus.entryPoints: https
+      traefik.http.routers.prometheus.entryPoints: websecure
       traefik.http.services.prometheus.loadbalancer.server.port: 9090
     logging:
       driver: json-file
