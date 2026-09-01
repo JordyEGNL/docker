@@ -5,6 +5,7 @@ services:
     restart: unless-stopped
     environment:
       PORT: "8080"
+      TZ: Europe/Amsterdam
     env_file:
       - .env
     volumes:
@@ -30,7 +31,8 @@ services:
       - no-new-privileges:true
     networks:
       - termix-backend
-
+    environment:
+      - TZ=Europe/Amsterdam
 networks:
   termix-backend:
   frontend:

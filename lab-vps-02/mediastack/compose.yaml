@@ -9,7 +9,8 @@ services:
       - "-c"
       - "[ -f /mnt/externaldisk/.995b1a8f-37db-4aaa-aa97-d703d7670595 ]"
     network_mode: none
-
+    environment:
+      - TZ=Europe/Amsterdam
   jellyfin:
     container_name: jellyfin
     image: jellyfin/jellyfin:12.0-rc2
@@ -44,7 +45,8 @@ services:
     networks:
       - mediastack
       - frontend
-
+    environment:
+      - TZ=Europe/Amsterdam
   seerr:
     image: ghcr.io/seerr-team/seerr:v3.4.1
     container_name: seerr
@@ -156,7 +158,8 @@ services:
       traefik.http.routers.bazarr.entryPoints: websecure
       traefik.http.services.bazarr.loadbalancer.server.port: 6767
       traefik.http.routers.bazarr.rule: Host(`bazarr.hoebergen.net`)
-      traefik.http.routers.bazarr.middlewares: traefik-forward-auth@docker,localAccess@file
+      traefik.http.routers.bazarr.middlewares: 
+        traefik-forward-auth@docker,localAccess@file
     restart: unless-stopped
     networks:
       - mediastack
@@ -178,7 +181,8 @@ services:
       traefik.http.routers.prowlarr.entryPoints: websecure
       traefik.http.services.prowlarr.loadbalancer.server.port: 9696
       traefik.http.routers.prowlarr.rule: Host(`prowlarr.hoebergen.net`)
-      traefik.http.routers.prowlarr.middlewares: traefik-forward-auth@docker,localAccess@file
+      traefik.http.routers.prowlarr.middlewares: 
+        traefik-forward-auth@docker,localAccess@file
     restart: unless-stopped
     networks:
       - mediastack
@@ -205,6 +209,7 @@ services:
       - VPN_USER=${PIA_USER}
       - VPN_PASS=${PIA_PASSWORD}
       - VPN_ENABLED=yes
+      - TZ=Europe/Amsterdam
     volumes:
       - '/etc/localtime:/etc/localtime:ro'
       - /docker/mediastack/qbittorrent:/config
@@ -226,7 +231,8 @@ services:
       traefik.http.routers.qbittorrent.entryPoints: websecure
       traefik.http.services.qbittorrent.loadbalancer.server.port: 8080
       traefik.http.routers.qbittorrent.rule: Host(`qbittorrent.hoebergen.net`)
-      traefik.http.routers.qbittorrent.middlewares: traefik-forward-auth@docker,localAccess@file
+      traefik.http.routers.qbittorrent.middlewares: 
+        traefik-forward-auth@docker,localAccess@file
     networks:
       - mediastack
       - frontend
@@ -294,6 +300,7 @@ services:
     networks:
       - mediastack
 
+
   flaresolverr:
     container_name: flaresolverr
     image: ghcr.io/flaresolverr/flaresolverr:latest
@@ -310,6 +317,7 @@ services:
       - /docker/mediastack/flaresolver:/config
     networks:
       - mediastack
+
 
 networks:
   frontend:

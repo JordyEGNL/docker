@@ -25,7 +25,8 @@ services:
     env_file:
       - ./.env
     restart: unless-stopped
-
+    environment:
+      - TZ=Europe/Amsterdam
   traefik-forward-auth:
     image: ghcr.io/italypaleale/traefik-forward-auth:4.14.1
     restart: unless-stopped
@@ -35,19 +36,23 @@ services:
       - frontend
     labels:
       traefik.enable: true
-      traefik.http.middlewares.traefik-forward-auth.forwardauth.address: http://traefik-forward-auth:4181/portals/mediastack
-      traefik.http.middlewares.traefik-forward-auth.forwardauth.authResponseHeaders: X-Forwarded-User,X-Forwarded-Displayname,X-Authenticated-User
-      traefik.http.middlewares.traefik-forward-auth.forwardauth.trustForwardHeader: true
+      traefik.http.middlewares.traefik-forward-auth.forwardauth.address: 
+        http://traefik-forward-auth:4181/portals/mediastack
+      traefik.http.middlewares.traefik-forward-auth.forwardauth.authResponseHeaders: 
+        X-Forwarded-User,X-Forwarded-Displayname,X-Authenticated-User
+      traefik.http.middlewares.traefik-forward-auth.forwardauth.trustForwardHeader: 
+        true
       traefik.http.services.traefik-forward-auth.loadbalancer.server.port: 4181
-      traefik.http.routers.traefik-forward-auth.rule: Host(`authproxy.lab-vps-02.hoebergen.net`)
+      traefik.http.routers.traefik-forward-auth.rule: 
+        Host(`authproxy.lab-vps-02.hoebergen.net`)
       traefik.http.routers.traefik-forward-auth.entrypoints: websecure
      # Cloudflare
      # dockflare.enable: true
      # dockflare.hostname: "authproxy.lab-vps-02.hoebergen.net"
      # dockflare.originsrvname: "authproxy.lab-vps-02.hoebergen.net"
      # dockflare.service: "https://localhost:443"
-
+    environment:
+      - TZ=Europe/Amsterdam
 networks:
   frontend:
-    driver: bridge
     external: true

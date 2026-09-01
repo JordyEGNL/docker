@@ -25,7 +25,7 @@ services:
     env_file: .env
 
 # Persists SQLite DB and file uploads. To use a host path instead, replace the
-# pwpush-storage service volume with: - /path/on/host:/opt/PasswordPusher/storage
+# pwpush-storage service volume with: - /path/on/host:/opt/PasswordPusher/storage    environment:
 volumes:
   pwpush-storage:
     driver: local

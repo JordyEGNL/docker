@@ -6,6 +6,7 @@ services:
       TP_LINK_IP: 10.0.0.252
       TP_LINK_USERNAME: admin
       TP_LINK_PASSWORD: ${PASSWORD}
+      TZ: Europe/Amsterdam
     restart: unless-stopped
     labels:
       traefik.enable: true
@@ -13,6 +14,7 @@ services:
       traefik.http.services.tplink-api.loadbalancer.server.port: 5000
       traefik.http.routers.tplink-api.rule: Host(`tplinkapi.hoebergen.net`)
       traefik.http.routers.tplink-api.middlewares: localAccess@file
+
 
 networks:
   default:

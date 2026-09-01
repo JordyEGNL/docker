@@ -33,7 +33,8 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
-
+    environment:
+      - TZ=Europe/Amsterdam
   database:
     image: postgres:17-alpine
     restart: unless-stopped
@@ -52,7 +53,8 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
-
+    environment:
+      - TZ=Europe/Amsterdam
   redis:
     image: redis:7-alpine
     restart: unless-stopped
@@ -98,7 +100,8 @@ services:
 #     options:
 #       max-size: "10m"
 #       max-file: "3"
-
+    environment:
+      - TZ=Europe/Amsterdam
 networks:
   backend_patchmon:
   frontend:

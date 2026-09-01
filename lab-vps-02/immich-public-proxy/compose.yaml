@@ -23,7 +23,8 @@ services:
     networks:
       - immich
       - frontend
-
+    environment:
+      - TZ=Europe/Amsterdam
 networks:
   frontend:
     external: true

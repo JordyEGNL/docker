@@ -16,7 +16,13 @@ services:
       traefik.http.services.glance.loadbalancer.server.port: 8080
       traefik.http.routers.glance.rule: Host(`home.hoebergen.net`)
       traefik.http.routers.glance.middlewares: localAccess@file
-
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    environment:
+      - TZ=Europe/Amsterdam
 networks:
   default:
     name: frontend

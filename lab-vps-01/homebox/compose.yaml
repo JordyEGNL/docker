@@ -4,9 +4,10 @@ services:
     container_name: homebox
     restart: always
     environment:
-    - HBOX_LOG_LEVEL=info
-    - HBOX_LOG_FORMAT=text
-    - HBOX_WEB_MAX_UPLOAD_SIZE=50
+      - HBOX_LOG_LEVEL=info
+      - HBOX_LOG_FORMAT=text
+      - HBOX_WEB_MAX_UPLOAD_SIZE=50
+      - TZ=Europe/Amsterdam
     env_file: .env
     volumes:
       - /home/jordy/docker/homebox/data/:/data/
@@ -16,6 +17,7 @@ services:
       traefik.http.services.homebox.loadbalancer.server.port: 7745
       traefik.http.routers.homebox.rule: Host(`homebox.hoebergen.net`)
       traefik.http.routers.homebox.middlewares: localAccess@file
+
 
 networks:
   default:

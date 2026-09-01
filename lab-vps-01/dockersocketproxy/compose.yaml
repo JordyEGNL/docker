@@ -7,11 +7,13 @@ services:
       - CONTAINERS=1 # Allow access to viewing containers
       - NETWORKS=1 # Allow access to viewing networks (needed by Alloy)
       - POST=0 # Disallow any POST operations (effectively read-only)
+      - TZ=Europe/Amsterdam
     ports:
       - 10.0.10.101:2375:2375
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro # Mounted as read-only
     restart: unless-stopped
+
 
 networks:
   default:

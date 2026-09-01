@@ -21,12 +21,13 @@ services:
       dockflare.service: "https://traefik:443"
       dockflare.access.group: "block-all-except-trusted"
     healthcheck:
-      test: [ "CMD", "/app/pocket-id", "healthcheck" ]
+      test: ["CMD", "/app/pocket-id", "healthcheck"]
       interval: 1m30s
       timeout: 5s
       retries: 2
       start_period: 10s
-
+    environment:
+      - TZ=Europe/Amsterdam
 networks:
   default:
     name: frontend

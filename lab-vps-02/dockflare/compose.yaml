@@ -12,10 +12,12 @@ services:
       - POST=1
       - PING=1
       - EXEC=1
+      - TZ=Europe/Amsterdam
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - backend-dockflare
+
 
   dockflare-agent:
     container_name: dockflare-agent
@@ -35,6 +37,7 @@ services:
     networks:
       - frontend
       - backend-dockflare
+
 
 networks:
   backend-dockflare:

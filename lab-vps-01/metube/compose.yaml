@@ -10,7 +10,8 @@ services:
       traefik.http.routers.metube.entryPoints: websecure
       traefik.http.routers.metube.rule: Host(`yt.hoebergen.net`)
       traefik.http.routers.metube.middlewares: localAccess@file
-
+    environment:
+      - TZ=Europe/Amsterdam
 networks:
   default:
     name: frontend

@@ -25,7 +25,8 @@ services:
     networks:
       - backend-outline
       - frontend
-
+    environment:
+      - TZ=Europe/Amsterdam
   redis:
     container_name: outline-redis
     image: redis
@@ -42,7 +43,8 @@ services:
       retries: 3
     networks:
       - backend-outline
-
+    environment:
+      - TZ=Europe/Amsterdam
   postgres:
     container_name: outline-postgres
     image: postgres:18
@@ -58,8 +60,10 @@ services:
       retries: 3
     environment:
       POSTGRES_DB: 'outline'
+      TZ: Europe/Amsterdam
     networks:
       - backend-outline
+
 
 networks:
   frontend:

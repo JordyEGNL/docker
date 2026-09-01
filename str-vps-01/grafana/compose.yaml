@@ -12,7 +12,8 @@ services:
     volumes:
       - /docker/grafana/data:/var/lib/grafana
     env_file: .env
-
+    environment:
+      - TZ=Europe/Amsterdam
 networks:
   default:
     name: frontend

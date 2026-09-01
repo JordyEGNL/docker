@@ -5,11 +5,13 @@ services:
     environment:
       - CONTAINERS=1 # Allow access to viewing containers
       - POST=0 # Disallow any POST operations (effectively read-only)
+      - TZ=Europe/Amsterdam
     ports:
       - 172.16.2.2:2375:2375
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro # Mounted as read-only
     restart: unless-stopped
+
 
 networks:
   default:

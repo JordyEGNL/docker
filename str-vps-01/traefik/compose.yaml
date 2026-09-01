@@ -23,8 +23,8 @@ services:
     env_file:
       - ./.env
     restart: unless-stopped
-
+    environment:
+      - TZ=Europe/Amsterdam
 networks:
   frontend:
-    driver: bridge
     external: true

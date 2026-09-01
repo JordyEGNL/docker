@@ -20,3 +20,4 @@ services:
       - /docker:/docker
       - /etc/komodo:/komodo
     network_mode: bridge
+

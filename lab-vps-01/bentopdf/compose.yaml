@@ -9,7 +9,8 @@ services:
       traefik.enable: true
       traefik.http.routers.bentopdf.entryPoints: websecure
       traefik.http.routers.bentopdf.rule: Host(`pdf.hoebergen.net`)
-
+    environment:
+      - TZ=Europe/Amsterdam
 networks:
   default:
     name: frontend

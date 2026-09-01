@@ -9,7 +9,8 @@ services:
       - ./.env
     networks:
       - tandoor
-
+    environment:
+      - TZ=Europe/Amsterdam
   web_recipes:
     container_name: tandoor-web
     restart: unless-stopped
@@ -30,7 +31,8 @@ services:
     networks:
       - tandoor
       - frontend
-
+    environment:
+      - TZ=Europe/Amsterdam
 networks:
   tandoor:
     name: backend-tandoor

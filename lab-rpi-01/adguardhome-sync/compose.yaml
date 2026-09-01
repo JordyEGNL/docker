@@ -20,7 +20,9 @@ services:
       - API_PORT=8080
       #- API_USERNAME=${USERNAME}
       #- API_PASSWORD=${PASSWORD}
+      - TZ=Europe/Amsterdam
     ports:
       - 10.0.10.21:8080:8080
     restart: unless-stopped
     network_mode: bridge
+
