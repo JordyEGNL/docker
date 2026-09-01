@@ -79,12 +79,19 @@ api:
   dashboard: true
   insecure: true
 
-# Enable metrics for Grafana
+# Enable metrics & traces for Grafana via OpenTelemetry
 metrics:
-  prometheus:
+  otlp:
     addEntryPointsLabels: true
     addRoutersLabels: true
     addServicesLabels: true
+    http:
+      endpoint: "http://grafana-alloy:4318/v1/metrics"
+
+tracing:
+  otlp:
+    http:
+      endpoint: "http://grafana-alloy:4318/v1/traces"
 
 # Log level INFO|DEBUG|ERROR
 log:
