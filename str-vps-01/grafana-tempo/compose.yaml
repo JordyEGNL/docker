@@ -12,14 +12,12 @@ services:
       - frontend
     labels:
       traefik.enable: true
-      # OTLP gRPC Router (standaard)
       traefik.http.routers.tempo-grpc.rule: Host(`tempo.str-vps-01.hoebergen.net`)
       traefik.http.routers.tempo-grpc.entryPoints: websecure
       traefik.http.routers.tempo-grpc.service: tempo-grpc
       traefik.http.services.tempo-grpc.loadbalancer.server.port: 4317
       traefik.http.services.tempo-grpc.loadbalancer.server.scheme: h2c
       
-      # OTLP HTTP Router (voor Proxmox etc.)
       traefik.http.routers.tempo-http.rule: Host(`tempo.str-vps-01.hoebergen.net`) && PathPrefix(`/v1/`)
       traefik.http.routers.tempo-http.entryPoints: websecure
       traefik.http.routers.tempo-http.service: tempo-http
