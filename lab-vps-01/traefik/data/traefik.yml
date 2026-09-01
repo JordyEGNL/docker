@@ -114,6 +114,7 @@ certificatesResolvers:
           - "1.0.0.1:53"
 
 experimental:
+  otlpLogs: true
   plugins:
     traefik-get-real-ip:
       moduleName: "github.com/Paxxs/traefik-get-real-ip"
