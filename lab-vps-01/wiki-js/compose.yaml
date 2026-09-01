@@ -28,19 +28,7 @@ services:
       - frontend
       - wiki-js
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
-    logging:
-      driver: json-file
-      options:
-        max-size: 10m
-        max-file: '3'
+
   db:
     image: postgres:15.15-alpine3.21
     container_name: wiki-js-db
@@ -55,19 +43,7 @@ services:
     volumes:
       - /docker/wikijs/database:/var/lib/postgresql/data
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
-    logging:
-      driver: json-file
-      options:
-        max-size: 10m
-        max-file: '3'
+
 volumes:
   db-data:
 

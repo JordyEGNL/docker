@@ -18,19 +18,7 @@ services:
     networks:
       - backend-dockflare
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
-    logging:
-      driver: json-file
-      options:
-        max-size: 10m
-        max-file: '3'
+
   dockflare-agent:
     container_name: dockflare-agent
     image: alplat/dockflare-agent:latest
@@ -49,19 +37,7 @@ services:
       - frontend
       - backend-dockflare
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
-    logging:
-      driver: json-file
-      options:
-        max-size: 10m
-        max-file: '3'
+
 networks:
   backend-dockflare:
     name: backend-dockflare

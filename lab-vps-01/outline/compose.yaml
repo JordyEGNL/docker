@@ -26,19 +26,6 @@ services:
       - backend-outline
       - frontend
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
-    logging:
-      driver: json-file
-      options:
-        max-size: 10m
-        max-file: '3'
     environment:
       - TZ=Europe/Amsterdam
   redis:
@@ -58,19 +45,7 @@ services:
     networks:
       - backend-outline
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
-    logging:
-      driver: json-file
-      options:
-        max-size: 10m
-        max-file: '3'
+
     environment:
       - TZ=Europe/Amsterdam
   postgres:
@@ -92,19 +67,7 @@ services:
     networks:
       - backend-outline
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
-    logging:
-      driver: json-file
-      options:
-        max-size: 10m
-        max-file: '3'
+
 networks:
   frontend:
     external: true

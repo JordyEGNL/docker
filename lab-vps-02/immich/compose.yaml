@@ -10,19 +10,7 @@ services:
       - "-c"
       - "[ -f /mnt/externaldisk/.883f4828-a568-40c6-b21e-dc3b93c2aedd ]"
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
-    logging:
-      driver: json-file
-      options:
-        max-size: 10m
-        max-file: '3'
+
     environment:
       - TZ=Europe/Amsterdam
   immich-server:
@@ -60,19 +48,6 @@ services:
       - immich
       - frontend
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
-    logging:
-      driver: json-file
-      options:
-        max-size: 10m
-        max-file: '3'
     environment:
       - TZ=Europe/Amsterdam
   immich-machine-learning:
@@ -88,19 +63,7 @@ services:
     healthcheck:
       interval: 5m
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
-    logging:
-      driver: json-file
-      options:
-        max-size: 10m
-        max-file: '3'
+
     environment:
       - TZ=Europe/Amsterdam
   redis:
@@ -113,19 +76,7 @@ services:
     networks:
       - immich
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
-    logging:
-      driver: json-file
-      options:
-        max-size: 10m
-        max-file: '3'
+
     environment:
       - TZ=Europe/Amsterdam
   database:
@@ -150,19 +101,7 @@ services:
     networks:
       - immich
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
-    logging:
-      driver: json-file
-      options:
-        max-size: 10m
-        max-file: '3'
+
   power-tools:
     container_name: immich-power-tools
     image: ghcr.io/varun-raj/immich-power-tools:0.19.1
@@ -181,19 +120,6 @@ services:
       - immich
       - frontend
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
-    logging:
-      driver: json-file
-      options:
-        max-size: 10m
-        max-file: '3'
     environment:
       - TZ=Europe/Amsterdam
 networks:

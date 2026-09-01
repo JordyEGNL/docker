@@ -10,19 +10,7 @@ services:
     networks:
       - tandoor
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
-    logging:
-      driver: json-file
-      options:
-        max-size: 10m
-        max-file: '3'
+
     environment:
       - TZ=Europe/Amsterdam
   web_recipes:
@@ -46,19 +34,6 @@ services:
       - tandoor
       - frontend
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
-    logging:
-      driver: json-file
-      options:
-        max-size: 10m
-        max-file: '3'
     environment:
       - TZ=Europe/Amsterdam
 networks:

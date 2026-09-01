@@ -36,19 +36,7 @@ services:
       dockflare.service: "https://traefik:443"
       dockflare.access.group: "block-all-except-trusted"
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
-    logging:
-      driver: json-file
-      options:
-        max-size: 10m
-        max-file: '3'
+
   vaultwarden-backup:
     image: ttionya/vaultwarden-backup:1.27.0
     container_name: vaultwarden-backup
@@ -70,19 +58,7 @@ services:
       - /docker/vaultwarden/data/:/bitwarden/data/
       - vaultwarden-rclone-data:/config
 
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
-    logging:
-      driver: json-file
-      options:
-        max-size: 10m
-        max-file: '3'
+
 networks:
   default:
     name: frontend
