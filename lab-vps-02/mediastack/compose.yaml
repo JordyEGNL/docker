@@ -44,7 +44,8 @@ services:
     restart: always
     networks:
       - mediastack
-      - frontend    environment:
+      - frontend
+    environment:
       - TZ=Europe/Amsterdam
   seerr:
     image: ghcr.io/seerr-team/seerr:v3.4.1
