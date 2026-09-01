@@ -18,10 +18,6 @@ services:
       # OTLP (gRPC) endpoint van Tempo. H2C is nodig voor ongecodeerde interne gRPC.
       traefik.http.services.tempo.loadbalancer.server.port: 4317
       traefik.http.services.tempo.loadbalancer.server.scheme: h2c
-
-      # [Belangrijk] BasicAuth
-      # traefik.http.routers.tempo.middlewares: tempo-auth
-      # traefik.http.middlewares.tempo-auth.basicauth.users: "admin:$$apr1$$H6uskkkW$$IgXLP6ewTrSuBkTrqE8wj/"
     logging:
       driver: json-file
       options:
