@@ -41,7 +41,7 @@ services:
     environment:
       - TZ=Europe/Amsterdam
   dockflare:
-    image: alplat/dockflare:v3.1.4
+    image: alplat/dockflare:v3.1.5
     container_name: dockflare
     restart: unless-stopped
     logging:
