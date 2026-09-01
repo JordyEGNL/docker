@@ -1,6 +1,6 @@
 services:
   grafana-tempo:
-    image: grafana/tempo:2.6.0
+    image: grafana/tempo:3.2.0
     container_name: tempo
     user: "1000:1000"
     restart: unless-stopped
