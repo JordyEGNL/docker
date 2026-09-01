@@ -25,8 +25,6 @@ services:
     env_file:
       - ./.env
     restart: unless-stopped
-
-
     environment:
       - TZ=Europe/Amsterdam
   traefik-forward-auth:
@@ -54,8 +52,6 @@ services:
      # dockflare.hostname: "authproxy.lab-vps-01.hoebergen.net"
      # dockflare.originsrvname: "authproxy.lab-vps-01.hoebergen.net"
      # dockflare.service: "https://localhost:443"
-
-
     environment:
       - TZ=Europe/Amsterdam
 networks:

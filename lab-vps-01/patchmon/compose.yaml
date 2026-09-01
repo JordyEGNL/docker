@@ -33,15 +33,6 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
-
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
     environment:
       - TZ=Europe/Amsterdam
   database:
@@ -62,15 +53,6 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
-
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
     environment:
       - TZ=Europe/Amsterdam
   redis:
@@ -118,15 +100,6 @@ services:
 #     options:
 #       max-size: "10m"
 #       max-file: "3"
-
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.10'
-          memory: 128M
     environment:
       - TZ=Europe/Amsterdam
 networks:

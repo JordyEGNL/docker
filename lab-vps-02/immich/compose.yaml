@@ -9,8 +9,6 @@ services:
       - "/bin/sh"
       - "-c"
       - "[ -f /mnt/externaldisk/.883f4828-a568-40c6-b21e-dc3b93c2aedd ]"
-
-
     environment:
       - TZ=Europe/Amsterdam
   immich-server:
@@ -46,9 +44,7 @@ services:
     restart: always
     networks:
       - immich
-      - frontend
-
-    environment:
+      - frontend    environment:
       - TZ=Europe/Amsterdam
   immich-machine-learning:
     container_name: immich-machine-learning
@@ -62,8 +58,6 @@ services:
       - immich
     healthcheck:
       interval: 5m
-
-
     environment:
       - TZ=Europe/Amsterdam
   redis:
@@ -75,8 +69,6 @@ services:
     restart: always
     networks:
       - immich
-
-
     environment:
       - TZ=Europe/Amsterdam
   database:
@@ -118,9 +110,7 @@ services:
     restart: always
     networks:
       - immich
-      - frontend
-
-    environment:
+      - frontend    environment:
       - TZ=Europe/Amsterdam
 networks:
   frontend:

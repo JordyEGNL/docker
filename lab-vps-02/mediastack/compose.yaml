@@ -9,8 +9,6 @@ services:
       - "-c"
       - "[ -f /mnt/externaldisk/.995b1a8f-37db-4aaa-aa97-d703d7670595 ]"
     network_mode: none
-
-
     environment:
       - TZ=Europe/Amsterdam
   jellyfin:
@@ -46,9 +44,7 @@ services:
     restart: always
     networks:
       - mediastack
-      - frontend
-
-    environment:
+      - frontend    environment:
       - TZ=Europe/Amsterdam
   seerr:
     image: ghcr.io/seerr-team/seerr:v3.4.1

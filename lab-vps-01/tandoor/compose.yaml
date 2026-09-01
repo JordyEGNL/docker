@@ -9,8 +9,6 @@ services:
       - ./.env
     networks:
       - tandoor
-
-
     environment:
       - TZ=Europe/Amsterdam
   web_recipes:
@@ -32,9 +30,7 @@ services:
       - db_recipes
     networks:
       - tandoor
-      - frontend
-
-    environment:
+      - frontend    environment:
       - TZ=Europe/Amsterdam
 networks:
   tandoor:
