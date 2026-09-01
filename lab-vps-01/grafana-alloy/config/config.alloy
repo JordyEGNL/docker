@@ -57,6 +57,20 @@ otelcol.receiver.otlp "default" {
   }
   
   output {
+    metrics = [otelcol.processor.attributes.add_server.input]
+    logs    = [otelcol.processor.attributes.add_server.input]
+    traces  = [otelcol.processor.attributes.add_server.input]
+  }
+}
+
+// Stempelt automatisch de naam van de server op álles wat binnenkomt!
+otelcol.processor.attributes "add_server" {
+  action {
+    key = "server"
+    action = "insert"
+    value = sys.env("SERVER_NAME")
+  }
+  output {
     metrics = [otelcol.processor.batch.default.input]
     logs    = [otelcol.processor.batch.default.input]
     traces  = [otelcol.processor.batch.default.input]
