@@ -79,6 +79,13 @@ api:
   dashboard: true
   insecure: true
 
+# Enable metrics for Grafana
+metrics:
+  prometheus:
+    addEntryPointsLabels: true
+    addRoutersLabels: true
+    addServicesLabels: true
+
 # Log level INFO|DEBUG|ERROR
 log:
   level: INFO
