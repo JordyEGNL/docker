@@ -97,6 +97,19 @@ accessLog:
   otlp:
     http:
       endpoint: "http://grafana-alloy:4318/v1/logs"
+  fields:
+    defaultMode: keep
+    headers:
+      defaultMode: drop
+      names:
+        CF-Connecting-IP: keep
+        X-Forwarded-For: keep
+        X-Real-IP: keep
+        CF-IPCountry: keep
+        CF-Ray: keep
+        User-Agent: keep
+        Authorization: drop
+        Cookie: drop
 
 # Log level INFO|DEBUG|ERROR
 log:
