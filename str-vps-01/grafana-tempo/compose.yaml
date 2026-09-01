@@ -13,7 +13,7 @@ services:
     labels:
       traefik.enable: true
       traefik.http.routers.tempo.rule: Host(`tempo.str-vps-01.hoebergen.net`)
-      traefik.http.routers.tempo.entryPoints: https
+      traefik.http.routers.tempo.entryPoints: websecure
       
       # OTLP (gRPC) endpoint van Tempo. H2C is nodig voor ongecodeerde interne gRPC.
       traefik.http.services.tempo.loadbalancer.server.port: 4317
