@@ -13,6 +13,12 @@ services:
       - /docker/grafana-alloy/data:/var/lib/alloy/data
     networks:
       - frontend
+    labels:
+      traefik.enable: true
+      traefik.http.routers.alloy.rule: Host(`alloy.lab-vps-01.hoebergen.net`)
+      traefik.http.routers.alloy.entryPoints: websecure
+      traefik.http.services.alloy.loadbalancer.server.port: 12345
+      traefik.http.routers.alloy.middlewares: localAccess@file
     logging:
       driver: json-file
       options:
