@@ -9,7 +9,6 @@ services:
       - '--storage.tsdb.path=/prometheus'
       - '--storage.tsdb.retention.time=28d'
       - '--web.enable-remote-write-receiver'
-      - '--enable-feature=otlp-write-receiver'
     volumes:
       - ./config/prometheus.yml:/etc/prometheus/prometheus.yml:ro
       - /docker/prometheus/data:/prometheus
@@ -17,19 +16,8 @@ services:
       - frontend
     labels:
       traefik.enable: true
-      
-      # Standaard Prometheus UI & API router
       traefik.http.routers.prometheus.rule: Host(`prometheus.str-vps-01.hoebergen.net`)
       traefik.http.routers.prometheus.entryPoints: websecure
-      traefik.http.routers.prometheus.service: prometheus
-      
-      # Proxmox OTLP Router (Vertaalt /v1/metrics naar /api/v1/otlp/v1/metrics)
-      traefik.http.middlewares.proxmox-otlp.replacepath.path: /api/v1/otlp/v1/metrics
-      traefik.http.routers.prometheus-otlp.rule: Host(`prometheus.str-vps-01.hoebergen.net`) && Path(`/v1/metrics`)
-      traefik.http.routers.prometheus-otlp.entryPoints: websecure
-      traefik.http.routers.prometheus-otlp.middlewares: proxmox-otlp
-      traefik.http.routers.prometheus-otlp.service: prometheus
-      
       traefik.http.services.prometheus.loadbalancer.server.port: 9090
     logging:
       driver: json-file
@@ -42,4 +30,3 @@ services:
 networks:
   frontend:
     external: true
-
