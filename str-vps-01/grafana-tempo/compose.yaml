@@ -1,0 +1,40 @@
+services:
+  grafana-tempo:
+    image: grafana/tempo:2.6.0
+    container_name: tempo
+    user: "1000:1000"
+    restart: unless-stopped
+    command: [ "-config.file=/etc/tempo.yaml" ]
+    volumes:
+      - ./config/tempo.yaml:/etc/tempo.yaml:ro
+      - tempo-data:/var/tempo
+    networks:
+      - frontend
+    labels:
+      traefik.enable: true
+      traefik.http.routers.tempo.rule: Host(`tempo.str-vps-01.hoebergen.net`)
+      traefik.http.routers.tempo.entryPoints: https
+      
+      # OTLP (gRPC) endpoint van Tempo. H2C is nodig voor ongecodeerde interne gRPC.
+      traefik.http.services.tempo.loadbalancer.server.port: 4317
+      traefik.http.services.tempo.loadbalancer.server.scheme: h2c
+
+      # [Belangrijk] BasicAuth
+      # traefik.http.routers.tempo.middlewares: tempo-auth
+      # traefik.http.middlewares.tempo-auth.basicauth.users: "admin:$$apr1$$H6uskkkW$$IgXLP6ewTrSuBkTrqE8wj/"
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+    environment:
+      - TZ=Europe/Amsterdam
+
+volumes:
+  tempo-data:
+    name: tempo-data
+
+networks:
+  frontend:
+    external: true
+
