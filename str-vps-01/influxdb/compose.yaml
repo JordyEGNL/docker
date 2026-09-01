@@ -10,7 +10,7 @@ services:
       - --object-store=file
       - --data-dir=/var/lib/influxdb3/data
       - --plugin-dir=/var/lib/influxdb3/plugins
-      - --http-bind=0.0.0.0:8086
+      - --http-bind=0.0.0.0:8181
     volumes:
       - /docker/influxdb3/data:/var/lib/influxdb3/data
       - /docker/influxdb3/plugins:/var/lib/influxdb3/plugins
@@ -20,7 +20,7 @@ services:
       traefik.enable: true
       traefik.http.routers.influxdb.rule: Host(`influxdb.str-vps-01.hoebergen.net`)
       traefik.http.routers.influxdb.entryPoints: websecure
-      traefik.http.services.influxdb.loadbalancer.server.port: 8086
+      traefik.http.services.influxdb.loadbalancer.server.port: 8181
 
 networks:
   frontend:
