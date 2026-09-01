@@ -50,3 +50,20 @@ loki.write "remote" {
     // }
   }
 }
+
+// ----------------------------------------------------------------
+// METRICS (PROMETHEUS)
+// ----------------------------------------------------------------
+
+// Stuur alle verzamelde metrics naar je centrale Prometheus server
+prometheus.remote_write "metrics_service" {
+  endpoint {
+    url = "https://prometheus.str-vps-01.hoebergen.net/api/v1/write"
+    
+    // Zodra je basicAuth aanzet voor prometheus in Traefik:
+    // basic_auth {
+    //   username = "admin"
+    //   password = "jouw_wachtwoord_hier"
+    // }
+  }
+}
