@@ -2,6 +2,11 @@ services:
   immich-diskchecker:
     container_name: immich-diskchecker
     image: alpine:3.24.1
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
     network_mode: none
     volumes:
       - ${DISK_ROOT}:/mnt/externaldisk:ro
@@ -14,6 +19,11 @@ services:
   immich-server:
     container_name: immich-server
     image: ghcr.io/immich-app/immich-server:v3.2.0-rc.2
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
     group_add:
       - "109"
     ports:
@@ -50,6 +60,11 @@ services:
   immich-machine-learning:
     container_name: immich-machine-learning
     image: ghcr.io/immich-app/immich-machine-learning:v3.2.0-rc.2
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
     env_file:
       - ./.env
     volumes:
@@ -76,6 +91,11 @@ services:
     container_name: immich-postgres
     image: 
       ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0@sha256:bcf63357191b76a916ae5eb93464d65c07511da41e3bf7a8416db519b40b1c23
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
     env_file:
       - ./.env
     environment:
@@ -98,6 +118,11 @@ services:
   power-tools:
     container_name: immich-power-tools
     image: ghcr.io/varun-raj/immich-power-tools:0.19.1
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
     env_file:
       - ./.env
     labels:

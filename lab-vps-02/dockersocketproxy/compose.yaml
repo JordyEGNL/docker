@@ -2,6 +2,11 @@ services:
   dockerproxy:
     image: ghcr.io/tecnativa/docker-socket-proxy:v0.5.0
     container_name: dockerproxy
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
     environment:
       - CONTAINERS=1
       - EVENTS=1

@@ -29,6 +29,11 @@ services:
       - TZ=Europe/Amsterdam
   traefik-forward-auth:
     image: ghcr.io/italypaleale/traefik-forward-auth:4.14.1
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
     restart: unless-stopped
     volumes:
       - ./forward-proxy:/etc/traefik-forward-auth

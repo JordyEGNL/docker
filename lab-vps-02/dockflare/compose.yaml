@@ -3,6 +3,11 @@ services:
     container_name: dockflare-docker-socket-proxy
     image: tecnativa/docker-socket-proxy:v0.5.0
     restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
     environment:
       - DOCKER_HOST=unix:///var/run/docker.sock
       - CONTAINERS=1
@@ -24,6 +29,11 @@ services:
     hostname: dockflare-agent-lab-vps-02
     image: alplat/dockflare-agent:latest
     restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
     env_file:
       - .env
     environment:
