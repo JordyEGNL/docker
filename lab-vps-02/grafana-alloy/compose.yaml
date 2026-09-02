@@ -15,7 +15,7 @@ services:
       - frontend
     labels:
       traefik.enable: true
-      traefik.http.routers.alloy.rule: Host(`alloy.lab-vps-01.hoebergen.net`)
+      traefik.http.routers.alloy.rule: Host(`alloy.lab-vps-02.hoebergen.net`)
       traefik.http.routers.alloy.entryPoints: websecure
       traefik.http.services.alloy.loadbalancer.server.port: 12345
       traefik.http.routers.alloy.middlewares: localAccess@file
@@ -26,7 +26,7 @@ services:
         max-file: '3'
     environment:
       - TZ=Europe/Amsterdam
-      - SERVER_NAME=lab-vps-01
+      - SERVER_NAME=lab-vps-02
 
 networks:
   frontend:
