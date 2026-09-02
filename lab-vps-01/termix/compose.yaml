@@ -8,6 +8,11 @@ services:
       TZ: Europe/Amsterdam
     env_file:
       - .env
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
     volumes:
       - /docker/termix/data:/app/data
     labels:
@@ -33,6 +38,11 @@ services:
       - termix-backend
     environment:
       - TZ=Europe/Amsterdam
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 networks:
   termix-backend:
   frontend:

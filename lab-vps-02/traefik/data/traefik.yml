@@ -61,6 +61,7 @@ entryPoints:
           - main: '*.jellyfin.hoebergen.net'
       middlewares:
         - securityHeaders@file
+        - realip@file
 
 providers:
   providersThrottleDuration: 2s
@@ -77,9 +78,41 @@ providers:
 api:
   dashboard: true
 
+# Enable metrics & traces for Grafana via OpenTelemetry
+metrics:
+  otlp:
+    addEntryPointsLabels: true
+    addRoutersLabels: true
+    addServicesLabels: true
+    http:
+      endpoint: "http://grafana-alloy:4318/v1/metrics"
+
+tracing:
+  otlp:
+    http:
+      endpoint: "http://grafana-alloy:4318/v1/traces"
+
+accessLog:
+  otlp:
+    http:
+      endpoint: "http://grafana-alloy:4318/v1/logs"
+  fields:
+    defaultMode: keep
+    headers:
+      defaultMode: drop
+      names:
+        CF-Connecting-IP: keep
+        X-Forwarded-For: keep
+        X-Real-IP: keep
+        CF-IPCountry: keep
+        CF-Ray: keep
+        User-Agent: keep
+        Authorization: drop
+        Cookie: drop
+
 # Log level INFO|DEBUG|ERROR
 log:
-  level: DEBUG
+  level: INFO
 
 certificatesResolvers:
   letsencrypt:
@@ -91,3 +124,10 @@ certificatesResolvers:
         resolvers:
           - "1.1.1.1:53"
           - "1.0.0.1:53"
+
+experimental:
+  otlpLogs: true
+  plugins:
+    traefik-get-real-ip:
+      moduleName: "github.com/Paxxs/traefik-get-real-ip"
+      version: "v1.0.3"

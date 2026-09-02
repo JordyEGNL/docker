@@ -2,6 +2,11 @@ services:
   vaultwarden:
     image: vaultwarden/server:1.37.2-alpine
     container_name: vaultwarden
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
     volumes:
       - /docker/vaultwarden/data/:/data/
     restart: unless-stopped
@@ -40,6 +45,11 @@ services:
   vaultwarden-backup:
     image: ttionya/vaultwarden-backup:1.27.0
     container_name: vaultwarden-backup
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
     restart: unless-stopped
     environment:
       RCLONE_REMOTE_NAME: 'BitwardenBackup'
