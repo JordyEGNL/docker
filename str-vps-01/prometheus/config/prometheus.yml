@@ -1,0 +1,11 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+# Aangezien Alloy alle metrics centraal naar ons pusht (remote_write), 
+# hoeven we lokaal vrijwel niets te scrapen, behalve misschien Prometheus zelf.
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
