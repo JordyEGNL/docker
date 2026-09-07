@@ -43,7 +43,7 @@ services:
 
 
   vaultwarden-backup:
-    image: ttionya/vaultwarden-backup:1.27.0
+    image: ttionya/vaultwarden-backup:1.27.1
     container_name: vaultwarden-backup
     logging:
       driver: "json-file"
