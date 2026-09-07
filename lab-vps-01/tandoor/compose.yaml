@@ -19,7 +19,7 @@ services:
   web_recipes:
     container_name: tandoor-web
     restart: unless-stopped
-    image: ghcr.io/tandoorrecipes/recipes:2.6.14
+    image: ghcr.io/tandoorrecipes/recipes:2.6.15
     env_file:
       - ./.env
     logging:
