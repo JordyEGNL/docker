@@ -27,7 +27,7 @@ services:
   dockflare-agent:
     container_name: dockflare-agent
     hostname: dockflare-agent-lab-vps-02
-    image: alplat/dockflare-agent:latest
+    image: alplat/dockflare-agent:v3.1.5
     restart: unless-stopped
     logging:
       driver: "json-file"
