@@ -15,11 +15,30 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Get list of files to check
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            echo "Fetching base branch origin/${{ github.base_ref }}..."
+            git fetch origin "${{ github.base_ref }}" --depth=1 || true
+            echo "Comparing changes between origin/${{ github.base_ref }} and HEAD..."
+            # Get added, copied, modified, or renamed files (exclude deleted files)
+            CHANGED_FILES=$(git diff --name-only --diff-filter=d "origin/${{ github.base_ref }}"...HEAD)
+          else
+            echo "Non-PR event (${{ github.event_name }}), scanning entire repository..."
+            CHANGED_FILES=$(find . -type f -not -path "*/.*/*" | sed 's|^\./||')
+          fi
+
+          echo "$CHANGED_FILES" > changed_files.txt
+          echo "Files to evaluate:"
+          cat changed_files.txt
 
       - name: Check for deprecated docker-compose filenames
         run: |
           echo "Checking for deprecated docker-compose filenames..."
-          LEGACY_FILES=$(find . -type f \( -name "docker-compose.yml" -o -name "docker-compose.yaml" \) -not -path "*/.*/*")
+          LEGACY_FILES=$(grep -E '(^|/)docker-compose\.ya?ml$' changed_files.txt || true)
           if [ -n "$LEGACY_FILES" ]; then
             echo "::error::Deprecated docker-compose file(s) found! Use 'compose.yaml' instead."
             echo "Offending files:"
@@ -30,13 +49,26 @@ jobs:
 
       - name: Validate compose.yaml files
         run: |
+          COMPOSE_FILES=$(grep -E '(^|/)compose\.ya?ml$' changed_files.txt || true)
+          if [ -z "$COMPOSE_FILES" ]; then
+            echo "No compose.yaml files were modified in this run."
+            exit 0
+          fi
+
           echo "Validating compose.yaml files..."
           FAILED=0
           TOTAL=0
 
-          while IFS= read -r -d '' file; do
+          while IFS= read -r file; do
+            [ -z "$file" ] && continue
             TOTAL=$((TOTAL + 1))
             echo "Checking: $file"
+
+            if [ ! -f "$file" ]; then
+              echo "  Skipping (file not found): $file"
+              continue
+            fi
+
             if OUTPUT=$(docker compose -f "$file" config -q --no-interpolate --no-env-resolution --no-path-resolution 2>&1); then
               echo "  OK: $file"
             else
@@ -44,7 +76,7 @@ jobs:
               echo "$OUTPUT"
               FAILED=$((FAILED + 1))
             fi
-          done < <(find . -type f -name "compose.yaml" -not -path "*/.*/*" -print0)
+          done <<< "$COMPOSE_FILES"
 
           echo "=========================================="
           echo "Validated $TOTAL compose.yaml file(s)."
@@ -52,4 +84,4 @@ jobs:
             echo "::error::$FAILED compose.yaml file(s) failed validation."
             exit 1
           fi
-          echo "All compose.yaml files are valid!"
+          echo "All checked compose.yaml files are valid!"
