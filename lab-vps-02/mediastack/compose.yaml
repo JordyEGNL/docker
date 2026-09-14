@@ -279,7 +279,7 @@ services:
 
   cleanuperr:
     container_name: cleanuperr
-    image: ghcr.io/cleanuparr/cleanuparr:2.10.5
+    image: ghcr.io/cleanuparr/cleanuparr:2.10.6
     logging:
       driver: "json-file"
       options:
