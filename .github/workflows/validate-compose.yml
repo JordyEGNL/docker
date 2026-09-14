@@ -1,0 +1,55 @@
+name: Validate Docker Compose
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: Validate Docker Compose
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Check for deprecated docker-compose filenames
+        run: |
+          echo "Checking for deprecated docker-compose filenames..."
+          LEGACY_FILES=$(find . -type f \( -name "docker-compose.yml" -o -name "docker-compose.yaml" \) -not -path "*/.*/*")
+          if [ -n "$LEGACY_FILES" ]; then
+            echo "::error::Deprecated docker-compose file(s) found! Use 'compose.yaml' instead."
+            echo "Offending files:"
+            echo "$LEGACY_FILES"
+            exit 1
+          fi
+          echo "No deprecated docker-compose files found."
+
+      - name: Validate compose.yaml files
+        run: |
+          echo "Validating compose.yaml files..."
+          FAILED=0
+          TOTAL=0
+
+          while IFS= read -r -d '' file; do
+            TOTAL=$((TOTAL + 1))
+            echo "Checking: $file"
+            if OUTPUT=$(docker compose -f "$file" config -q --no-interpolate --no-env-resolution --no-path-resolution 2>&1); then
+              echo "  OK: $file"
+            else
+              echo "::error file=$file::Docker Compose validation failed for $file"
+              echo "$OUTPUT"
+              FAILED=$((FAILED + 1))
+            fi
+          done < <(find . -type f -name "compose.yaml" -not -path "*/.*/*" -print0)
+
+          echo "=========================================="
+          echo "Validated $TOTAL compose.yaml file(s)."
+          if [ "$FAILED" -gt 0 ]; then
+            echo "::error::$FAILED compose.yaml file(s) failed validation."
+            exit 1
+          fi
+          echo "All compose.yaml files are valid!"
