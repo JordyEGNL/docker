@@ -1,0 +1,104 @@
+discovery.docker "local" {
+  host = "tcp://dockerproxy:2375"
+}
+
+discovery.relabel "docker" {
+  targets = discovery.docker.local.targets
+
+  rule {
+    source_labels = ["__meta_docker_container_name"]
+    regex         = "/(.*)"
+    target_label  = "container"
+  }
+
+  rule {
+    target_label = "instance"
+    replacement  = sys.env("SERVER_NAME")
+  }
+}
+
+loki.source.docker "default" {
+  host       = "tcp://dockerproxy:2375"
+  targets    = discovery.relabel.docker.output
+  forward_to = [loki.write.remote.receiver]
+}
+
+// ----------------------------------------------------------------
+// METRICS (Loki)
+// ----------------------------------------------------------------
+
+loki.write "remote" {
+  endpoint {
+    url = "https://loki.str-vps-01.hoebergen.net/loki/api/v1/push"
+    // }
+  }
+}
+
+// ----------------------------------------------------------------
+// METRICS (PROMETHEUS)
+// ----------------------------------------------------------------
+
+prometheus.remote_write "metrics_service" {
+  endpoint {
+    url = "https://prometheus.str-vps-01.hoebergen.net/api/v1/write"
+  }
+}
+
+// ----------------------------------------------------------------
+// OPENTELEMETRY (OTLP) PIPELINE
+// ----------------------------------------------------------------
+
+otelcol.receiver.otlp "default" {
+  grpc {
+    endpoint = "0.0.0.0:4317"
+  }
+  http {
+    endpoint = "0.0.0.0:4318"
+  }
+  
+  output {
+    metrics = [otelcol.processor.attributes.add_server.input]
+    logs    = [otelcol.processor.attributes.add_server.input]
+    traces  = [otelcol.processor.attributes.add_server.input]
+  }
+}
+
+// Stempelt automatisch de naam van de server op álles wat binnenkomt!
+otelcol.processor.attributes "add_server" {
+  action {
+    key = "server"
+    action = "insert"
+    value = sys.env("SERVER_NAME")
+  }
+  output {
+    metrics = [otelcol.processor.batch.default.input]
+    logs    = [otelcol.processor.batch.default.input]
+    traces  = [otelcol.processor.batch.default.input]
+  }
+}
+
+otelcol.processor.batch "default" {
+  output {
+    metrics = [otelcol.exporter.prometheus.default.input]
+    logs    = [otelcol.exporter.loki.default.input]
+    traces  = [otelcol.exporter.otlp.tempo.input]
+  }
+}
+
+otelcol.exporter.prometheus "default" {
+  forward_to = [prometheus.remote_write.metrics_service.receiver]
+}
+
+otelcol.exporter.loki "default" {
+  forward_to = [loki.write.remote.receiver]
+}
+
+otelcol.exporter.otlp "tempo" {
+  client {
+    endpoint = "tempo.str-vps-01.hoebergen.net:443"
+    tls {
+      insecure = false
+      insecure_skip_verify = true
+    }
+  }
+}

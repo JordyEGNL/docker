@@ -368,6 +368,7 @@ services:
     networks:
       - mediastack
 
+
 networks:
   frontend:
     name: frontend
