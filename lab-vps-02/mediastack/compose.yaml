@@ -1,7 +1,7 @@
 services:
   mediastack-diskchecker:
     container_name: mediastack-diskchecker
-    image: alpine:3.24.1
+    image: alpine:3.24.2
     logging:
       driver: "json-file"
       options:
