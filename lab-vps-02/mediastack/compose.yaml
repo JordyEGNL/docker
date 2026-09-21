@@ -382,10 +382,10 @@ services:
     environment:
       - TZ=Europe/Amsterdam
       - SCRIPT_INTERVAL=300
+      - WEBUI_ENABLED=true
     volumes:
       - /docker/mediastack/soularr:/data
       - ${MOUNT_ROOT}/slskd_downloads:/downloads
-      - WEBUI_ENABLED=true
     ports:
       - "${LOCAL_IP}:8265:8265"
     labels:
