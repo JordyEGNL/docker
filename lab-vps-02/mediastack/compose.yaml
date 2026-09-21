@@ -410,7 +410,7 @@ services:
     ports:
       - "${LOCAL_IP}:5030:5030"
       - "${LOCAL_IP}:5031:5031"
-      - "${LOCAL_IP}:50300:50300"
+      - "50300:50300"
     volumes:
       - /docker/mediastack/slskd:/app
       - ${MEDIA_ROOT}/music:/music
