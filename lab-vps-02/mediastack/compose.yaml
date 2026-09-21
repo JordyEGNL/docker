@@ -346,27 +346,78 @@ services:
       - mediastack
 
 
-  flaresolverr:
-    container_name: flaresolverr
-    image: ghcr.io/flaresolverr/flaresolverr:v3.5.2
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-    restart: unless-stopped
+  lidarr:
+    image: lscr.io/linuxserver/lidarr:3.1.0
+    container_name: lidarr
     environment:
-      - LOG_LEVEL=${LOG_LEVEL:-info}
-      - LOG_FILE=${LOG_FILE:-none}
-      - LOG_HTML=${LOG_HTML:-false}
-      - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
-      - TZ=Europe/London
-    ports:
-      - "${LOCAL_IP}:8191:8191"
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Amsterdam
     volumes:
-      - /docker/mediastack/flaresolver:/config
+      - /docker/mediastack/lidarr/config:/config
+      - ${MEDIA_ROOT}/music:/music
+      - ${MOUNT_ROOT}/slskd_downloads:/downloads
+    depends_on:
+      mediastack-diskchecker:
+        condition: service_completed_successfully
+        restart: true
+    ports:
+      - ${LOCAL_IP}:8686:8686
+    labels:
+      traefik.enable: true
+      traefik.http.routers.lidarr.entryPoints: websecure
+      traefik.http.services.lidarr.loadbalancer.server.port: 8686
+      traefik.http.routers.lidarr.rule: Host(`lidarr.hoebergen.net`) || Host(`music.hoebergen.net`)
+      traefik.http.routers.lidarr.middlewares: traefik-forward-auth@docker,localAccess@file
+    restart: unless-stopped
     networks:
       - mediastack
+      - frontend
+
+  soularr:
+    image: mrusse08/soularr:latest
+    container_name: soularr
+    hostname: soularr
+    user: 1000:1000
+    environment:
+      - TZ=Europe/Amsterdam
+      - SCRIPT_INTERVAL=300
+    volumes:
+      - /docker/mediastack/soularr:/data
+      - ${MOUNT_ROOT}/slskd_downloads:/downloads
+      - WEBUI_ENABLED=true
+    ports:
+      - "${LOCAL_IP}:8265:8265"
+    labels:
+      traefik.enable: true
+      traefik.http.routers.soularr.entryPoints: websecure
+      traefik.http.services.soularr.loadbalancer.server.port: 8265
+      traefik.http.routers.soularr.rule: Host(`soularr.hoebergen.net`)
+      traefik.http.routers.soularr.middlewares: traefik-forward-auth@docker,localAccess@file
+    restart: unless-stopped
+    networks:
+      - mediastack
+      - frontend
+
+  slskd:
+    image: slskd/slskd
+    container_name: slskd
+    hostname: slskd
+    user: 1000:1000
+    environment:
+      - TZ=ETC/UTC
+      - SLSKD_REMOTE_CONFIGURATION=true
+    ports:
+      - "${LOCAL_IP}:5030:5030"
+      - "${LOCAL_IP}:5031:5031"
+      - "${LOCAL_IP}:50300:50300"
+    volumes:
+      - /docker/mediastack/slskd:/app
+      - ${MEDIA_ROOT}/music:/music
+    restart: unless-stopped
+    networks:
+      - mediastack
+      - frontend
 
 
 networks:
