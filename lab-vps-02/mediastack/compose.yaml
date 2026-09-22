@@ -385,7 +385,7 @@ services:
       - WEBUI_ENABLED=true
     volumes:
       - /docker/mediastack/soularr:/data
-      - ${MOUNT_ROOT}/slskd_downloads:/downloads
+      - ${MEDIA_ROOT}/music:/music
     ports:
       - "${LOCAL_IP}:8265:8265"
     labels:
@@ -405,7 +405,7 @@ services:
     hostname: slskd
     user: 1000:1000
     environment:
-      - TZ=ETC/UTC
+      - TZ=Europe/Amsterdam
       - SLSKD_REMOTE_CONFIGURATION=true
     ports:
       - "${LOCAL_IP}:5030:5030"
