@@ -364,11 +364,15 @@ services:
     ports:
       - ${LOCAL_IP}:8686:8686
     labels:
+      dockflare.access.group: block-all-except-trusted
+      dockflare.enable: "true"
+      dockflare.hostname: lidarr.hoebergen.net
+      dockflare.originsrvname: lidarr.hoebergen.net
+      dockflare.service: https://traefik:443
       traefik.enable: true
       traefik.http.routers.lidarr.entryPoints: websecure
       traefik.http.services.lidarr.loadbalancer.server.port: 8686
       traefik.http.routers.lidarr.rule: Host(`lidarr.hoebergen.net`) || Host(`music.hoebergen.net`)
-      traefik.http.routers.lidarr.middlewares: traefik-forward-auth@docker,localAccess@file
     restart: unless-stopped
     networks:
       - mediastack
