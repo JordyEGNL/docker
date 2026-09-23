@@ -94,7 +94,7 @@ services:
       - frontend
 
   radarr:
-    image: lscr.io/linuxserver/radarr:6.3.0
+    image: lscr.io/linuxserver/radarr:6.4.4
     logging:
       driver: "json-file"
       options:
