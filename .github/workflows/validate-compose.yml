@@ -21,11 +21,17 @@ jobs:
       - name: Get list of files to check
         run: |
           if [ "${{ github.event_name }}" = "pull_request" ]; then
-            echo "Fetching base branch origin/${{ github.base_ref }}..."
-            git fetch origin "${{ github.base_ref }}" --depth=1 || true
-            echo "Comparing changes between origin/${{ github.base_ref }} and HEAD..."
-            # Get added, copied, modified, or renamed files (exclude deleted files)
-            CHANGED_FILES=$(git diff --name-only --diff-filter=d "origin/${{ github.base_ref }}"...HEAD)
+            # In GitHub Actions pull_request workflows, HEAD is a merge commit (refs/pull/<pr>/merge).
+            # HEAD^1 is the target branch (base) and HEAD^2 is the PR branch.
+            # Comparing HEAD^1 and HEAD gives the exact changes in the PR without relying on shallow remote branches.
+            if git rev-parse --verify HEAD^1 >/dev/null 2>&1 && git rev-parse --verify HEAD^2 >/dev/null 2>&1; then
+              echo "Detected PR merge commit. Diffing base (HEAD^1) against PR merge (HEAD)..."
+              CHANGED_FILES=$(git diff --name-only --diff-filter=d HEAD^1 HEAD)
+            else
+              echo "Fetching base branch origin/${{ github.base_ref }} without depth limit..."
+              git fetch origin "${{ github.base_ref }}"
+              CHANGED_FILES=$(git diff --name-only --diff-filter=d "origin/${{ github.base_ref }}"...HEAD || git diff --name-only --diff-filter=d "origin/${{ github.base_ref }}" HEAD)
+            fi
           else
             echo "Non-PR event (${{ github.event_name }}), scanning entire repository..."
             CHANGED_FILES=$(find . -type f -not -path "*/.*/*" | sed 's|^\./||')
