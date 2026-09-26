@@ -1,6 +1,6 @@
 services:
   zerobyte:
-    image: ghcr.io/nicotsx/zerobyte:v0.42.0
+    image: ghcr.io/nicotsx/zerobyte:v0.43.0
     logging:
       driver: "json-file"
       options:
