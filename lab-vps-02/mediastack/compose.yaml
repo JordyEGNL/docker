@@ -225,7 +225,7 @@ services:
 
   qbittorrent:
     container_name: qbittorrent
-    image: binhex/arch-qbittorrentvpn:5.2.3-3-01
+    image: binhex/arch-qbittorrentvpn:5.2.4-1-01
     logging:
       driver: "json-file"
       options:
