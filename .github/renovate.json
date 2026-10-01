@@ -35,7 +35,8 @@
         "ghcr.io/immich-app/immich-machine-learning"
       ],
       "ignoreUnstable": false,
-      "versioning": "semver"
+      "versioning": "semver",
+      "ignoreVersions": ["/-rocm/", "/-cuda/", "/-openvino/"]
     },
     {
       "description": "Group Traefik updates",
