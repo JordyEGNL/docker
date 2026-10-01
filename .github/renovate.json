@@ -98,7 +98,7 @@
     },
     {
       "description": "Always create a PR for Release Candidates (disable automerge)",
-      "matchNewVersion": "/-rc/",
+      "matchCurrentVersion": "/-rc/",
       "matchDatasources": ["docker"],
       "automerge": false,
       "labels": ["rc"]
