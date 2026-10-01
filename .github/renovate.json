@@ -36,7 +36,7 @@
       ],
       "ignoreUnstable": false,
       "versioning": "semver",
-      "allowedVersions": "!/-(rocm|cuda|openvino)/"
+      "allowedVersions": "/^v?\\d+\\.\\d+\\.\\d+(?:-rc\\.\\d+)?$/"
     },
     {
       "description": "Group Traefik updates",
