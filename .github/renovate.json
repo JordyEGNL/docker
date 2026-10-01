@@ -36,7 +36,7 @@
       ],
       "ignoreUnstable": false,
       "versioning": "semver",
-      "ignoreVersions": ["/-rocm/", "/-cuda/", "/-openvino/"]
+      "ignoredVersions": ["/-rocm/", "/-cuda/", "/-openvino/"]
     },
     {
       "description": "Group Traefik updates",
