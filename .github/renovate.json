@@ -34,7 +34,8 @@
         "ghcr.io/immich-app/immich-server",
         "ghcr.io/immich-app/immich-machine-learning"
       ],
-      "ignoreUnstable": false
+      "ignoreUnstable": false,
+      "versioning": "semver"
     },
     {
       "description": "Group Traefik updates",
