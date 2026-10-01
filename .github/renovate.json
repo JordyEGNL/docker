@@ -94,8 +94,14 @@
       "description": "Major updates require manual review",
       "matchUpdateTypes": ["major"],
       "automerge": false,
-      "labels": ["major-update"],
-      "schedule": ["before 5am on monday"]
+      "labels": ["major-update"]
+    },
+    {
+      "description": "Always create a PR for Release Candidates (disable automerge)",
+      "matchNewVersion": "/-rc/",
+      "matchDatasources": ["docker"],
+      "automerge": false,
+      "labels": ["rc"]
     }
   ]
 }
