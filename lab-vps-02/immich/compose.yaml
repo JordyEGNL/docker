@@ -76,6 +76,7 @@ services:
       interval: 5m
     environment:
       - TZ=Europe/Amsterdam
+      - MACHINE_LEARNING_MODEL_REVISION=v2
   redis:
     container_name: immich-redis
     image: 
