@@ -128,7 +128,7 @@ services:
       - frontend
 
   sonarr:
-    image: lscr.io/linuxserver/sonarr:4.0.20
+    image: lscr.io/linuxserver/sonarr:develop-version-5.0.0.2569
     logging:
       driver: "json-file"
       options:
