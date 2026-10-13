@@ -158,7 +158,7 @@ services:
       traefik.http.routers.sonarr.entryPoints: websecure
       traefik.http.services.sonarr.loadbalancer.server.port: 8989
       traefik.http.routers.sonarr.rule: Host(`sonarr.hoebergen.net`) || Host(`series.hoebergen.net`)
-      traefik.http.routers.sonarr.middlewares: traefik-forward-auth@docker,localAccess@file
+      traefik.http.routers.sonarr.middlewares: localAccess@file
     restart: unless-stopped
     networks:
       - mediastack
