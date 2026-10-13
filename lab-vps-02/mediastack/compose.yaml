@@ -140,8 +140,8 @@ services:
       - PGID=1000
       - TZ=Europe/Amsterdam
     dns:
-      - "10.0.10.201"
-      - "10.0.10.21"
+      - "9.9.9.9"
+      - "1.1.1.1"
     volumes:
       - /docker/mediastack/sonarr/config:/config
       - ${MOUNT_ROOT}:/data
