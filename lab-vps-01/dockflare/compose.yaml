@@ -40,6 +40,7 @@ services:
         max-file: "3"
     environment:
       - TZ=Europe/Amsterdam
+
   dockflare:
     image: alplat/dockflare:v3.1.6
     container_name: dockflare
@@ -57,8 +58,8 @@ services:
       - REDIS_URL=redis://redis:6379/0
       - REDIS_DB_INDEX=0
       - DOCKER_HOST=tcp://docker-socket-proxy:2375
-      - CLOUDFLARED_NETWORK_NAME=frontend
-      - CLOUDFLARED_CONTAINER_NAME=dockflare-cloudflared
+      - USE_EXTERNAL_CLOUDFLARED=true
+      - EXTERNAL_TUNNEL_ID=${EXTERNAL_TUNNEL_ID}
       - TZ=Europe/Amsterdam
     labels:
       traefik.enable: true
@@ -74,6 +75,22 @@ services:
         condition: service_started
     networks:
       - backend-dockflare
+      - frontend
+
+  cloudflared:
+    image: cloudflare/cloudflared:2026.10.0
+    container_name: cloudflared
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    environment:
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+      - TZ=Europe/Amsterdam
+    networks:
       - frontend
 
   redis:
