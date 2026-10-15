@@ -26,7 +26,7 @@ services:
 
   dockflare-agent:
     container_name: dockflare-agent
-    hostname: dockflare-agent-lab-vps-02
+    hostname: dockflare-agent
     image: alplat/dockflare-agent:v3.1.6
     restart: unless-stopped
     logging:
@@ -38,8 +38,9 @@ services:
       - .env
     environment:
       - DOCKER_HOST=${DOCKER_HOST:-tcp://docker-socket-proxy:2375}
-      - TZ=${TZ:-UTC}
       - LOG_LEVEL=${LOG_LEVEL:-info}
+      - USE_EXTERNAL_CLOUDFLARED=true
+      - EXTERNAL_TUNNEL_ID=${EXTERNAL_TUNNEL_ID}
     volumes:
       - /docker/dockflare/data:/app/data
     depends_on:
@@ -47,6 +48,23 @@ services:
     networks:
       - frontend
       - backend-dockflare
+
+  cloudflared:
+    image: cloudflare/cloudflared:2026.10.0
+    container_name: dockflare-tunnel
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    env_file:
+      - .env
+    environment:
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+    networks:
+      - frontend
 
 
 networks:
