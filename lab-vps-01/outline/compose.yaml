@@ -8,6 +8,7 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
+    restart: unless-stopped
     labels:
       # Traefik
       traefik.enable: true
@@ -35,6 +36,7 @@ services:
   redis:
     container_name: outline-redis
     image: redis
+    restart: unless-stopped
     env_file: .env
     logging:
       driver: "json-file"
@@ -59,6 +61,7 @@ services:
     container_name: outline-postgres
     image: postgres:18
     env_file: .env
+    restart: unless-stopped
     logging:
       driver: "json-file"
       options:
