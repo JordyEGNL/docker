@@ -18,7 +18,7 @@ services:
       - TZ=Europe/Amsterdam
   jellyfin:
     container_name: jellyfin
-    image: jellyfin/jellyfin:12.2
+    image: jellyfin/jellyfin:12.3
     logging:
       driver: "json-file"
       options:
