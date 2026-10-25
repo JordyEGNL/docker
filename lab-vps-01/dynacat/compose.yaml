@@ -1,9 +1,9 @@
 services:
-  glance:
-    image: glanceapp/glance:v0.8.7
-    container_name: glance
+  dynacat:
+    image: panonim/dynacat:3.0.2
+    container_name: dynacat
     volumes:
-      - /docker/glance/config:/app/config
+      - /docker/dynacat/config:/app/config
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     restart: unless-stopped
@@ -12,10 +12,10 @@ services:
       - "10.0.10.21"
     labels:
       traefik.enable: true
-      traefik.http.routers.glance.entryPoints: websecure
-      traefik.http.services.glance.loadbalancer.server.port: 8080
-      traefik.http.routers.glance.rule: Host(`home.hoebergen.net`)
-      traefik.http.routers.glance.middlewares: localAccess@file
+      traefik.http.routers.dynacat.entryPoints: websecure
+      traefik.http.services.dynacat.loadbalancer.server.port: 8080
+      traefik.http.routers.dynacat.rule: Host(`home.hoebergen.net`)
+      traefik.http.routers.dynacat.middlewares: localAccess@file
     logging:
       driver: "json-file"
       options:
