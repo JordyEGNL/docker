@@ -13,6 +13,9 @@ services:
       traefik.http.routers.pulse.entryPoints: websecure
       traefik.http.services.pulse.loadbalancer.server.port: 7655
       traefik.http.routers.pulse.rule: Host(`pulse.hoebergen.net`)
+    dns:
+      - "10.0.10.201"
+      - "10.0.10.21"
     volumes:
       - /docker/pulse/data:/data
       # Temperature monitoring: install pulse-agent on each Proxmox host with --enable-proxmox, or use SSH (see docs/TEMPERATURE_MONITORING.md).
