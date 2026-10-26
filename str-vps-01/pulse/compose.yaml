@@ -8,8 +8,11 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
-    ports:
-      - 7655:7655
+    labels:
+      traefik.enable: true
+      traefik.http.routers.pulse.entryPoints: websecure
+      traefik.http.services.pulse.loadbalancer.server.port: 7655
+      traefik.http.routers.pulse.rule: Host(`pulse.hoebergen.net`)
     volumes:
       - /docker/pulse/data:/data
       # Temperature monitoring: install pulse-agent on each Proxmox host with --enable-proxmox, or use SSH (see docs/TEMPERATURE_MONITORING.md).
