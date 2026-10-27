@@ -23,6 +23,7 @@ services:
       - TZ=Europe/Amsterdam
       - PULSE_DEPLOYMENT_METHOD=docker_compose
       - PULSE_ENABLE_PROXMOX_GUEST_DOCKER_INVENTORY=true
+      - PULSE_TRUSTED_PROXY_CIDRS=172.16.0.0/12
     healthcheck:
       test: ["CMD-SHELL", "[ -x /docker-healthcheck.sh ] && /docker-healthcheck.sh || wget --quiet --tries=1 --spider http://localhost:7655/api/health"]
       interval: 30s
