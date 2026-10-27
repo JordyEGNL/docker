@@ -1,0 +1,39 @@
+services:
+  immich-pet-tagger:
+    image: ghcr.io/tedornitier/immich-pet-tagger:v1.8.1-cpu
+    container_name: immich-pet-tagger
+    restart: unless-stopped
+    environment:
+      - IMMICH_URL=http://immich-server:2283
+      - TAG_NAME=immich-pet-tagger
+      - POLL_INTERVAL=3600
+      - GPU_WORKERS=1
+      - YOLO_INPUT_SIZE=640
+      - THRESHOLD=0.8
+      - THRESHOLD_FALLBACK=0.85
+      - YOLO_CONF=0.2
+    env_file:
+      - .env
+    labels:
+      traefik.enable: true
+      traefik.http.routers.immich-pet-tagger.entryPoints: websecure
+      traefik.http.services.immich-pet-tagger.loadbalancer.server.port: 8000
+      traefik.http.routers.immich-pet-tagger.rule: 
+        Host(`pets.photos.hoebergen.net`)
+      traefik.http.routers.immich-pet-tagger.tls.certresolver: letsencrypt
+      traefik.http.routers.immich-pet-tagger.middlewares: localAccess@file
+    volumes:
+      - /docker/immich-pet-tagger/data:/data
+      - model_cache:/root/.cache
+    networks:
+      - backend-immich
+      - frontend
+
+volumes:
+  model_cache:
+
+networks:
+  backend-immich:
+    external: true
+  frontend:
+    external: true
