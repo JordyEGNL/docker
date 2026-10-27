@@ -59,7 +59,7 @@ services:
       - frontend
 
   cloudflared:
-    image: cloudflare/cloudflared:2026.10.4
+    image: cloudflare/cloudflared:2026.10.5
     container_name: dockflare-tunnel
     restart: unless-stopped
     command: tunnel --no-autoupdate run
