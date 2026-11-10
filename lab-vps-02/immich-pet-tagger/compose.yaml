@@ -1,6 +1,6 @@
 services:
   immich-pet-tagger:
-    image: ghcr.io/tedornitier/immich-pet-tagger:v1.9.0-cpu
+    image: ghcr.io/tedornitier/immich-pet-tagger:v1.10.0-cpu
     container_name: immich-pet-tagger
     restart: unless-stopped
     environment:
