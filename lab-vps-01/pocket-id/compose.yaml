@@ -1,4 +1,4 @@
-services:
+services: 
   pocket-id:
     image: ghcr.io/pocket-id/pocket-id:next
     container_name: pocket-id
