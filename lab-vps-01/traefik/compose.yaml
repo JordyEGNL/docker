@@ -41,6 +41,7 @@ services:
         http://traefik-forward-auth:4181/portals/dns
       traefik.http.middlewares.traefik-forward-auth.forwardauth.authResponseHeaders: 
         X-Forwarded-User,X-Forwarded-Displayname,X-Authenticated-User
+      traefik.http.middlewares.traefik-forward-auth.forwardauth.maxResponseBodySize: 1048576
       traefik.http.middlewares.traefik-forward-auth.forwardauth.trustForwardHeader: 
         true
       traefik.http.services.traefik-forward-auth.loadbalancer.server.port: 4181
