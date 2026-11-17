@@ -27,6 +27,9 @@ services:
     restart: unless-stopped
     environment:
       - TZ=Europe/Amsterdam
+    depends_on:
+      traefik-forward-auth:
+        condition: service_started
   traefik-forward-auth:
     image: ghcr.io/italypaleale/traefik-forward-auth:4.16.0
     container_name: traefik-forward-auth
