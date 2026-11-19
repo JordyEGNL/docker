@@ -94,7 +94,7 @@ tracing:
       endpoint: "http://grafana-alloy:4318/v1/traces"
 
 accessLog:
-  filePath: "/var/log/traefik/traefik.log"
+  filePath: "/var/log/traefik/access.log"
   format: json
   otlp:
     http:
