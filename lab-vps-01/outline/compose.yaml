@@ -59,7 +59,7 @@ services:
       - TZ=Europe/Amsterdam
   postgres:
     container_name: outline-postgres
-    image: postgres:18
+    image: postgres:19
     env_file: .env
     restart: unless-stopped
     logging:
