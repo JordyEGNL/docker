@@ -1,6 +1,6 @@
 services:
   adguardhome-sync:
-    image: ghcr.io/bakito/adguardhome-sync:alpine-v0.10.0
+    image: ghcr.io/bakito/adguardhome-sync:alpine-v0.10.1
     container_name: adguardhome-sync
     command: run
     environment:
