@@ -1,6 +1,6 @@
 services:
   dynacat:
-    image: panonim/dynacat:3.0.3
+    image: panonim/dynacat:3.0.4
     container_name: dynacat
     volumes:
       - /docker/dynacat/config:/app/config
